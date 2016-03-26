@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace FinanceTracker
@@ -199,6 +200,16 @@ namespace FinanceTracker
         
         private void ReadXML()
         {
+            XmlDocument doc = new XmlDocument();
+            var exml = File.ReadAllText("file.ftf");
+            var xml = Encryption.Decrypt(exml);
+            if (xml != null)
+            {
+                doc.LoadXml(xml);
+                doc.Save("file.xml");
+            }
+
+
             var reader = new XmlSerializer(typeof(List<FinanceEntry>));
             var projReader = new XmlSerializer(typeof(List<double>));
             StreamReader file = null;
@@ -285,6 +296,11 @@ namespace FinanceTracker
                 if (projFile != null)
                     projFile.Close();
             }
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load("file.xml");
+            var exml = Encryption.Encrypt(doc.OuterXml);
+            File.WriteAllText("file.ftf", exml);
         }
 
         private void lstItems_ColumnSort(object sender, ColumnClickEventArgs e)

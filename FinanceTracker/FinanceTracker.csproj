@@ -40,6 +40,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,6 +58,7 @@
     <Compile Include="ArchiveViewer.Designer.cs">
       <DependentUpon>ArchiveViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Encryption.cs" />
     <Compile Include="ListSorter.cs" />
     <Compile Include="FinanceEntry.cs" />
     <Compile Include="InputBox.cs">
