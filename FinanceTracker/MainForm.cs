@@ -11,9 +11,9 @@ namespace FinanceTracker
 {
     public partial class MainForm : Form
     {
-        private List<FinanceEntry> _listFinances = new List<FinanceEntry>();
+        private List<FinanceEntry> _listFinances;
         private List<ArchiveMonth> _archived;
-        private List<double> _projData = new List<double>();
+        private List<double> _projData;
         private List<double> _currData = new List<double>();
         private int _currColumn = -1;
 
@@ -154,19 +154,39 @@ namespace FinanceTracker
                 Utilities.LabelColor(_projData[i] - _currData[i++], label);
         }
 
+        private void ReadXML()
+        {
+            foreach (var pair in _filenames)
+            {
+                switch (pair.Key)
+                {
+                    case "file":
+                        _listFinances = ReadFile(pair.Key, pair.Value) ?? new List<FinanceEntry>();
+                        break;
+                    case "projFile":
+                        _projData = ReadFile(pair.Key, pair.Value) ?? new List<double>();
+                        break;
+                }
+            }
+        }
+
         private void ReadArchives()
         {
+            _archived = ReadFile("archFile", typeof(List<ArchiveMonth>)) ?? new List<ArchiveMonth>();
+        }
+
+        private static dynamic ReadFile(string name, Type objType)
+        {
+            dynamic list = null;
             try
             {
-                var exml = File.ReadAllText("archFile.ftf");
+                var exml = File.ReadAllText(name + ".ftf");
                 var xml = Encryption.Decrypt(exml);
 
                 using (var xreader = XmlReader.Create(new StringReader(xml)))
                 {
                     xreader.MoveToContent();
-                    var list = new XmlSerializer(typeof(List<ArchiveMonth>)).Deserialize(xreader);
-
-                    _archived = (List<ArchiveMonth>) list;
+                    list = new XmlSerializer(objType).Deserialize(xreader);
                 }
             }
             catch (FileNotFoundException)
@@ -178,93 +198,46 @@ namespace FinanceTracker
                 MessageBox.Show("Error reading file\n" + e.Message, "Error Reading File");
             }
 
-            if(_archived == null)
-                _archived = new List<ArchiveMonth>();
-        }
-
-        private void WriteArchives()
-        {
-            try
-            {
-                using (var writer = new StringWriter())
-                {
-                    var serializer = new XmlSerializer(typeof(List<ArchiveMonth>));
-                    serializer.Serialize(writer, _archived);
-
-                    var exml = Encryption.Encrypt(writer.ToString());
-                    File.WriteAllText("archFile.ftf", exml);
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error writing to file\n" + e.Message, "Error Saving File");
-            }
-        }
-        
-        private void ReadXML()
-        {
-            foreach (var pair in _filenames)
-            {
-                try
-                {
-                    var exml = File.ReadAllText(pair.Key + ".ftf");
-                    var xml = Encryption.Decrypt(exml);
-
-                    using (var xreader = XmlReader.Create(new StringReader(xml)))
-                    {
-                        xreader.MoveToContent();
-                        var list = new XmlSerializer(pair.Value).Deserialize(xreader);
-
-                        switch (pair.Key)
-                        {
-                            case "file":
-                                _listFinances = (List<FinanceEntry>) list;
-                                break;
-                            case "projFile":
-                                _projData = (List<double>) list;
-                                break;
-                        }
-                    }
-                }
-                catch (FileNotFoundException)
-                {
-                    //keep going the file hasnt been created yet
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Error reading file\n" + e.Message, "Error Reading File");
-                }
-            }
+            return list;
         }
 
         private void WriteXML()
         {
             foreach (var pair in _filenames)
             {
-                try
+                switch (pair.Key)
                 {
-                    using (var writer = new StringWriter())
-                    {
-                        var serializer = new XmlSerializer(pair.Value);
-                        switch (pair.Key)
-                        {
-                            case "file":
-                                serializer.Serialize(writer, _listFinances);
-                                break;
-                            case "projFile":
-                                serializer.Serialize(writer, _projData);
-                                break;
-                        }
-                        var xml = writer.ToString();
+                    case "file":
+                        WriteFile(pair.Key, pair.Value, _listFinances);
+                        break;
+                    case "projFile":
+                        WriteFile(pair.Key, pair.Value, _projData);
+                        break;
+                }
+            }
+        }
 
-                        var exml = Encryption.Encrypt(xml);
-                        File.WriteAllText(pair.Key + ".ftf", exml);
-                    }
-                }
-                catch (Exception e)
+        private void WriteArchives()
+        {
+            WriteFile("archFile", typeof(List<ArchiveMonth>), _archived);
+        }
+
+        private static void WriteFile(string name, Type objType, dynamic list)
+        {
+            try
+            {
+                using (var writer = new StringWriter())
                 {
-                    MessageBox.Show("Error writing to file\n" + e.Message, "Error Saving File");
+                    var serializer = new XmlSerializer(objType);
+                    serializer.Serialize(writer, list);
+                    var xml = writer.ToString();
+                    var exml = Encryption.Encrypt(xml);
+                    File.WriteAllText(name + ".ftf", exml);
                 }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error writing to file\n" + e.Message, "Error Saving File");
             }
         }
 
