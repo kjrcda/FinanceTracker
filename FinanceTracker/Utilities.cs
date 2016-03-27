@@ -9,7 +9,7 @@ namespace FinanceTracker
     {
         private static int nextID;
         public static String[] CATEGORIES = new String[7] { "Rent", "Phone Bill", "Entertainment", "Grocery", "Transportation", "Eating Out", "Other" };
-        public static String[] FILE_NAMES = new String[3] { "file.xml", "projFile.xml", "archFile.xml" };
+        public static String[] FILE_NAMES = new String[3] { "file.ftf", "projFile.ftf", "archFile.ftf" };
         
         public static void LoadID(List<FinanceEntry> list)
         {

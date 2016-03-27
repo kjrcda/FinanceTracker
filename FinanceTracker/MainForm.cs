@@ -350,8 +350,8 @@ namespace FinanceTracker
                 if (!archiveEntry.Any()) //will only ever be archives
                 {
                     MessageBox.Show("No file " + name + " to be found. It will not be imported.\nThe current archive file will be deleted.", "File Not Found");
-                    if(File.Exists("archFile.xml"))
-                        File.Delete("archFile.xml");
+                    if(File.Exists("archFile.ftf"))
+                        File.Delete("archFile.ftf");
                     _archived = new List<ArchiveMonth>();
                 }
                 else
