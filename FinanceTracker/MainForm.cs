@@ -15,12 +15,16 @@ namespace FinanceTracker
         private List<ArchiveMonth> _archived = new List<ArchiveMonth>();
         private List<double> _projData = new List<double>();
         private List<double> _currData = new List<double>();
-        private readonly List<Label> _labels = new List<Label>();
         private int _currColumn = -1;
+
+        private readonly List<Label> _labels = new List<Label>();
+        private readonly Dictionary<string, Type> _filenames = new Dictionary<string, Type>();
 
         public MainForm()
         {
             InitializeComponent();
+            _filenames.Add("file", typeof(List<FinanceEntry>));
+            _filenames.Add("projFile", typeof(List<double>));
             ReadXML();
 
             _labels.Add(lblRentAmt);
@@ -200,101 +204,100 @@ namespace FinanceTracker
         
         private void ReadXML()
         {
-            XmlDocument doc = new XmlDocument();
-            var exml = File.ReadAllText("file.ftf");
-            var xml = Encryption.Decrypt(exml);
-            if (xml != null)
+            if (File.Exists("file.ftf"))
             {
-                doc.LoadXml(xml);
-                doc.Save("file.xml");
+                foreach (var pair in _filenames)
+                {
+                    if (pair.Key == "projFile")
+                        break;
+
+                    var exml = File.ReadAllText(pair.Key + ".ftf");
+                    var xml = Encryption.Decrypt(exml);
+
+                    using (var xreader = XmlReader.Create(new StringReader(xml)))
+                    {
+                        xreader.MoveToContent();
+                        object list;
+
+                        switch (xreader.Name)
+                        {
+                            case "ArrayOfFinanceEntry":
+                                list = new XmlSerializer(typeof (List<FinanceEntry>)).Deserialize(xreader);
+                                _listFinances = (List<FinanceEntry>) list;
+                                break;
+                            case "ArrayOfDouble":
+                                list = new XmlSerializer(typeof (List<double>)).Deserialize(xreader);
+                                _projData = (List<double>) list;
+                                break;
+                        }
+                    }
+                }
             }
 
+            foreach (var pair in _filenames)
+            {
+                var reader = new XmlSerializer(pair.Value);
+                StreamReader file = null;
 
-            var reader = new XmlSerializer(typeof(List<FinanceEntry>));
-            var projReader = new XmlSerializer(typeof(List<double>));
-            StreamReader file = null;
-            StreamReader projFile = null;
-
-            //load entries
-            try
-            {
-                file = new StreamReader("file.xml");
-                var list = reader.Deserialize(file);
-                _listFinances = (List<FinanceEntry>)list;
-            }
-            catch (FileNotFoundException)
-            {
-                //keep going the file hasnt been created yet
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error reading file\n" + e.Message,"Error Reading File");
-            }
-            finally
-            {
-                if (file != null)
-                    file.Close();
-            }
-
-            //load prpjection
-            try
-            {
-                projFile = new StreamReader("projFile.xml");
-                var list = projReader.Deserialize(projFile);
-                _projData = (List<double>)list;
-            }
-            catch (FileNotFoundException)
-            {
-                //keep going the file hasnt been created yet
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error reading file\n" + e.Message, "Error Reading File");
-            }
-            finally
-            {
-                if (projFile != null)
-                    projFile.Close();
+                try
+                {
+                    file = new StreamReader(pair.Key + ".xml");
+                    var list = reader.Deserialize(file);
+                    switch (pair.Key)
+                    {
+                        case "file":
+                            _listFinances = (List<FinanceEntry>)list;
+                            break;
+                        case "projFile":
+                            _projData = (List<double>)list;
+                            break;
+                    }
+                }
+                catch (FileNotFoundException)
+                {
+                    //keep going the file hasnt been created yet
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error reading file\n" + e.Message, "Error Reading File");
+                }
+                finally
+                {
+                    if (file != null)
+                        file.Close();
+                }
             }
         }
 
         private void WriteXML()
         {
-            var writer = new XmlSerializer(typeof(List<FinanceEntry>));
-            var projWriter = new XmlSerializer(typeof(List<double>));
-            StreamWriter file = null;
-            StreamWriter projFile = null;
+            foreach (var pair in _filenames)
+            {
+                var writer = new XmlSerializer(pair.Value);
+                StreamWriter file = null;
 
-            //write entries
-            try
-            {
-                file = new StreamWriter("file.xml", false);
-                writer.Serialize(file, _listFinances);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error writing to file\n" + e.Message, "Error Saving File");
-            }
-            finally
-            {
-                if (file != null)
-                    file.Close();
-            }
-
-            //write projection
-            try
-            {
-                projFile = new StreamWriter("projFile.xml", false);
-                projWriter.Serialize(projFile, _projData);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error writing to file\n" + e.Message, "Error Saving File");
-            }
-            finally
-            {
-                if (projFile != null)
-                    projFile.Close();
+                try
+                {
+                    file = new StreamWriter(pair.Key + ".ftf", false);
+                    switch (pair.Key)
+                    {
+                        case "file":
+                            writer.Serialize(file, _listFinances);
+                            break;
+                        case "projFile":
+                            writer.Serialize(file, _projData);
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error writing to file\n" + e.Message, "Error Saving File");
+                }
+                finally
+                {
+                    if (file != null)
+                        file.Close();
+                }
             }
 
             XmlDocument doc = new XmlDocument();
