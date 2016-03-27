@@ -154,6 +154,8 @@ namespace FinanceTracker
                 Utilities.LabelColor(_projData[i] - _currData[i++], label);
         }
 
+#region FileLoadAndSave
+
         private void ReadXML()
         {
             foreach (var pair in _filenames)
@@ -240,6 +242,8 @@ namespace FinanceTracker
                 MessageBox.Show("Error writing to file\n" + e.Message, "Error Saving File");
             }
         }
+
+#endregion
 
         private void lstItems_ColumnSort(object sender, ColumnClickEventArgs e)
         {

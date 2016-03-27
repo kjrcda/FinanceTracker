@@ -99,6 +99,7 @@ namespace FinanceTracker
             this.btnFinish.TabIndex = 16;
             this.btnFinish.Text = "Finish";
             this.btnFinish.UseVisualStyleBackColor = true;
+            this.btnFinish.Click += new System.EventHandler(Utilities.CloseWindow);
             this.btnFinish.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckEscape);
             // 
             // lstItems
