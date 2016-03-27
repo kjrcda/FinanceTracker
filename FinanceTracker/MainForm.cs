@@ -12,7 +12,7 @@ namespace FinanceTracker
     public partial class MainForm : Form
     {
         private List<FinanceEntry> _listFinances = new List<FinanceEntry>();
-        private List<ArchiveMonth> _archived = new List<ArchiveMonth>();
+        private List<ArchiveMonth> _archived;
         private List<double> _projData = new List<double>();
         private List<double> _currData = new List<double>();
         private int _currColumn = -1;
@@ -156,15 +156,18 @@ namespace FinanceTracker
 
         private void ReadArchives()
         {
-            var archReader = new XmlSerializer(typeof(List<ArchiveMonth>));
-            StreamReader archFile = null;
-
-            //load archives
             try
             {
-                archFile = new StreamReader("archFile.xml");
-                var list = archReader.Deserialize(archFile);
-                _archived = (List<ArchiveMonth>)list;
+                var exml = File.ReadAllText("archFile.ftf");
+                var xml = Encryption.Decrypt(exml);
+
+                using (var xreader = XmlReader.Create(new StringReader(xml)))
+                {
+                    xreader.MoveToContent();
+                    var list = new XmlSerializer(typeof(List<ArchiveMonth>)).Deserialize(xreader);
+
+                    _archived = (List<ArchiveMonth>) list;
+                }
             }
             catch (FileNotFoundException)
             {
@@ -174,32 +177,27 @@ namespace FinanceTracker
             {
                 MessageBox.Show("Error reading file\n" + e.Message, "Error Reading File");
             }
-            finally
-            {
-                if (archFile != null)
-                    archFile.Close();
-            }
+
+            if(_archived == null)
+                _archived = new List<ArchiveMonth>();
         }
 
         private void WriteArchives()
         {
-            var archiveWriter = new XmlSerializer(typeof(List<ArchiveMonth>));
-            StreamWriter archFile = null;
-
-            //write projection
             try
             {
-                archFile = new StreamWriter("archFile.xml", false);
-                archiveWriter.Serialize(archFile, _archived);
+                using (var writer = new StringWriter())
+                {
+                    var serializer = new XmlSerializer(typeof(List<ArchiveMonth>));
+                    serializer.Serialize(writer, _archived);
+
+                    var exml = Encryption.Encrypt(writer.ToString());
+                    File.WriteAllText("archFile.ftf", exml);
+                }
             }
             catch (Exception e)
             {
                 MessageBox.Show("Error writing to file\n" + e.Message, "Error Saving File");
-            }
-            finally
-            {
-                if (archFile != null)
-                    archFile.Close();
             }
         }
         
@@ -330,6 +328,7 @@ namespace FinanceTracker
                 }
                 else
                     MessageBox.Show("Error: There is already an entry with the same name","Error");
+                _archived = null;
             }
         }
 
@@ -407,6 +406,7 @@ namespace FinanceTracker
             }
             else
                 MessageBox.Show("There is no information archived", "No Archive");
+            _archived = null;
         }
 
         private void totalsAcrossMonthsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -419,6 +419,7 @@ namespace FinanceTracker
                     form.ShowDialog();
                 }
             }
+            _archived = null;
         }
 
         private void lstItems_Click(object sender, MouseEventArgs e)
