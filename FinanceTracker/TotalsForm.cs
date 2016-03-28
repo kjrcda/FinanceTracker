@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace FinanceTracker
@@ -8,7 +6,7 @@ namespace FinanceTracker
     public partial class TotalsForm : Form
     {
         private readonly List<ArchiveMonth> _totalsList;
-        private double _total = 0;
+        private double _total;
 
         public TotalsForm(List<ArchiveMonth> list)
         {
@@ -35,11 +33,6 @@ namespace FinanceTracker
         private void CheckEscape(object sender, KeyEventArgs e)
         {
             Utilities.CheckEscape(this, sender, e);
-        }
-
-        private void btnFinish_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

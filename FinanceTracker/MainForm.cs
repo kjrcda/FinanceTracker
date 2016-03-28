@@ -91,7 +91,7 @@ namespace FinanceTracker
                     if (result == DialogResult.OK)
                     {
                         _listFinances[index] = form.Entry;
-                        row.SubItems[1].Text = Utilities.CATEGORIES[form.Entry.Category];
+                        row.SubItems[1].Text = Utilities.Categories[form.Entry.Category];
                         row.SubItems[2].Text = form.Entry.Amount.ToString("N2");
                         row.SubItems[3].Text = form.Entry.Place;
                         row.SubItems[4].Text = form.Entry.Description;
@@ -263,7 +263,7 @@ namespace FinanceTracker
             var zipFile = new FileStream(diag.FileName, FileMode.Create);
             using (var archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
             {
-                foreach (var name in Utilities.FILE_NAMES)
+                foreach (var name in Utilities.FileNames)
                 {
                     try
                     {
@@ -281,11 +281,14 @@ namespace FinanceTracker
         {
             using (var input = new InputBox("Enter a Month", "Please enter the month you are archiving"))
             {
-                if (input.ShowDialog() != DialogResult.OK) 
+                string inputtxt;
+                if (input.ShowDialog() == DialogResult.OK)
+                    inputtxt = input.InputText.ToUpper();
+                else
                     return;
 
                 ReadArchives();
-                var exists = _archived.Where(item => String.Compare(item.MonthName.ToUpper(), input.InputText.ToUpper(), StringComparison.Ordinal) == 0);
+                var exists = _archived.Where(item => String.Compare(item.MonthName.ToUpper(), inputtxt, StringComparison.Ordinal) == 0);
 
                 if (!exists.Any())
                 {
@@ -312,9 +315,9 @@ namespace FinanceTracker
         private void InitProjectionData()
         {
             if (_projData.Count == 0)
-                for (var i = 0; i < Utilities.CATEGORIES.Length; i++)
+                for (var i = 0; i < Utilities.Categories.Length; i++)
                     _projData.Add(0);
-            for (var i = 0; i < Utilities.CATEGORIES.Length; i++)
+            for (var i = 0; i < Utilities.Categories.Length; i++)
                 _currData.Add(0);
         }
 
@@ -338,7 +341,7 @@ namespace FinanceTracker
 
             //check to see if files are in the .zip, skip archFile though its not required
             var archive = ZipFile.OpenRead(diag.FileName);
-            var hasAll = Utilities.FILE_NAMES.Where(name => name != Utilities.FILE_NAMES[2]).All(
+            var hasAll = Utilities.FileNames.Where(name => name != Utilities.FileNames[2]).All(
                 name => archive.Entries.Count(item => String.Equals(item.Name, name, StringComparison.CurrentCultureIgnoreCase)) == 1);
 
             if(!hasAll) //if file or projfile missing, cancel
@@ -348,10 +351,13 @@ namespace FinanceTracker
             }
 
             //otherwise import files
-            foreach (var name in Utilities.FILE_NAMES)
+            foreach (var name in Utilities.FileNames)
             {
-                var archiveEntry = archive.Entries.Where(item => String.Equals(item.Name, name, StringComparison.CurrentCultureIgnoreCase));
-                if (!archiveEntry.Any()) //will only ever be archives
+                var fName = name;
+                var archiveEntry = archive.Entries.Where(item => String.Equals(item.Name, fName, StringComparison.CurrentCultureIgnoreCase));
+
+                var zipArchiveEntries = archiveEntry.ToList();
+                if (!zipArchiveEntries.Any()) //will only ever be archives
                 {
                     MessageBox.Show("No file " + name + " to be found. It will not be imported.\nThe current archive file will be deleted.", "File Not Found");
                     if(File.Exists("archFile.ftf"))
@@ -359,7 +365,7 @@ namespace FinanceTracker
                     _archived = new List<ArchiveMonth>();
                 }
                 else
-                    archiveEntry.First().ExtractToFile(name, true);
+                    zipArchiveEntries.First().ExtractToFile(name, true);
             }
 
             //now need to update the prorgam

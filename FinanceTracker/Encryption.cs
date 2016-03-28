@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FinanceTracker
 {
-    static class Encryption
+    public static class Encryption
     {
         private static readonly byte[] InitVector = Encoding.ASCII.GetBytes("D#$rwfa24SGHdf4f");
         private const int KeySize = 256;

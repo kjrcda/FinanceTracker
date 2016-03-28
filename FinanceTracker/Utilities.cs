@@ -7,21 +7,21 @@ namespace FinanceTracker
 {
     public static class Utilities
     {
-        private static int nextID;
-        public static String[] CATEGORIES = new String[7] { "Rent", "Phone Bill", "Entertainment", "Grocery", "Transportation", "Eating Out", "Other" };
-        public static String[] FILE_NAMES = new String[3] { "file.ftf", "projFile.ftf", "archFile.ftf" };
+        private static int _nextID;
+        public static String[] Categories = { "Rent", "Phone Bill", "Entertainment", "Grocery", "Transportation", "Eating Out", "Other" };
+        public static String[] FileNames = { "file.ftf", "projFile.ftf", "archFile.ftf" };
         
         public static void LoadID(List<FinanceEntry> list)
         {
             if (list.Count == 0)
-                nextID = 1;
+                _nextID = 1;
             else
-                nextID = list[list.Count - 1].ID + 1;
+                _nextID = list[list.Count - 1].ID + 1;
         }
 
         public static int GetNextID()
         {
-            return nextID++;
+            return _nextID++;
         }
 
         public static void LabelColor(double amt, Label lbl)
@@ -43,7 +43,7 @@ namespace FinanceTracker
 
         public static void LoadItem(ListView list, FinanceEntry item)
         {
-            var row = new ListViewItem(new[] { "" + item.ID, CATEGORIES[item.Category], item.Amount.ToString("N2"), item.Place, item.Description });
+            var row = new ListViewItem(new[] { "" + item.ID, Categories[item.Category], item.Amount.ToString("N2"), item.Place, item.Description });
             list.Items.Add(row);
             list.Items[list.Items.Count-1].EnsureVisible();
         }

@@ -49,21 +49,24 @@ namespace FinanceTracker
 
         private bool ValidInput()
         {
-            var valid = false;
-            try
+            var valid = true;
+
+            foreach(var box in _boxes)
             {
-                foreach(var box in _boxes)
+                if (String.IsNullOrWhiteSpace(box.Text))
+                    box.Text = "0";
+
+                double num;
+                if (!Double.TryParse(box.Text, out num))
                 {
-                    if (String.IsNullOrWhiteSpace(box.Text))
-                        box.Text = "0";
-                    Convert.ToDouble(box.Text);
+                    valid = false;
+                    break;
                 }
-                valid = true;
             }
-            catch (Exception)
-            {
+
+            if(!valid)
                 MessageBox.Show("Please enter a valid number");
-            }
+
             return valid;
         }
 

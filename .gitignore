@@ -1,5 +1,7 @@
 /FinanceTracker/bin
 /FinanceTracker/obj
+/DataConverter/bin
+/DataConverter/obj
 
 # Windows image file caches
 Thumbs.db

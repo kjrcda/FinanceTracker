@@ -29,7 +29,7 @@ namespace FinanceTracker
 
         private bool ValidInput()
         {
-            bool valid = false;
+            var valid = false;
 
             if (cmbCategory.SelectedIndex == -1)
                 MessageBox.Show("Please select a category");
@@ -39,15 +39,10 @@ namespace FinanceTracker
                 MessageBox.Show("Please enter a place");
             else
             {
-                try
-                {
-                    Convert.ToDouble(txtAmount.Text);
-                    valid = true;
-                }
-                catch (Exception)
-                {
+                double variable;
+                valid = Double.TryParse(txtAmount.Text, out variable);
+                if(!valid)
                     MessageBox.Show("Please enter a valid number");
-                }
             }
 
             return valid;
