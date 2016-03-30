@@ -18,13 +18,14 @@ namespace FinanceTracker
         private int _currColumn = -1;
 
         private readonly List<Label> _labels = new List<Label>();
-        private readonly Dictionary<string, Type> _filenames = new Dictionary<string, Type>();
+        private readonly Dictionary<string, Type> _fileNameType = new Dictionary<string, Type>();
+        private static readonly string SavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Finance Tracker");
 
         public MainForm()
         {
             InitializeComponent();
-            _filenames.Add("file", typeof(List<FinanceEntry>));
-            _filenames.Add("projFile", typeof(List<double>));
+            _fileNameType.Add(Utilities.FileNames[0], typeof(List<FinanceEntry>));
+            _fileNameType.Add(Utilities.FileNames[1], typeof(List<double>));
 
             ReadXML();
 
@@ -158,23 +159,18 @@ namespace FinanceTracker
 
         private void ReadXML()
         {
-            foreach (var pair in _filenames)
+            foreach (var pair in _fileNameType)
             {
-                switch (pair.Key)
-                {
-                    case "file":
-                        _listFinances = ReadFile(pair.Key, pair.Value) ?? new List<FinanceEntry>();
-                        break;
-                    case "projFile":
-                        _projData = ReadFile(pair.Key, pair.Value) ?? new List<double>();
-                        break;
-                }
+                if(pair.Key == Utilities.FileNames[0])
+                    _listFinances = ReadFile(pair.Key, pair.Value) ?? new List<FinanceEntry>();
+                else if(pair.Key == Utilities.FileNames[1])
+                    _projData = ReadFile(pair.Key, pair.Value) ?? new List<double>();
             }
         }
 
         private void ReadArchives()
         {
-            _archived = ReadFile("archFile", typeof(List<ArchiveMonth>)) ?? new List<ArchiveMonth>();
+            _archived = ReadFile(Utilities.FileNames[2], typeof(List<ArchiveMonth>)) ?? new List<ArchiveMonth>();
         }
 
         private static dynamic ReadFile(string name, Type objType)
@@ -182,7 +178,7 @@ namespace FinanceTracker
             dynamic list = null;
             try
             {
-                var exml = File.ReadAllText(name + ".ftf");
+                var exml = File.ReadAllText(Path.Combine(SavePath, name));
                 var xml = Encryption.Decrypt(exml);
 
                 using (var xreader = XmlReader.Create(new StringReader(xml)))
@@ -195,6 +191,10 @@ namespace FinanceTracker
             {
                 //keep going the file hasnt been created yet
             }
+            catch (DirectoryNotFoundException)
+            {
+                Directory.CreateDirectory(SavePath);
+            }
             catch (Exception e)
             {
                 MessageBox.Show("Error reading file\n" + e.Message, "Error Reading File");
@@ -205,23 +205,18 @@ namespace FinanceTracker
 
         private void WriteXML()
         {
-            foreach (var pair in _filenames)
+            foreach (var pair in _fileNameType)
             {
-                switch (pair.Key)
-                {
-                    case "file":
-                        WriteFile(pair.Key, pair.Value, _listFinances);
-                        break;
-                    case "projFile":
-                        WriteFile(pair.Key, pair.Value, _projData);
-                        break;
-                }
+                if(pair.Key == Utilities.FileNames[0])
+                    WriteFile(pair.Key, pair.Value, _listFinances);
+                else if(pair.Key == Utilities.FileNames[1])
+                    WriteFile(pair.Key, pair.Value, _projData);
             }
         }
 
         private void WriteArchives()
         {
-            WriteFile("archFile", typeof(List<ArchiveMonth>), _archived);
+            WriteFile(Utilities.FileNames[2], typeof(List<ArchiveMonth>), _archived);
         }
 
         private static void WriteFile(string name, Type objType, dynamic list)
@@ -234,7 +229,7 @@ namespace FinanceTracker
                     serializer.Serialize(writer, list);
                     var xml = writer.ToString();
                     var exml = Encryption.Encrypt(xml);
-                    File.WriteAllText(name + ".ftf", exml);
+                    File.WriteAllText(Path.Combine(SavePath, name), exml);
                 }
             }
             catch (Exception e)
@@ -267,7 +262,7 @@ namespace FinanceTracker
                 {
                     try
                     {
-                        archive.CreateEntryFromFile(name, name);
+                        archive.CreateEntryFromFile(Path.Combine(SavePath, name), name);
                     }
                     catch (Exception)
                     {
@@ -355,17 +350,18 @@ namespace FinanceTracker
             {
                 var fName = name;
                 var archiveEntry = archive.Entries.Where(item => String.Equals(item.Name, fName, StringComparison.CurrentCultureIgnoreCase));
+                var fNamePath = Path.Combine(SavePath, fName);
 
                 var zipArchiveEntries = archiveEntry.ToList();
                 if (!zipArchiveEntries.Any()) //will only ever be archives
                 {
-                    MessageBox.Show("No file " + name + " to be found. It will not be imported.\nThe current archive file will be deleted.", "File Not Found");
-                    if(File.Exists("archFile.ftf"))
-                        File.Delete("archFile.ftf");
+                    MessageBox.Show("No file " + fName + " to be found. It will not be imported.\nThe current archive file will be deleted.", "File Not Found");
+                    if (File.Exists(fNamePath))
+                        File.Delete(fNamePath);
                     _archived = new List<ArchiveMonth>();
                 }
                 else
-                    zipArchiveEntries.First().ExtractToFile(name, true);
+                    zipArchiveEntries.First().ExtractToFile(fNamePath, true);
             }
 
             //now need to update the prorgam
