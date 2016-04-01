@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_459E08C50D6148A682B094EB39343F7D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_7A87D727D3AC432090699EA45E17940B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -88,6 +94,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_459E08C50D6148A682B094EB39343F7D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_7A87D727D3AC432090699EA45E17940B"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -134,6 +146,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
         "Release"
@@ -158,6 +178,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
     }
@@ -165,6 +193,20 @@
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_C0E723510FAB4419BBB7A03711B646F3"
+            {
+            "Name" = "8:Primary output from CustomsActions (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_459E08C50D6148A682B094EB39343F7D"
+            "FileType" = "3:1"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_C4BF176D_B195_4085_A0C0_41F04C5E2BF3"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -369,7 +411,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Finance Tracker"
         "ProductCode" = "8:{C3484269-C2D9-4786-AB20-F195097E72CF}"
-        "PackageCode" = "8:{B8BA16D4-CCF8-4851-A8EB-B4C01BEDB2A2}"
+        "PackageCode" = "8:{445A1B74-3699-4F05-826E-15AC016DB3FD}"
         "UpgradeCode" = "8:{06A4AC74-4D3C-4103-9388-4F32B30716F2}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -930,6 +972,34 @@
         }
         "ProjectOutput"
         {
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_459E08C50D6148A682B094EB39343F7D"
+            {
+            "SourcePath" = "8:..\\CustomsActions\\obj\\Debug\\CustomsActions.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_7798E339B1A04D44A85B44B3F5C3B3E5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{F61C7EC9-7341-4E38-8889-CAFCB7ACEDAA}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7A87D727D3AC432090699EA45E17940B"
             {
             "SourcePath" = "8:..\\DataConverter\\obj\\Debug\\DataConverter.exe"
