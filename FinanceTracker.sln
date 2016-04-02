@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataConverter", "DataConver
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FinanceTrackerSetup", "FinanceTrackerSetup\FinanceTrackerSetup.vdproj", "{A54E5DF6-4FFE-4B10-B05B-D3EEB9A52CC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomsActions", "CustomsActions\CustomsActions.csproj", "{F61C7EC9-7341-4E38-8889-CAFCB7ACEDAA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeleteDataAction", "CustomsActions\DeleteDataAction.csproj", "{F61C7EC9-7341-4E38-8889-CAFCB7ACEDAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

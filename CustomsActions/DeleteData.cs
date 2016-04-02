@@ -6,7 +6,7 @@ using System.IO;
 namespace CustomsActions
 {
     [RunInstaller(true)]
-    public partial class Installer : System.Configuration.Install.Installer
+    public partial class DeleteData : System.Configuration.Install.Installer
     {
         public override void Uninstall(IDictionary savedState)
         {

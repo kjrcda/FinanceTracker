@@ -34,13 +34,13 @@
         "Entry"
         {
         "MsmKey" = "8:_7B1F9268DEE5A7B699BA5BD426751257"
-        "OwnerKey" = "8:_963565B33AE942CF813294EAFD4F9116"
+        "OwnerKey" = "8:_9D6CD0C8420FBAD27A599202FA4F1815"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_7B1F9268DEE5A7B699BA5BD426751257"
-        "OwnerKey" = "8:_9D6CD0C8420FBAD27A599202FA4F1815"
+        "OwnerKey" = "8:_963565B33AE942CF813294EAFD4F9116"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -64,7 +64,7 @@
         "Entry"
         {
         "MsmKey" = "8:_A836593020631EEE05C12E5AF91D9C72"
-        "OwnerKey" = "8:_963565B33AE942CF813294EAFD4F9116"
+        "OwnerKey" = "8:_7B1F9268DEE5A7B699BA5BD426751257"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,7 +76,7 @@
         "Entry"
         {
         "MsmKey" = "8:_A836593020631EEE05C12E5AF91D9C72"
-        "OwnerKey" = "8:_7B1F9268DEE5A7B699BA5BD426751257"
+        "OwnerKey" = "8:_963565B33AE942CF813294EAFD4F9116"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -94,19 +94,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_459E08C50D6148A682B094EB39343F7D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7A87D727D3AC432090699EA45E17940B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9D6CD0C8420FBAD27A599202FA4F1815"
+        "OwnerKey" = "8:_A836593020631EEE05C12E5AF91D9C72"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -118,7 +106,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A836593020631EEE05C12E5AF91D9C72"
+        "OwnerKey" = "8:_9D6CD0C8420FBAD27A599202FA4F1815"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7A87D727D3AC432090699EA45E17940B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_459E08C50D6148A682B094EB39343F7D"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -193,9 +193,9 @@
     {
         "CustomAction"
         {
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_C0E723510FAB4419BBB7A03711B646F3"
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_EB9AB0C32AA148EB85931917DEBAC794"
             {
-            "Name" = "8:Primary output from CustomsActions (Active)"
+            "Name" = "8:Delete Data Action"
             "Condition" = "8:"
             "Object" = "8:_459E08C50D6148A682B094EB39343F7D"
             "FileType" = "3:1"
@@ -203,7 +203,7 @@
             "Arguments" = "8:"
             "EntryPoint" = "8:"
             "Sequence" = "3:1"
-            "Identifier" = "8:_C4BF176D_B195_4085_A0C0_41F04C5E2BF3"
+            "Identifier" = "8:_40888C15_1008_49DA_9004_FFD0E3127A93"
             "InstallerClass" = "11:TRUE"
             "CustomActionData" = "8:"
             }
@@ -237,11 +237,6 @@
             "AssemblyAsmDisplayName" = "8:System.IO.Compression.FileSystem, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
                 "ScatterAssemblies"
                 {
-                    "_7B1F9268DEE5A7B699BA5BD426751257"
-                    {
-                    "Name" = "8:System.IO.Compression.FileSystem.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.IO.Compression.FileSystem.dll"
             "TargetName" = "8:"
@@ -268,11 +263,6 @@
             "AssemblyAsmDisplayName" = "8:FinanceTracker, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_9D6CD0C8420FBAD27A599202FA4F1815"
-                    {
-                    "Name" = "8:FinanceTracker.exe"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:FinanceTracker.exe"
             "TargetName" = "8:"
@@ -299,11 +289,6 @@
             "AssemblyAsmDisplayName" = "8:System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
                 "ScatterAssemblies"
                 {
-                    "_A836593020631EEE05C12E5AF91D9C72"
-                    {
-                    "Name" = "8:System.IO.Compression.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.IO.Compression.dll"
             "TargetName" = "8:"

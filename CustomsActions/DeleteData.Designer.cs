@@ -1,6 +1,6 @@
 ﻿namespace CustomsActions
 {
-    partial class Installer
+    partial class DeleteData
     {
         /// <summary>
         /// Required designer variable.
