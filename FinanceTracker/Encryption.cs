@@ -22,6 +22,8 @@ namespace FinanceTracker
 
         public static string Encrypt(string plaintext)
         {
+            CheckPasswordAndVector();
+
             var ptBytes = Encoding.ASCII.GetBytes(plaintext);
             var aes = new AesCryptoServiceProvider
             {
@@ -42,6 +44,8 @@ namespace FinanceTracker
 
         public static string Decrypt(string ciphertext)
         {
+            CheckPasswordAndVector();
+
             var ctBytes = Convert.FromBase64String(ciphertext);
             var aes = new AesCryptoServiceProvider
             {
@@ -58,6 +62,21 @@ namespace FinanceTracker
             crypto.Dispose();
 
             return Encoding.ASCII.GetString(ptBytes);
+        }
+
+        private static void CheckPasswordAndVector()
+        {
+            var variable = string.Empty;
+
+            if (_passBytes == null)
+                variable = "Password";
+            else if (_initVector == null)
+                variable = "Initial Vector";
+
+            if (String.IsNullOrEmpty(variable))
+            {
+                throw new ArgumentNullException(variable, variable +  "has not been initialized yet.");
+            }
         }
     }
 }
