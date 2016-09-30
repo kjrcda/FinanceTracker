@@ -58,7 +58,7 @@
             // 
             // btnConvert
             // 
-            this.btnConvert.Location = new System.Drawing.Point(58, 158);
+            this.btnConvert.Location = new System.Drawing.Point(479, 158);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(112, 32);
             this.btnConvert.TabIndex = 3;
@@ -68,7 +68,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(479, 158);
+            this.btnExit.Location = new System.Drawing.Point(65, 158);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(112, 32);
             this.btnExit.TabIndex = 4;
