@@ -24,6 +24,7 @@ namespace FinanceTracker
         public MainForm()
         {
             InitializeComponent();
+            Encryption.Initialize("@Why4Not8USE3A2funny0pasSworD%3T", "D#$rwfa24SGHdf4f");
             _fileNameType.Add(Utilities.FileNames[0], typeof(List<FinanceEntry>));
             _fileNameType.Add(Utilities.FileNames[1], typeof(List<double>));
 

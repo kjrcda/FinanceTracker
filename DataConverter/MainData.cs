@@ -15,6 +15,7 @@ namespace DataConverter
         public MainData()
         {
             InitializeComponent();
+            Encryption.Initialize("@Why4Not8USE3A2funny0pasSworD%3T", "D#$rwfa24SGHdf4f");
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
