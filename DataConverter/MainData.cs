@@ -53,7 +53,8 @@ namespace DataConverter
             }
 
             var nameParts = _filename.Split('.');
-            var convertedFormat = nameParts[1] == FileExtensions.Xml ? FileExtensions.Ftf : FileExtensions.Xml;
+            var convertXml = nameParts[1] == FileExtensions.Xml;
+            var convertedFormat = convertXml ? FileExtensions.Ftf : FileExtensions.Xml;
             var namePath = nameParts[0] + "." + convertedFormat;
 
             if (File.Exists(namePath))
@@ -66,10 +67,8 @@ namespace DataConverter
 
             try
             {
-                var doc = new XmlDocument();
-                doc.Load(_filename);
-                var exml = Encryption.Encrypt(doc.OuterXml);
-                File.WriteAllText(namePath, exml);
+                if (convertXml)
+                    ConvertXmlToFtf(namePath);
 
                 if (delete)
                     try { File.Delete(_filename); }
@@ -83,6 +82,14 @@ namespace DataConverter
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void ConvertXmlToFtf(string namePath)
+        {
+            var doc = new XmlDocument();
+            doc.Load(_filename);
+            var exml = Encryption.Encrypt(doc.OuterXml);
+            File.WriteAllText(namePath, exml);
         }
     }
 }
