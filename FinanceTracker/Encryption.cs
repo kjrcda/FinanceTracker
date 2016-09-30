@@ -11,13 +11,10 @@ namespace FinanceTracker
         private static byte[] _passBytes;
         private static byte[] _initVector;
 
-        public static string PassBytes
+        public static void Initialize(string password, string vector)
         {
-            set { _passBytes = Encoding.ASCII.GetBytes(value); }
-        }
-        public static string InitVector
-        {
-            set { _initVector = Encoding.ASCII.GetBytes(value); }
+            _passBytes = Encoding.ASCII.GetBytes(password);
+            _initVector = Encoding.ASCII.GetBytes(vector);
         }
 
         public static string Encrypt(string plaintext)
