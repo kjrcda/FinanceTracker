@@ -70,7 +70,7 @@ namespace FinanceTracker
             else if (_initVector == null)
                 variable = "Initial Vector";
 
-            if (String.IsNullOrEmpty(variable))
+            if (!String.IsNullOrEmpty(variable))
             {
                 throw new ArgumentNullException(variable, variable +  "has not been initialized yet.");
             }
