@@ -68,7 +68,13 @@ namespace DataConverter
             try
             {
                 if (convertXml)
+                {
                     ConvertXmlToFtf(namePath);
+                }
+                else
+                {
+                    ConvertFtfToXml(namePath);
+                }
 
                 if (delete)
                     try { File.Delete(_filename); }
@@ -90,6 +96,15 @@ namespace DataConverter
             doc.Load(_filename);
             var exml = Encryption.Encrypt(doc.OuterXml);
             File.WriteAllText(namePath, exml);
+        }
+
+        private void ConvertFtfToXml(string namePath)
+        {
+            var doc = new XmlDocument();
+            var dxml = File.ReadAllText(_filename);
+            dxml = Encryption.Decrypt(dxml);
+            doc.LoadXml(dxml);
+            doc.Save(namePath);
         }
     }
 }
