@@ -9,8 +9,8 @@ namespace DataConverter
     public partial class MainData : Form
     {
         private string _filename = "";
-        private const string FileFilter = "XML File (*.xml)|*.xml";
-        private const string AdminFilter = "Finance Tracker File (*.ftf)|*.ftf";
+        private const string FileFilter = "XML File (*." + FileExtensions.Xml + ")|*." + FileExtensions.Xml;
+        private const string AdminFilter = "Finance Tracker File (*." + FileExtensions.Ftf + ")|*." + FileExtensions.Ftf;
 
         public MainData()
         {
@@ -52,10 +52,14 @@ namespace DataConverter
                 return;
             }
 
-            var namePath = _filename.Split('.')[0] + ".ftf";
+            var nameParts = _filename.Split('.');
+            var convertedFormat = nameParts[1] == FileExtensions.Xml ? FileExtensions.Ftf : FileExtensions.Xml;
+            var namePath = nameParts[0] + "." + convertedFormat;
+
             if (File.Exists(namePath))
             {
-                var result = MessageBox.Show(txtFile.Text.Replace("xml", "ftf") + " already exists.\nDo you want to overwrite it?", "Overwrite", MessageBoxButtons.YesNo);
+                var message = txtFile.Text.Split('.')[0] + "." + convertedFormat + " already exists.\nDo you want to overwrite it?";
+                var result = MessageBox.Show(message, "Overwrite", MessageBoxButtons.YesNo);
                 if (result == DialogResult.No)
                     return;
             }
