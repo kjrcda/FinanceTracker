@@ -6,10 +6,19 @@ namespace FinanceTracker
 {
     public static class Encryption
     {
-        private static readonly byte[] InitVector = Encoding.ASCII.GetBytes("D#$rwfa24SGHdf4f");
         private const int KeySize = 256;
         private const int BlockSize = 128;
-        private static readonly byte[] PassBytes = Encoding.ASCII.GetBytes("@Why4Not8USE3A2funny0pasSworD%3T");
+        private static byte[] _passBytes;
+        private static byte[] _initVector;
+
+        public static string PassBytes
+        {
+            set { _passBytes = Encoding.ASCII.GetBytes(value); }
+        }
+        public static string InitVector
+        {
+            set { _initVector = Encoding.ASCII.GetBytes(value); }
+        }
 
         public static string Encrypt(string plaintext)
         {
@@ -18,8 +27,8 @@ namespace FinanceTracker
             {
                 BlockSize = BlockSize,
                 KeySize = KeySize,
-                Key = PassBytes,
-                IV = InitVector,
+                Key = _passBytes,
+                IV = _initVector,
                 Padding = PaddingMode.PKCS7,
                 Mode = CipherMode.CBC
             };
@@ -38,8 +47,8 @@ namespace FinanceTracker
             {
                 BlockSize = 128,
                 KeySize = 256,
-                Key = PassBytes,
-                IV = InitVector,
+                Key = _passBytes,
+                IV = _initVector,
                 Padding = PaddingMode.PKCS7,
                 Mode = CipherMode.CBC
             };
