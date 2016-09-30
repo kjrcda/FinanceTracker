@@ -9,6 +9,8 @@ namespace DataConverter
     public partial class MainData : Form
     {
         private string _filename = "";
+        private const string FileFilter = "XML File (*.xml)|*.xml";
+        private const string AdminFilter = "Finance Tracker File (*.ftf)|*.ftf";
 
         public MainData()
         {
@@ -17,7 +19,15 @@ namespace DataConverter
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            var diag = new OpenFileDialog { Filter = "XML File (*.xml)|*.xml", Title = "Open" };
+            var filter = FileFilter;
+            var mEvent = (MouseEventArgs) e;
+
+            if(mEvent.Button == MouseButtons.Right)
+            {
+                filter += "|" + AdminFilter;
+            }
+
+            var diag = new OpenFileDialog { Filter = filter, Title = "Open" };
             var result = diag.ShowDialog();
 
             if (result != DialogResult.OK || diag.FileName == "")
