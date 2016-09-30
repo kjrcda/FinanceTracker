@@ -61,6 +61,7 @@
       <DependentUpon>ArchiveViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Encryption.cs" />
+    <Compile Include="FileExtensions.cs" />
     <Compile Include="ListSorter.cs" />
     <Compile Include="FinanceEntry.cs" />
     <Compile Include="InputBox.cs">
