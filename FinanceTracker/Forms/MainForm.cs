@@ -261,7 +261,7 @@ namespace FinanceTracker.Forms
             var zipFile = new FileStream(diag.FileName, FileMode.Create);
             using (var archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
             {
-                foreach (var name in FileNames.Members())
+                foreach (var name in FileNames.Members)
                 {
                     try
                     {
@@ -349,7 +349,7 @@ namespace FinanceTracker.Forms
             }
 
             //otherwise import files
-            foreach (var name in FileNames.Members())
+            foreach (var name in FileNames.Members)
             {
                 var fName = name;
                 var archiveEntry = archive.Entries.Where(item => String.Equals(item.Name, fName, StringComparison.CurrentCultureIgnoreCase));
