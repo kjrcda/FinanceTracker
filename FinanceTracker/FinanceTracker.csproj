@@ -91,8 +91,8 @@
     <Compile Include="Forms\TotalsForm.Designer.cs">
       <DependentUpon>TotalsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Resources\FileExtensions.cs" />
     <Compile Include="Utilities\Encryption.cs" />
-    <Compile Include="FileExtensions.cs" />
     <Compile Include="Utilities\ListSorter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

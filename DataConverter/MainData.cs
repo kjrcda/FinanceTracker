@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Xml;
 using FinanceTracker;
 using System.IO;
+using FinanceTracker.Resources;
 
 namespace DataConverter
 {

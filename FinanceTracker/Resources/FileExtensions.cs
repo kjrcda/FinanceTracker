@@ -1,4 +1,4 @@
-﻿namespace FinanceTracker
+﻿namespace FinanceTracker.Resources
 {
     public static class FileExtensions
     {
