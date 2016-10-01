@@ -85,16 +85,16 @@ namespace FinanceTracker.Forms
                 var i = 0;
                 foreach (var label in list)
                 {
-                    label.Text = _projData[i++].ToString("N2");
+                    label.Text = _projData[i++].ToString(Formats.MoneyFormat);
                     if (j == 1)
-                        label.Text = _currData[i - 1].ToString("N2");
+                        label.Text = _currData[i - 1].ToString(Formats.MoneyFormat);
                     else if (j == 2)
                         Utilities.LabelColor(_projData[i - 1] - _currData[i - 1], label);
                 }
                 j++;
             }
-            lblPTotalAmt.Text = _projTotal.ToString("N2");
-            lblCTotalAmt.Text = _currTotal.ToString("N2");
+            lblPTotalAmt.Text = _projTotal.ToString(Formats.MoneyFormat);
+            lblCTotalAmt.Text = _currTotal.ToString(Formats.MoneyFormat);
             Utilities.LabelColor(_projTotal - _currTotal, lblTotalAmt);
         }
 

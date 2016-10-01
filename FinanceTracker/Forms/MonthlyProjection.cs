@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using FinanceTracker.Resources;
 
 namespace FinanceTracker.Forms
 {
@@ -26,7 +27,7 @@ namespace FinanceTracker.Forms
             var i=0;
             foreach(var box in _boxes)
             {
-                box.Text = ProjData[i++].ToString("N2");
+                box.Text = ProjData[i++].ToString(Formats.MoneyFormat);
             }
 
             UpdateTotal(null,null);

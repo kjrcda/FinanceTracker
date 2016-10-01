@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
+using FinanceTracker.Resources;
 
 namespace FinanceTracker.Forms
 {
@@ -55,7 +56,7 @@ namespace FinanceTracker.Forms
                 return;
 
             cmbCategory.SelectedIndex = Entry.Category;
-            txtAmount.Text = Entry.Amount.ToString("N2");
+            txtAmount.Text = Entry.Amount.ToString(Formats.MoneyFormat);
             txtPlace.Text = Entry.Place;
             txtDescription.Text = Entry.Description;
         }

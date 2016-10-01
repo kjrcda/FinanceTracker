@@ -96,7 +96,7 @@ namespace FinanceTracker.Forms
                     {
                         _listFinances[index] = form.Entry;
                         row.SubItems[1].Text = Categories.Get(form.Entry.Category);
-                        row.SubItems[2].Text = form.Entry.Amount.ToString("N2");
+                        row.SubItems[2].Text = form.Entry.Amount.ToString(Formats.MoneyFormat);
                         row.SubItems[3].Text = form.Entry.Place;
                         row.SubItems[4].Text = form.Entry.Description;
 
@@ -302,7 +302,7 @@ namespace FinanceTracker.Forms
                     Utilities.LoadID(_listFinances);
                     WriteXML();
                     Recalculate();
-                    MessageBox.Show("Your total spending for the month left you with: " + (projTotal - currTotal).ToString("N2"), "Monthly Total");
+                    MessageBox.Show("Your total spending for the month left you with: " + (projTotal - currTotal).ToString(Formats.MoneyFormat), "Monthly Total");
                 }
                 else
                     MessageBox.Show("Error: There is already an entry with the same name","Error");

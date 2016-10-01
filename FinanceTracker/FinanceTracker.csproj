@@ -94,6 +94,7 @@
     <Compile Include="Resources\Categories.cs" />
     <Compile Include="Resources\FileExtensions.cs" />
     <Compile Include="Resources\FileNames.cs" />
+    <Compile Include="Resources\Formats.cs" />
     <Compile Include="Utilities\Encryption.cs" />
     <Compile Include="Utilities\ListSorter.cs" />
     <Compile Include="Program.cs" />

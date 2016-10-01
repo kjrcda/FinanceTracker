@@ -26,7 +26,7 @@ namespace FinanceTracker
 
         public static void LabelColor(double amt, Label lbl)
         {
-            lbl.Text = amt.ToString("N2");
+            lbl.Text = amt.ToString(Formats.MoneyFormat);
             if (amt < 0)
                 lbl.ForeColor = Color.Red;
             else if (amt > 0)
@@ -43,7 +43,7 @@ namespace FinanceTracker
 
         public static void LoadItem(ListView list, FinanceEntry item)
         {
-            var row = new ListViewItem(new[] { "" + item.ID, Categories.Get(item.Category), item.Amount.ToString("N2"), item.Place, item.Description });
+            var row = new ListViewItem(new[] { "" + item.ID, Categories.Get(item.Category), item.Amount.ToString(Formats.MoneyFormat), item.Place, item.Description });
             list.Items.Add(row);
             list.Items[list.Items.Count-1].EnsureVisible();
         }
