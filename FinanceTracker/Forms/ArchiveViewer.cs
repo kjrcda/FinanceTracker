@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
 
-namespace FinanceTracker
+namespace FinanceTracker.Forms
 {
     public partial class ArchiveViewer : Form
     {

@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
-using System.Security.AccessControl;
 using System.Windows.Forms;
 
-namespace FinanceTracker
+namespace FinanceTracker.Forms
 {
     partial class MainForm
     {

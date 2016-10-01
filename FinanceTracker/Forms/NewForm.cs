@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
 
-namespace FinanceTracker
+namespace FinanceTracker.Forms
 {
     public sealed partial class NewForm : Form
     {

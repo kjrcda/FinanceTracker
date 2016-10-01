@@ -8,7 +8,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using FinanceTracker.DataObjects;
 
-namespace FinanceTracker
+namespace FinanceTracker.Forms
 {
     public partial class MainForm : Form
     {

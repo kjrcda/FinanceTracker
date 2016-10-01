@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace FinanceTracker
+namespace FinanceTracker.Forms
 {
     sealed partial class NewForm
     {

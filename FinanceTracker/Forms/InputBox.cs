@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace FinanceTracker
+namespace FinanceTracker.Forms
 {
     public sealed partial class InputBox : Form
     {
