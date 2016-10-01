@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using FinanceTracker.DataObjects;
+using FinanceTracker.Resources;
 
 namespace FinanceTracker.Forms
 {
@@ -26,8 +27,8 @@ namespace FinanceTracker.Forms
         {
             InitializeComponent();
             Encryption.Initialize("@Why4Not8USE3A2funny0pasSworD%3T", "D#$rwfa24SGHdf4f");
-            _fileNameType.Add(Utilities.FileNames[0], typeof(List<FinanceEntry>));
-            _fileNameType.Add(Utilities.FileNames[1], typeof(List<double>));
+            _fileNameType.Add(FileNames.SaveFile, typeof(List<FinanceEntry>));
+            _fileNameType.Add(FileNames.ProjectionFile, typeof(List<double>));
 
             ReadXML();
 
@@ -163,16 +164,16 @@ namespace FinanceTracker.Forms
         {
             foreach (var pair in _fileNameType)
             {
-                if(pair.Key == Utilities.FileNames[0])
+                if(pair.Key == FileNames.SaveFile)
                     _listFinances = ReadFile(pair.Key, pair.Value) ?? new List<FinanceEntry>();
-                else if(pair.Key == Utilities.FileNames[1])
+                else if(pair.Key == FileNames.ProjectionFile)
                     _projData = ReadFile(pair.Key, pair.Value) ?? new List<double>();
             }
         }
 
         private void ReadArchives()
         {
-            _archived = ReadFile(Utilities.FileNames[2], typeof(List<ArchiveMonth>)) ?? new List<ArchiveMonth>();
+            _archived = ReadFile(FileNames.ArchiveFile, typeof(List<ArchiveMonth>)) ?? new List<ArchiveMonth>();
         }
 
         private static dynamic ReadFile(string name, Type objType)
@@ -209,16 +210,16 @@ namespace FinanceTracker.Forms
         {
             foreach (var pair in _fileNameType)
             {
-                if(pair.Key == Utilities.FileNames[0])
+                if(pair.Key == FileNames.SaveFile)
                     WriteFile(pair.Key, pair.Value, _listFinances);
-                else if(pair.Key == Utilities.FileNames[1])
+                else if(pair.Key == FileNames.ProjectionFile)
                     WriteFile(pair.Key, pair.Value, _projData);
             }
         }
 
         private void WriteArchives()
         {
-            WriteFile(Utilities.FileNames[2], typeof(List<ArchiveMonth>), _archived);
+            WriteFile(FileNames.ArchiveFile, typeof(List<ArchiveMonth>), _archived);
         }
 
         private static void WriteFile(string name, Type objType, dynamic list)
@@ -260,7 +261,7 @@ namespace FinanceTracker.Forms
             var zipFile = new FileStream(diag.FileName, FileMode.Create);
             using (var archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
             {
-                foreach (var name in Utilities.FileNames)
+                foreach (var name in FileNames.Members())
                 {
                     try
                     {
@@ -338,7 +339,7 @@ namespace FinanceTracker.Forms
 
             //check to see if files are in the .zip, skip archFile though its not required
             var archive = ZipFile.OpenRead(diag.FileName);
-            var hasAll = Utilities.FileNames.Where(name => name != Utilities.FileNames[2]).All(
+            var hasAll = FileNames.Where(name => name != FileNames.ArchiveFile).All(
                 name => archive.Entries.Count(item => String.Equals(item.Name, name, StringComparison.CurrentCultureIgnoreCase)) == 1);
 
             if(!hasAll) //if file or projfile missing, cancel
@@ -348,7 +349,7 @@ namespace FinanceTracker.Forms
             }
 
             //otherwise import files
-            foreach (var name in Utilities.FileNames)
+            foreach (var name in FileNames.Members())
             {
                 var fName = name;
                 var archiveEntry = archive.Entries.Where(item => String.Equals(item.Name, fName, StringComparison.CurrentCultureIgnoreCase));

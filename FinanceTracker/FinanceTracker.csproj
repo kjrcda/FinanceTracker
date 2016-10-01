@@ -92,6 +92,7 @@
       <DependentUpon>TotalsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Resources\FileExtensions.cs" />
+    <Compile Include="Resources\FileNames.cs" />
     <Compile Include="Utilities\Encryption.cs" />
     <Compile Include="Utilities\ListSorter.cs" />
     <Compile Include="Program.cs" />
