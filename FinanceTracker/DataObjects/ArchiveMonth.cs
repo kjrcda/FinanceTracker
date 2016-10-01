@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FinanceTracker
+namespace FinanceTracker.DataObjects
 {
     public class ArchiveMonth
     {
