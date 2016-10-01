@@ -96,7 +96,7 @@
     <Compile Include="TotalsForm.Designer.cs">
       <DependentUpon>TotalsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utilities.cs" />
+    <Compile Include="Utilities\Utilities.cs" />
     <EmbeddedResource Include="ArchiveViewer.resx">
       <DependentUpon>ArchiveViewer.cs</DependentUpon>
     </EmbeddedResource>
