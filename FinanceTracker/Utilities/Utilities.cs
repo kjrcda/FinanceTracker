@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
+using FinanceTracker.Resources;
 
 namespace FinanceTracker
 {
     public static class Utilities
     {
         private static int _nextID;
-        public static String[] Categories = { "Rent", "Phone Bill", "Entertainment", "Grocery", "Transportation", "Eating Out", "Other" };
         
         public static void LoadID(List<FinanceEntry> list)
         {
@@ -43,7 +43,7 @@ namespace FinanceTracker
 
         public static void LoadItem(ListView list, FinanceEntry item)
         {
-            var row = new ListViewItem(new[] { "" + item.ID, Categories[item.Category], item.Amount.ToString("N2"), item.Place, item.Description });
+            var row = new ListViewItem(new[] { "" + item.ID, Categories.Get(item.Category), item.Amount.ToString("N2"), item.Place, item.Description });
             list.Items.Add(row);
             list.Items[list.Items.Count-1].EnsureVisible();
         }

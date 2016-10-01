@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
+using FinanceTracker.Resources;
 
 namespace FinanceTracker.Forms
 {
@@ -99,9 +100,9 @@ namespace FinanceTracker.Forms
 
         private void InitProjectionData()
         {
-            _currData = new List<double>(Utilities.Categories.Length);
-            _projData = new List<double>(Utilities.Categories.Length);
-            for (var i = 0; i < Utilities.Categories.Length; i++)
+            _currData = new List<double>(Categories.Length);
+            _projData = new List<double>(Categories.Length);
+            for (var i = 0; i < Categories.Length; i++)
             {
                 _projData.Add(0);
                 _currData.Add(0);

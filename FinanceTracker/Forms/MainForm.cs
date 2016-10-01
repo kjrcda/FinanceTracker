@@ -95,7 +95,7 @@ namespace FinanceTracker.Forms
                     if (result == DialogResult.OK)
                     {
                         _listFinances[index] = form.Entry;
-                        row.SubItems[1].Text = Utilities.Categories[form.Entry.Category];
+                        row.SubItems[1].Text = Categories.Get(form.Entry.Category);
                         row.SubItems[2].Text = form.Entry.Amount.ToString("N2");
                         row.SubItems[3].Text = form.Entry.Place;
                         row.SubItems[4].Text = form.Entry.Description;
@@ -313,9 +313,9 @@ namespace FinanceTracker.Forms
         private void InitProjectionData()
         {
             if (_projData.Count == 0)
-                for (var i = 0; i < Utilities.Categories.Length; i++)
+                for (var i = 0; i < Categories.Length; i++)
                     _projData.Add(0);
-            for (var i = 0; i < Utilities.Categories.Length; i++)
+            for (var i = 0; i < Categories.Length; i++)
                 _currData.Add(0);
         }
 
