@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Serialization;
 using FinanceTracker.DataObjects;
 using FinanceTracker.Resources;
 
@@ -21,7 +17,6 @@ namespace FinanceTracker.Forms
 
         private readonly List<Label> _labels = new List<Label>();
         private readonly Dictionary<string, Type> _fileNameType = new Dictionary<string, Type>();
-        private static readonly string SavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Finance Tracker");
 
         public MainForm()
         {
@@ -165,45 +160,15 @@ namespace FinanceTracker.Forms
             foreach (var pair in _fileNameType)
             {
                 if(pair.Key == FileNames.SaveFile)
-                    _listFinances = ReadFile(pair.Key, pair.Value) ?? new List<FinanceEntry>();
+                    _listFinances = FileIO.ReadFile(pair.Key, pair.Value) ?? new List<FinanceEntry>();
                 else if(pair.Key == FileNames.ProjectionFile)
-                    _projData = ReadFile(pair.Key, pair.Value) ?? new List<double>();
+                    _projData = FileIO.ReadFile(pair.Key, pair.Value) ?? new List<double>();
             }
         }
 
         private void ReadArchives()
         {
-            _archived = ReadFile(FileNames.ArchiveFile, typeof(List<ArchiveMonth>)) ?? new List<ArchiveMonth>();
-        }
-
-        private static dynamic ReadFile(string name, Type objType)
-        {
-            dynamic list = null;
-            try
-            {
-                var exml = File.ReadAllText(Path.Combine(SavePath, name));
-                var xml = Encryption.Decrypt(exml);
-
-                using (var xreader = XmlReader.Create(new StringReader(xml)))
-                {
-                    xreader.MoveToContent();
-                    list = new XmlSerializer(objType).Deserialize(xreader);
-                }
-            }
-            catch (FileNotFoundException)
-            {
-                //keep going the file hasnt been created yet
-            }
-            catch (DirectoryNotFoundException)
-            {
-                Directory.CreateDirectory(SavePath);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error reading file\n" + e.Message, "Error Reading File");
-            }
-
-            return list;
+            _archived = FileIO.ReadFile(FileNames.ArchiveFile, typeof(List<ArchiveMonth>)) ?? new List<ArchiveMonth>();
         }
 
         private void WriteXML()
@@ -211,34 +176,15 @@ namespace FinanceTracker.Forms
             foreach (var pair in _fileNameType)
             {
                 if(pair.Key == FileNames.SaveFile)
-                    WriteFile(pair.Key, pair.Value, _listFinances);
+                    FileIO.WriteFile(pair.Key, pair.Value, _listFinances);
                 else if(pair.Key == FileNames.ProjectionFile)
-                    WriteFile(pair.Key, pair.Value, _projData);
+                    FileIO.WriteFile(pair.Key, pair.Value, _projData);
             }
         }
 
         private void WriteArchives()
         {
-            WriteFile(FileNames.ArchiveFile, typeof(List<ArchiveMonth>), _archived);
-        }
-
-        private static void WriteFile(string name, Type objType, dynamic list)
-        {
-            try
-            {
-                using (var writer = new StringWriter())
-                {
-                    var serializer = new XmlSerializer(objType);
-                    serializer.Serialize(writer, list);
-                    var xml = writer.ToString();
-                    var exml = Encryption.Encrypt(xml);
-                    File.WriteAllText(Path.Combine(SavePath, name), exml);
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error writing to file\n" + e.Message, "Error Saving File");
-            }
+            FileIO.WriteFile(FileNames.ArchiveFile, typeof(List<ArchiveMonth>), _archived);
         }
 
 #endregion
@@ -255,23 +201,9 @@ namespace FinanceTracker.Forms
             var diag = new SaveFileDialog {Filter = "ZIP File (*.zip)|*.zip", Title = "Save As", FilterIndex = 1};
             var result = diag.ShowDialog();
 
-            if (result != DialogResult.OK || diag.FileName == "") 
-                return;
-
-            var zipFile = new FileStream(diag.FileName, FileMode.Create);
-            using (var archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
+            if (result == DialogResult.OK && !String.IsNullOrEmpty(diag.FileName))
             {
-                foreach (var name in FileNames.Members)
-                {
-                    try
-                    {
-                        archive.CreateEntryFromFile(Path.Combine(SavePath, name), name);
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("No file " + name + " generated to backup yet. Continuing...", "File Not Backed Up");
-                    }
-                }
+                FileIO.BackupFiles(diag.FileName);
             }
         }
 
@@ -334,46 +266,18 @@ namespace FinanceTracker.Forms
             var diag = new OpenFileDialog {Filter = "ZIP File (*.zip)|*.zip", Title = "Open"};
             var result = diag.ShowDialog();
 
-            if (result != DialogResult.OK || diag.FileName == "")
-                return;
-
-            //check to see if files are in the .zip, skip archFile though its not required
-            var archive = ZipFile.OpenRead(diag.FileName);
-            var hasAll = FileNames.Where(name => name != FileNames.ArchiveFile).All(
-                name => archive.Entries.Count(item => String.Equals(item.Name, name, StringComparison.CurrentCultureIgnoreCase)) == 1);
-
-            if(!hasAll) //if file or projfile missing, cancel
+            if (result == DialogResult.OK && !String.IsNullOrEmpty(diag.FileName))
             {
-                MessageBox.Show("The selected file does not have the required files", "Required Files Missing");
-                return;
+                FileIO.ImportFiles(diag.FileName, ref _archived);
+
+                //now need to update the prorgam
+                Utilities.ClearList(lstItems);
+                _currData = new List<double>();
+                ReadXML();
+                Utilities.LoadID(_listFinances);
+                InitProjectionData();
+                PopulateList();
             }
-
-            //otherwise import files
-            foreach (var name in FileNames.Members)
-            {
-                var fName = name;
-                var archiveEntry = archive.Entries.Where(item => String.Equals(item.Name, fName, StringComparison.CurrentCultureIgnoreCase));
-                var fNamePath = Path.Combine(SavePath, fName);
-
-                var zipArchiveEntries = archiveEntry.ToList();
-                if (!zipArchiveEntries.Any()) //will only ever be archives
-                {
-                    MessageBox.Show("No file " + fName + " to be found. It will not be imported.\nThe current archive file will be deleted.", "File Not Found");
-                    if (File.Exists(fNamePath))
-                        File.Delete(fNamePath);
-                    _archived = new List<ArchiveMonth>();
-                }
-                else
-                    zipArchiveEntries.First().ExtractToFile(fNamePath, true);
-            }
-
-            //now need to update the prorgam
-            Utilities.ClearList(lstItems);
-            _currData = new List<double>();
-            ReadXML();
-            Utilities.LoadID(_listFinances);
-            InitProjectionData();
-            PopulateList();
         }
 
         private void viewArchiveToolStripMenuItem_Click(object sender, EventArgs e)
