@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FinanceTracker
+namespace FinanceTracker.DataObjects
 {
     public class FinanceEntry
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using FinanceTracker.DataObjects;
 
 namespace FinanceTracker
 {
