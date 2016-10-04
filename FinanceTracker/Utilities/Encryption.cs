@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -6,18 +7,24 @@ namespace FinanceTracker
 {
     public static class Encryption
     {
+        private const string KeysFilename = "data.dat";
         private const int KeySize = 256;
         private const int BlockSize = 128;
-        private static byte[] _passBytes;
-        private static byte[] _initVector;
+        private static byte[] _passBytes = new byte[0];
+        private static byte[] _initVector = new byte[0];
+        private static bool _initialized;
 
-        public static void Initialize(string password, string vector)
+        public static void Initialize()
         {
-            _passBytes = Encoding.ASCII.GetBytes(password);
-            _initVector = Encoding.ASCII.GetBytes(vector);
+            if (_initialized) { return; }
 
-            _passBytes = _passBytes ?? new byte[0];
-            _initVector = _initVector ?? new byte[0];
+            List<String> fileContents = FileIO.ReadFile(KeysFilename, typeof(List<String>));
+
+            if (fileContents != null && fileContents.Count == 2)
+            {
+                _passBytes = Encoding.ASCII.GetBytes(fileContents[0]);
+                _initVector = Encoding.ASCII.GetBytes(fileContents[1]);
+            }
 
             var message = string.Empty;
             if (_passBytes.Length == 0)
@@ -28,6 +35,8 @@ namespace FinanceTracker
 
             if (!String.IsNullOrEmpty(message))
                 System.Windows.Forms.MessageBox.Show(message, "Encryption Keys");
+            else
+                _initialized = true;
         }
 
         public static string Encrypt(string plaintext)
@@ -76,7 +85,7 @@ namespace FinanceTracker
 
         private static bool IsPasswordAndVectorValid()
         {
-            return !(_passBytes.Length == 0 || _initVector.Length == 0);
+            return _passBytes.Length > 0 && _initVector.Length > 0;
         }
     }
 }
