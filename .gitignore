@@ -4,6 +4,8 @@
 /DataConverter/obj
 /CustomsActions/bin
 /CustomsActions/obj
+/InventoryTracker/bin
+/InventoryTracker/obj
 
 # Windows image file caches
 Thumbs.db

@@ -11,6 +11,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FinanceTrackerSetup", "Fina
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeleteDataAction", "CustomsActions\DeleteDataAction.csproj", "{F61C7EC9-7341-4E38-8889-CAFCB7ACEDAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryTracker", "InventoryTracker\InventoryTracker.csproj", "{1343808B-8ACA-4209-B286-D47C581CE926}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{F61C7EC9-7341-4E38-8889-CAFCB7ACEDAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F61C7EC9-7341-4E38-8889-CAFCB7ACEDAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F61C7EC9-7341-4E38-8889-CAFCB7ACEDAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1343808B-8ACA-4209-B286-D47C581CE926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1343808B-8ACA-4209-B286-D47C581CE926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1343808B-8ACA-4209-B286-D47C581CE926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1343808B-8ACA-4209-B286-D47C581CE926}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
