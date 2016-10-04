@@ -16,7 +16,12 @@ namespace DataConverter
         public MainData()
         {
             InitializeComponent();
-            Encryption.Initialize();
+            var message = Encryption.Initialize();
+
+            if (!String.IsNullOrEmpty(message))
+            {
+                MessageBox.Show(message, "Encryption Keys");
+            }
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)

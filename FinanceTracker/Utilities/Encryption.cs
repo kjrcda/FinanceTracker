@@ -14,9 +14,9 @@ namespace FinanceTracker
         private static byte[] _initVector = new byte[0];
         private static bool _initialized;
 
-        public static void Initialize()
+        public static string Initialize()
         {
-            if (_initialized) { return; }
+            if (_initialized) { return ""; }
 
             List<String> fileContents = FileIO.ReadFile(KeysFilename, typeof(List<String>));
 
@@ -34,9 +34,10 @@ namespace FinanceTracker
                 message += (_passBytes.Length == 0 ? "\n" : "") + "Initial Vector has not been initialized yet.";
 
             if (!String.IsNullOrEmpty(message))
-                System.Windows.Forms.MessageBox.Show(message, "Encryption Keys");
-            else
-                _initialized = true;
+                return message;
+
+            _initialized = true;
+            return "";
         }
 
         public static string Encrypt(string plaintext)
