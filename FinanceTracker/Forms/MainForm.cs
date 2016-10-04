@@ -21,7 +21,7 @@ namespace FinanceTracker.Forms
         public MainForm()
         {
             InitializeComponent();
-            Encryption.Initialize("@Why4Not8USE3A2funny0pasSworD%3T", "D#$rwfa24SGHdf4f");
+            Encryption.Initialize();
             _fileNameType.Add(FileNames.SaveFile, typeof(List<FinanceEntry>));
             _fileNameType.Add(FileNames.ProjectionFile, typeof(List<double>));
 
