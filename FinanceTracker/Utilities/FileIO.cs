@@ -37,6 +37,16 @@ namespace FinanceTracker
             {
                 Directory.CreateDirectory(SavePath);
             }
+            catch (XmlException)
+            {
+                //Chances are there is a discrepancy between encrypted and non encrypted files
+                File.Copy(Path.Combine(SavePath, name), Path.Combine(SavePath, name + "_backup"), true);
+            }
+            catch (FormatException)
+            {
+                //Chances are there is a discrepancy between encrypted and non encrypted files
+                File.Copy(Path.Combine(SavePath, name), Path.Combine(SavePath, name + "_backup"), true);
+            }
             catch (Exception e)
             {
                 MessageBox.Show("Error reading file\n" + e.Message, "Error Reading File");
