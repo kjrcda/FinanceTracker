@@ -15,11 +15,24 @@ namespace FinanceTracker
         {
             _passBytes = Encoding.ASCII.GetBytes(password);
             _initVector = Encoding.ASCII.GetBytes(vector);
+
+            _passBytes = _passBytes ?? new byte[0];
+            _initVector = _initVector ?? new byte[0];
+
+            var message = string.Empty;
+            if (_passBytes.Length == 0)
+                message = "Password has not been initialized yet.";
+
+            if (_initVector.Length == 0)
+                message += (_passBytes.Length == 0 ? "\n" : "") + "Initial Vector has not been initialized yet.";
+
+            if (!String.IsNullOrEmpty(message))
+                System.Windows.Forms.MessageBox.Show(message, "Encryption Keys");
         }
 
         public static string Encrypt(string plaintext)
         {
-            CheckPasswordAndVector();
+            if(!IsPasswordAndVectorValid()) { return plaintext; }
 
             var ptBytes = Encoding.ASCII.GetBytes(plaintext);
             var aes = new AesCryptoServiceProvider
@@ -41,7 +54,7 @@ namespace FinanceTracker
 
         public static string Decrypt(string ciphertext)
         {
-            CheckPasswordAndVector();
+            if (!IsPasswordAndVectorValid()) { return ciphertext; }
 
             var ctBytes = Convert.FromBase64String(ciphertext);
             var aes = new AesCryptoServiceProvider
@@ -61,19 +74,9 @@ namespace FinanceTracker
             return Encoding.ASCII.GetString(ptBytes);
         }
 
-        private static void CheckPasswordAndVector()
+        private static bool IsPasswordAndVectorValid()
         {
-            var variable = string.Empty;
-
-            if (_passBytes == null)
-                variable = "Password";
-            else if (_initVector == null)
-                variable = "Initial Vector";
-
-            if (!String.IsNullOrEmpty(variable))
-            {
-                throw new ArgumentNullException(variable, variable +  "has not been initialized yet.");
-            }
+            return !(_passBytes.Length == 0 || _initVector.Length == 0);
         }
     }
 }
