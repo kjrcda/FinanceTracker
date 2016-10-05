@@ -18,6 +18,7 @@ namespace FinanceTracker.Forms
         private readonly List<Label> _labels = new List<Label>();
         private readonly Dictionary<string, Type> _fileNameType = new Dictionary<string, Type>();
 
+#region FormFunctions
         public MainForm()
         {
             InitializeComponent();
@@ -146,49 +147,6 @@ namespace FinanceTracker.Forms
                 MessageBox.Show("Please select an entry to delete", "Deletion Error");
         }
 
-        private void Recalculate()
-        {
-            var i = 0;
-            foreach (var label in _labels)
-                UIHelper.LabelColor(_projData[i] - _currData[i++], label);
-        }
-
-#region FileLoadAndSave
-
-        private void ReadXML()
-        {
-            foreach (var pair in _fileNameType)
-            {
-                if(pair.Key == FileNames.SaveFile)
-                    _listFinances = FileIO.ReadFile(pair.Key, pair.Value) ?? new List<FinanceEntry>();
-                else if(pair.Key == FileNames.ProjectionFile)
-                    _projData = FileIO.ReadFile(pair.Key, pair.Value) ?? new List<double>();
-            }
-        }
-
-        private void ReadArchives()
-        {
-            _archived = FileIO.ReadFile(FileNames.ArchiveFile, typeof(List<ArchiveMonth>)) ?? new List<ArchiveMonth>();
-        }
-
-        private void WriteXML()
-        {
-            foreach (var pair in _fileNameType)
-            {
-                if(pair.Key == FileNames.SaveFile)
-                    FileIO.WriteFile(pair.Key, pair.Value, _listFinances);
-                else if(pair.Key == FileNames.ProjectionFile)
-                    FileIO.WriteFile(pair.Key, pair.Value, _projData);
-            }
-        }
-
-        private void WriteArchives()
-        {
-            FileIO.WriteFile(FileNames.ArchiveFile, typeof(List<ArchiveMonth>), _archived);
-        }
-
-#endregion
-
         private void lstItems_ColumnSort(object sender, ColumnClickEventArgs e)
         {
             _currColumn = ListSorter.ColumnSort((ListView)sender, e, _currColumn);
@@ -242,25 +200,6 @@ namespace FinanceTracker.Forms
             }
         }
 
-        private void InitProjectionData()
-        {
-            if (_projData.Count == 0)
-                for (var i = 0; i < Categories.Length; i++)
-                    _projData.Add(0);
-            for (var i = 0; i < Categories.Length; i++)
-                _currData.Add(0);
-        }
-
-        private void PopulateList()
-        {
-            foreach (var item in _listFinances)
-            {
-                _currData[item.Category] += item.Amount;
-                UIHelper.LoadItem(lstItems, item);
-            }
-            Recalculate();
-        }
-        
         private void importToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var diag = new OpenFileDialog {Filter = "ZIP File (*.zip)|*.zip", Title = "Open"};
@@ -333,6 +272,70 @@ namespace FinanceTracker.Forms
                 _currData[entry.Category] += entry.Amount;
                 Recalculate();
             }
+        }
+
+#endregion
+
+#region FileLoadAndSave
+
+        private void ReadXML()
+        {
+            foreach (var pair in _fileNameType)
+            {
+                if(pair.Key == FileNames.SaveFile)
+                    _listFinances = FileIO.ReadFile(pair.Key, pair.Value) ?? new List<FinanceEntry>();
+                else if(pair.Key == FileNames.ProjectionFile)
+                    _projData = FileIO.ReadFile(pair.Key, pair.Value) ?? new List<double>();
+            }
+        }
+
+        private void ReadArchives()
+        {
+            _archived = FileIO.ReadFile(FileNames.ArchiveFile, typeof(List<ArchiveMonth>)) ?? new List<ArchiveMonth>();
+        }
+
+        private void WriteXML()
+        {
+            foreach (var pair in _fileNameType)
+            {
+                if(pair.Key == FileNames.SaveFile)
+                    FileIO.WriteFile(pair.Key, pair.Value, _listFinances);
+                else if(pair.Key == FileNames.ProjectionFile)
+                    FileIO.WriteFile(pair.Key, pair.Value, _projData);
+            }
+        }
+
+        private void WriteArchives()
+        {
+            FileIO.WriteFile(FileNames.ArchiveFile, typeof(List<ArchiveMonth>), _archived);
+        }
+
+#endregion
+
+        private void Recalculate()
+        {
+            var i = 0;
+            foreach (var label in _labels)
+                UIHelper.LabelColor(_projData[i] - _currData[i++], label);
+        }
+
+        private void InitProjectionData()
+        {
+            if (_projData.Count == 0)
+                for (var i = 0; i < Categories.Length; i++)
+                    _projData.Add(0);
+            for (var i = 0; i < Categories.Length; i++)
+                _currData.Add(0);
+        }
+
+        private void PopulateList()
+        {
+            foreach (var item in _listFinances)
+            {
+                _currData[item.Category] += item.Amount;
+                UIHelper.LoadItem(lstItems, item);
+            }
+            Recalculate();
         }
     }
 }

@@ -7,6 +7,9 @@ namespace FinanceTracker
 {
     public static  class UIHelper
     {
+
+#region PublicFunctions
+
         public static void LabelColor(double amt, Label lbl)
         {
             lbl.Text = amt.ToString(Formats.MoneyFormat);
@@ -41,5 +44,11 @@ namespace FinanceTracker
         {
             ((Button)sender).Parent.Dispose();
         }
+
+#endregion
+
+#region PrivateFunctions
+
+#endregion
     }
 }
