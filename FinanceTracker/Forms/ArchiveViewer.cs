@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
 using FinanceTracker.Resources;
@@ -100,13 +101,8 @@ namespace FinanceTracker.Forms
 
         private void InitProjectionData()
         {
-            _currData = new List<double>(Categories.Length);
-            _projData = new List<double>(Categories.Length);
-            for (var i = 0; i < Categories.Length; i++)
-            {
-                _projData.Add(0);
-                _currData.Add(0);
-            }
+            _currData = Enumerable.Repeat(0.0, Categories.Length).ToList();
+            _projData = Enumerable.Repeat(0.0, Categories.Length).ToList();
         }
 
         private void lstItems_ColumnSort(object sender, ColumnClickEventArgs e)

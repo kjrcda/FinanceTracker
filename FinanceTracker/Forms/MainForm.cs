@@ -322,10 +322,9 @@ namespace FinanceTracker.Forms
         private void InitProjectionData()
         {
             if (_projData.Count == 0)
-                for (var i = 0; i < Categories.Length; i++)
-                    _projData.Add(0);
-            for (var i = 0; i < Categories.Length; i++)
-                _currData.Add(0);
+                _projData = Enumerable.Repeat(0.0, Categories.Length).ToList();
+
+            _currData = Enumerable.Repeat(0.0, Categories.Length).ToList();
         }
 
         private void PopulateList()
