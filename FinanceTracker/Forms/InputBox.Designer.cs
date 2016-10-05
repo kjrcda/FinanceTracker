@@ -73,7 +73,7 @@ namespace FinanceTracker.Forms
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(Utilities.CloseWindow);
+            this.btnCancel.Click += new System.EventHandler(UIHelper.CloseWindow);
             // 
             // InputBox
             // 

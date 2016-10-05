@@ -72,7 +72,7 @@ namespace FinanceTracker.Forms
             foreach (var item in month.MonthInfo)
             {
                 _currData[item.Category] += item.Amount;
-                Utilities.LoadItem(lstItems, item);
+                UIHelper.LoadItem(lstItems, item);
             }
             Recalculate();
         }
@@ -89,13 +89,13 @@ namespace FinanceTracker.Forms
                     if (j == 1)
                         label.Text = _currData[i - 1].ToString(Formats.MoneyFormat);
                     else if (j == 2)
-                        Utilities.LabelColor(_projData[i - 1] - _currData[i - 1], label);
+                        UIHelper.LabelColor(_projData[i - 1] - _currData[i - 1], label);
                 }
                 j++;
             }
             lblPTotalAmt.Text = _projTotal.ToString(Formats.MoneyFormat);
             lblCTotalAmt.Text = _currTotal.ToString(Formats.MoneyFormat);
-            Utilities.LabelColor(_projTotal - _currTotal, lblTotalAmt);
+            UIHelper.LabelColor(_projTotal - _currTotal, lblTotalAmt);
         }
 
         private void InitProjectionData()
@@ -116,14 +116,14 @@ namespace FinanceTracker.Forms
 
         private void cboSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Utilities.ClearList(lstItems);
+            UIHelper.ClearList(lstItems);
             InitProjectionData();
             PopulateList();
         }
 
         private void CheckEscape(object sender,KeyEventArgs e)
         {
-            Utilities.CheckEscape(this, sender, e);
+            UIHelper.CheckEscape(this, sender, e);
         }
     }
 }

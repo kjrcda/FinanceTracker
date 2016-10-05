@@ -47,7 +47,7 @@ namespace FinanceTracker.Forms
             this.btnFinish.TabIndex = 1;
             this.btnFinish.Text = "Finish";
             this.btnFinish.UseVisualStyleBackColor = true;
-            this.btnFinish.Click += new System.EventHandler(Utilities.CloseWindow);
+            this.btnFinish.Click += new System.EventHandler(UIHelper.CloseWindow);
             this.btnFinish.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckEscape);
             // 
             // chklstItems

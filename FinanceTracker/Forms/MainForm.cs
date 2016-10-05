@@ -68,7 +68,7 @@ namespace FinanceTracker.Forms
                 {
                     var entry = form.Entry;
                     _listFinances.Add(entry);
-                    Utilities.LoadItem(lstItems, entry);
+                    UIHelper.LoadItem(lstItems, entry);
                     _currData[entry.Category] += entry.Amount;
                     Recalculate();
                 }
@@ -150,7 +150,7 @@ namespace FinanceTracker.Forms
         {
             var i = 0;
             foreach (var label in _labels)
-                Utilities.LabelColor(_projData[i] - _currData[i++], label);
+                UIHelper.LabelColor(_projData[i] - _currData[i++], label);
         }
 
 #region FileLoadAndSave
@@ -227,7 +227,7 @@ namespace FinanceTracker.Forms
                     _archived.Add(new ArchiveMonth(input.InputText, _projData, projTotal, _listFinances, currTotal));
                     WriteArchives();
 
-                    Utilities.ClearList(lstItems);
+                    UIHelper.ClearList(lstItems);
                     _listFinances = new List<FinanceEntry>();
                     _currData = new List<double>();
                     InitProjectionData();
@@ -256,7 +256,7 @@ namespace FinanceTracker.Forms
             foreach (var item in _listFinances)
             {
                 _currData[item.Category] += item.Amount;
-                Utilities.LoadItem(lstItems, item);
+                UIHelper.LoadItem(lstItems, item);
             }
             Recalculate();
         }
@@ -271,7 +271,7 @@ namespace FinanceTracker.Forms
                 FileIO.ImportFiles(diag.FileName, ref _archived);
 
                 //now need to update the prorgam
-                Utilities.ClearList(lstItems);
+                UIHelper.ClearList(lstItems);
                 _currData = new List<double>();
                 ReadXML();
                 Utilities.LoadID(_listFinances);
@@ -329,7 +329,7 @@ namespace FinanceTracker.Forms
                 var row = _listFinances.Find(item => item.ID == Convert.ToInt32(lstItems.SelectedItems[0].SubItems[0].Text));
                 var entry = new FinanceEntry(row.Category, row.Amount, row.Place, row.Description);
                 _listFinances.Add(entry);
-                Utilities.LoadItem(lstItems, entry);
+                UIHelper.LoadItem(lstItems, entry);
                 _currData[entry.Category] += entry.Amount;
                 Recalculate();
             }
