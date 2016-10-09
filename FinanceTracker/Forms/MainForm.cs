@@ -16,15 +16,12 @@ namespace FinanceTracker.Forms
         private int _currColumn = -1;
 
         private readonly List<Label> _labels = new List<Label>();
-        private readonly Dictionary<string, Type> _fileNameType = new Dictionary<string, Type>();
 
 #region FormFunctions
         public MainForm()
         {
             InitializeComponent();
             Encryption.Initialize();
-            _fileNameType.Add(FileNames.SaveFile, typeof(List<FinanceEntry>));
-            _fileNameType.Add(FileNames.ProjectionFile, typeof(List<double>));
 
             ReadXML();
 
@@ -280,34 +277,35 @@ namespace FinanceTracker.Forms
 
         private void ReadXML()
         {
-            foreach (var pair in _fileNameType)
+            foreach (var pair in FileNames.Pairs)
             {
-                if(pair.Key == FileNames.SaveFile)
-                    _listFinances = FileIO.ReadFile(pair.Key, pair.Value) ?? new List<FinanceEntry>();
-                else if(pair.Key == FileNames.ProjectionFile)
-                    _projData = FileIO.ReadFile(pair.Key, pair.Value) ?? new List<double>();
+                if(pair.Key == FileNames.SaveFile.Name)
+                    _listFinances = FileIO.ReadFile(pair.Key, pair.Value) ?? Activator.CreateInstance(pair.Value);
+                else if(pair.Key == FileNames.ProjectionFile.Name)
+                    _projData = FileIO.ReadFile(pair.Key, pair.Value) ?? Activator.CreateInstance(pair.Value);
             }
         }
 
         private void ReadArchives()
         {
-            _archived = FileIO.ReadFile(FileNames.ArchiveFile, typeof(List<ArchiveMonth>)) ?? new List<ArchiveMonth>();
+            _archived = FileIO.ReadFile(FileNames.ArchiveFile.Name, FileNames.ArchiveFile.DataType) ??
+                Activator.CreateInstance(FileNames.ArchiveFile.DataType);
         }
 
         private void WriteXML()
         {
-            foreach (var pair in _fileNameType)
+            foreach (var pair in FileNames.Pairs)
             {
-                if(pair.Key == FileNames.SaveFile)
+                if(pair.Key == FileNames.SaveFile.Name)
                     FileIO.WriteFile(pair.Key, pair.Value, _listFinances);
-                else if(pair.Key == FileNames.ProjectionFile)
+                else if(pair.Key == FileNames.ProjectionFile.Name)
                     FileIO.WriteFile(pair.Key, pair.Value, _projData);
             }
         }
 
         private void WriteArchives()
         {
-            FileIO.WriteFile(FileNames.ArchiveFile, typeof(List<ArchiveMonth>), _archived);
+            FileIO.WriteFile(FileNames.ArchiveFile.Name, FileNames.ArchiveFile.DataType, _archived);
         }
 
 #endregion

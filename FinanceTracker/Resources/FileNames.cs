@@ -7,27 +7,60 @@ namespace FinanceTracker.Resources
 {
     public static class FileNames
     {
-        public const string SaveFile = "file." + FileExtensions.Ftf;
-        public const string ProjectionFile = "projFile." + FileExtensions.Ftf;
-        public const string ArchiveFile = "archFile." + FileExtensions.Ftf;
+        public static readonly FileNameType SaveFile = new FileNameType
+        {
+            Name = "file." + FileExtensions.Ftf,
+            DataType = typeof(List<DataObjects.FinanceEntry>)
+        };
 
-        private static IEnumerable<string> _members;
-        public static IEnumerable<string> Members
+        public static readonly FileNameType ProjectionFile = new FileNameType
+        {
+            Name = "projFile." + FileExtensions.Ftf,
+            DataType = typeof(List<double>)
+        };
+
+        public static readonly FileNameType ArchiveFile = new FileNameType
+        {
+            Name = "archFile." + FileExtensions.Ftf,
+            DataType = typeof(List<DataObjects.ArchiveMonth>)
+        };
+
+        private static IEnumerable<FileNameType> _members;
+        public static IEnumerable<FileNameType> Members
         {
             get
             {
                 if (_members == null)
                 {
-                    _members = typeof (Categories).GetFields(BindingFlags.Static | BindingFlags.Public)
-                        .Select(field => field.GetValue(null).ToString());
+                    _members = typeof (FileNames).GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.GetField)
+                        .Select(field => (FileNameType)field.GetValue(null));
                 }
                 return _members;
             }
         }
 
-        public static IEnumerable<string> Where(Func<string, bool> predicate)
+        public static IEnumerable<string> Names
+        {
+            get { return Members.Select(fnt => fnt.Name); }
+        }
+
+        public static Dictionary<string, Type> Pairs
+        {
+            get
+            {
+                return Members.ToDictionary(member => member.Name, member => member.DataType);
+            }
+        }
+
+        public static IEnumerable<FileNameType> Where(Func<FileNameType, bool> predicate)
         {
             return Members.Where(predicate);
         }
+    }
+
+    public class FileNameType
+    {
+        public string Name;
+        public Type DataType;
     }
 }

@@ -80,7 +80,7 @@ namespace FinanceTracker
 
             using (var archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
             {
-                foreach (var name in FileNames.Members)
+                foreach (var name in FileNames.Names)
                 {
                     try
                     {
@@ -98,7 +98,7 @@ namespace FinanceTracker
         {
             //check to see if files are in the .zip, skip archFile though its not required
             var archive = ZipFile.OpenRead(filename);
-            var hasAll = FileNames.Where(name => name != FileNames.ArchiveFile).All(
+            var hasAll = FileNames.Names.Where(name => String.Compare(name, FileNames.ArchiveFile.Name, StringComparison.CurrentCultureIgnoreCase) != 0).All(
                 name => archive.Entries.Count(item => String.Equals(item.Name, name, StringComparison.CurrentCultureIgnoreCase)) == 1);
 
             if (!hasAll) //if file or projfile missing, cancel
@@ -108,7 +108,7 @@ namespace FinanceTracker
             }
 
             //otherwise import files
-            foreach (var name in FileNames.Members)
+            foreach (var name in FileNames.Names)
             {
                 var fName = name;
                 var archiveEntry = archive.Entries.Where(item => String.Equals(item.Name, fName, StringComparison.CurrentCultureIgnoreCase));
