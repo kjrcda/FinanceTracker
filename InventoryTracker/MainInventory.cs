@@ -8,5 +8,10 @@ namespace InventoryTracker
         {
             InitializeComponent();
         }
+
+        private void btnExit_Click(object sender, System.EventArgs e)
+        {
+            Close();
+        }
     }
 }
