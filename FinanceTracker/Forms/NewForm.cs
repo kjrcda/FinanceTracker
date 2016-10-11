@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
 using FinanceTracker.Resources;
@@ -11,6 +12,8 @@ namespace FinanceTracker.Forms
         public NewForm(String title)
         {
             InitializeComponent();
+            cmbCategory.DataSource = Categories.Members.ToList();
+            cmbCategory.SelectedItem = null;
             DialogResult = DialogResult.Cancel;
             Text = title;
             CenterToParent();

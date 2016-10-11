@@ -136,14 +136,6 @@ namespace FinanceTracker.Forms
             this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory.ForeColor = System.Drawing.SystemColors.Desktop;
             this.cmbCategory.FormattingEnabled = true;
-            this.cmbCategory.Items.AddRange(new object[] {
-            "Rent",
-            "Phone Bill",
-            "Entertainment",
-            "Grocery",
-            "Transportation",
-            "Eating Out",
-            "Other"});
             this.cmbCategory.Location = new System.Drawing.Point(150, 47);
             this.cmbCategory.MaxDropDownItems = 5;
             this.cmbCategory.Name = "cmbCategory";
