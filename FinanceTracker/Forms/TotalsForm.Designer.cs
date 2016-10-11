@@ -48,7 +48,7 @@ namespace FinanceTracker.Forms
             this.btnFinish.Text = "Finish";
             this.btnFinish.UseVisualStyleBackColor = true;
             this.btnFinish.Click += new System.EventHandler(UIHelper.CloseWindow);
-            this.btnFinish.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckEscape);
+            this.btnFinish.KeyDown += new System.Windows.Forms.KeyEventHandler(UIHelper.CheckEscape);
             // 
             // chklstItems
             // 
@@ -63,7 +63,7 @@ namespace FinanceTracker.Forms
             this.chklstItems.Size = new System.Drawing.Size(340, 251);
             this.chklstItems.TabIndex = 99;
             this.chklstItems.TabStop = false;
-            this.chklstItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckEscape);
+            this.chklstItems.KeyDown += new System.Windows.Forms.KeyEventHandler(UIHelper.CheckEscape);
             // 
             // label1
             // 

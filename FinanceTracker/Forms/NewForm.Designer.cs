@@ -111,7 +111,7 @@ namespace FinanceTracker.Forms
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(172, 20);
             this.txtAmount.TabIndex = 1;
-            this.txtAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
+            this.txtAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPressAction);
             // 
             // txtPlace
             // 
@@ -119,7 +119,7 @@ namespace FinanceTracker.Forms
             this.txtPlace.Name = "txtPlace";
             this.txtPlace.Size = new System.Drawing.Size(172, 20);
             this.txtPlace.TabIndex = 2;
-            this.txtPlace.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
+            this.txtPlace.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPressAction);
             // 
             // txtDescription
             // 
@@ -129,7 +129,7 @@ namespace FinanceTracker.Forms
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(172, 68);
             this.txtDescription.TabIndex = 3;
-            this.txtDescription.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
+            this.txtDescription.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPressAction);
             // 
             // cmbCategory
             // 
@@ -149,7 +149,7 @@ namespace FinanceTracker.Forms
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(172, 21);
             this.cmbCategory.TabIndex = 0;
-            this.cmbCategory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
+            this.cmbCategory.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPressAction);
             // 
             // NewForm
             // 

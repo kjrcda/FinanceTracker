@@ -100,7 +100,7 @@ namespace FinanceTracker.Forms
             this.btnFinish.Text = "Finish";
             this.btnFinish.UseVisualStyleBackColor = true;
             this.btnFinish.Click += new System.EventHandler(UIHelper.CloseWindow);
-            this.btnFinish.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckEscape);
+            this.btnFinish.KeyDown += new System.Windows.Forms.KeyEventHandler(UIHelper.CheckEscape);
             // 
             // lstItems
             // 
@@ -124,7 +124,7 @@ namespace FinanceTracker.Forms
             this.lstItems.UseCompatibleStateImageBehavior = false;
             this.lstItems.View = System.Windows.Forms.View.Details;
             this.lstItems.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lstItems_ColumnSort);
-            this.lstItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckEscape);
+            this.lstItems.KeyDown += new System.Windows.Forms.KeyEventHandler(UIHelper.CheckEscape);
             // 
             // hdrID
             // 
@@ -163,7 +163,7 @@ namespace FinanceTracker.Forms
             this.cboSelector.Sorted = true;
             this.cboSelector.TabIndex = 18;
             this.cboSelector.SelectedIndexChanged += new System.EventHandler(this.cboSelector_SelectedIndexChanged);
-            this.cboSelector.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckEscape);
+            this.cboSelector.KeyDown += new System.Windows.Forms.KeyEventHandler(UIHelper.CheckEscape);
             // 
             // lblEntry
             // 

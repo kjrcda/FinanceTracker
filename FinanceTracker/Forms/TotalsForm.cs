@@ -30,10 +30,5 @@ namespace FinanceTracker.Forms
                 _total -= entry.MonthProjTotal - entry.MonthInfoTotal;
             UIHelper.LabelColor(_total, lblTotal);
         }
-
-        private void CheckEscape(object sender, KeyEventArgs e)
-        {
-            UIHelper.CheckEscape(this, sender, e);
-        }
     }
 }

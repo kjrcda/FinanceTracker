@@ -21,10 +21,30 @@ namespace FinanceTracker
                 lbl.ForeColor = System.Drawing.Color.Black;
         }
 
-        public static void CheckEscape(Form thisForm, object sender, KeyEventArgs e)
+        public static void CheckEscape(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
-                thisForm.Dispose();
+            var form = ((Control) sender).FindForm();
+
+            if (e.KeyCode == Keys.Escape && form != null)
+            {
+                form.Dispose();
+                e.Handled = true;
+            }
+        }
+
+        public static void CheckReturn(object sender, KeyEventArgs e, Action<object, EventArgs> success)
+        {
+            if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter)
+            {
+                success(sender, e);
+                e.Handled = true;
+            }
+        }
+
+        public static void CheckKeyPress(object sender, KeyEventArgs e, Action<object, EventArgs> success)
+        {
+            CheckEscape(sender, e);
+            CheckReturn(sender, e, success);
         }
 
         public static void LoadItem(ListView list, FinanceEntry item)

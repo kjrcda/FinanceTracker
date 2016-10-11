@@ -116,10 +116,5 @@ namespace FinanceTracker.Forms
             InitProjectionData();
             PopulateList();
         }
-
-        private void CheckEscape(object sender,KeyEventArgs e)
-        {
-            UIHelper.CheckEscape(this, sender, e);
-        }
     }
 }

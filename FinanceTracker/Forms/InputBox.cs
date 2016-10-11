@@ -28,11 +28,6 @@ namespace FinanceTracker.Forms
                 MessageBox.Show("Please enter a valid input", "Invalid Input");
         }
 
-        private void CheckKeyPress(object sender, KeyEventArgs e)
-        {
-            UIHelper.CheckEscape(this, sender, e);
-            if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter)
-                btnOK_Click(sender, e);
-        }
+        private void CheckKeyPressAction(object sender, KeyEventArgs e) { UIHelper.CheckKeyPress(sender,e, btnOK_Click); }
     }
 }

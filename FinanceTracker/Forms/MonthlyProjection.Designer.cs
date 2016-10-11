@@ -128,7 +128,7 @@ namespace FinanceTracker.Forms
             this.txtRent.Name = "txtRent";
             this.txtRent.Size = new System.Drawing.Size(132, 20);
             this.txtRent.TabIndex = 0;
-            this.txtRent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
+            this.txtRent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPressAction);
             this.txtRent.LostFocus += new System.EventHandler(this.UpdateTotal);
             // 
             // txtPhoneBill
@@ -137,7 +137,7 @@ namespace FinanceTracker.Forms
             this.txtPhoneBill.Name = "txtPhoneBill";
             this.txtPhoneBill.Size = new System.Drawing.Size(132, 20);
             this.txtPhoneBill.TabIndex = 1;
-            this.txtPhoneBill.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
+            this.txtPhoneBill.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPressAction);
             this.txtPhoneBill.LostFocus += new System.EventHandler(this.UpdateTotal);
             // 
             // txtEntertainment
@@ -146,7 +146,7 @@ namespace FinanceTracker.Forms
             this.txtEntertainment.Name = "txtEntertainment";
             this.txtEntertainment.Size = new System.Drawing.Size(132, 20);
             this.txtEntertainment.TabIndex = 2;
-            this.txtEntertainment.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
+            this.txtEntertainment.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPressAction);
             this.txtEntertainment.LostFocus += new System.EventHandler(this.UpdateTotal);
             // 
             // txtGrocery
@@ -155,7 +155,7 @@ namespace FinanceTracker.Forms
             this.txtGrocery.Name = "txtGrocery";
             this.txtGrocery.Size = new System.Drawing.Size(132, 20);
             this.txtGrocery.TabIndex = 3;
-            this.txtGrocery.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
+            this.txtGrocery.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPressAction);
             this.txtGrocery.LostFocus += new System.EventHandler(this.UpdateTotal);
             // 
             // txtTransportation
@@ -164,7 +164,7 @@ namespace FinanceTracker.Forms
             this.txtTransportation.Name = "txtTransportation";
             this.txtTransportation.Size = new System.Drawing.Size(132, 20);
             this.txtTransportation.TabIndex = 4;
-            this.txtTransportation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
+            this.txtTransportation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPressAction);
             this.txtTransportation.LostFocus += new System.EventHandler(this.UpdateTotal);
             // 
             // txtEatOut
@@ -173,7 +173,7 @@ namespace FinanceTracker.Forms
             this.txtEatOut.Name = "txtEatOut";
             this.txtEatOut.Size = new System.Drawing.Size(132, 20);
             this.txtEatOut.TabIndex = 5;
-            this.txtEatOut.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
+            this.txtEatOut.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPressAction);
             this.txtEatOut.LostFocus += new System.EventHandler(this.UpdateTotal);
             // 
             // txtOther
@@ -182,7 +182,7 @@ namespace FinanceTracker.Forms
             this.txtOther.Name = "txtOther";
             this.txtOther.Size = new System.Drawing.Size(132, 20);
             this.txtOther.TabIndex = 6;
-            this.txtOther.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPress);
+            this.txtOther.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CheckKeyPressAction);
             this.txtOther.LostFocus += new System.EventHandler(this.UpdateTotal);
             // 
             // label1
