@@ -13,5 +13,12 @@ namespace InventoryTracker
         {
             Close();
         }
+
+        private void btnAdd_Click(object sender, System.EventArgs e)
+        {
+            var diag = new AddForm();
+
+            diag.ShowDialog();
+        }
     }
 }
