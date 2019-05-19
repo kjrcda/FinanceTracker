@@ -7,6 +7,10 @@
 /InventoryTracker/bin
 /InventoryTracker/obj
 
+# IDE Settings
+.vs/**
+.idea/**
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
