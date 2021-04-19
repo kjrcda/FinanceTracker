@@ -15,50 +15,50 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_459E08C50D6148A682B094EB39343F7D"
+        "MsmKey" = "8:_06D0377477BC40BEAE4580C40EF4219D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7A87D727D3AC432090699EA45E17940B"
+        "MsmKey" = "8:_2EB0F107C5F5465C829B7626D16C0544"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_34441E3883E1405E930BAB3AB20600CA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_58DD9766CDA34F04A6DAA4C3C3B3C108"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_7B1F9268DEE5A7B699BA5BD426751257"
-        "OwnerKey" = "8:_7A87D727D3AC432090699EA45E17940B"
+        "OwnerKey" = "8:_06D0377477BC40BEAE4580C40EF4219D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7B1F9268DEE5A7B699BA5BD426751257"
-        "OwnerKey" = "8:_9D6CD0C8420FBAD27A599202FA4F1815"
+        "MsmKey" = "8:_9B3CD01E21BAEA3AAD66526C2D5ED3AA"
+        "OwnerKey" = "8:_06D0377477BC40BEAE4580C40EF4219D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7B1F9268DEE5A7B699BA5BD426751257"
-        "OwnerKey" = "8:_963565B33AE942CF813294EAFD4F9116"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_963565B33AE942CF813294EAFD4F9116"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9D6CD0C8420FBAD27A599202FA4F1815"
-        "OwnerKey" = "8:_7A87D727D3AC432090699EA45E17940B"
+        "MsmKey" = "8:_9B3CD01E21BAEA3AAD66526C2D5ED3AA"
+        "OwnerKey" = "8:_58DD9766CDA34F04A6DAA4C3C3B3C108"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_A836593020631EEE05C12E5AF91D9C72"
-        "OwnerKey" = "8:_7A87D727D3AC432090699EA45E17940B"
+        "OwnerKey" = "8:_06D0377477BC40BEAE4580C40EF4219D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -69,26 +69,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A836593020631EEE05C12E5AF91D9C72"
-        "OwnerKey" = "8:_9D6CD0C8420FBAD27A599202FA4F1815"
+        "MsmKey" = "8:_AD5D1A71682F4520755381EE7505C2FC"
+        "OwnerKey" = "8:_06D0377477BC40BEAE4580C40EF4219D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A836593020631EEE05C12E5AF91D9C72"
-        "OwnerKey" = "8:_963565B33AE942CF813294EAFD4F9116"
+        "MsmKey" = "8:_AD5D1A71682F4520755381EE7505C2FC"
+        "OwnerKey" = "8:_2EB0F107C5F5465C829B7626D16C0544"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F5D0CD6C5CD3459BB16A4F9AAE7C4637"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_963565B33AE942CF813294EAFD4F9116"
+        "MsmKey" = "8:_AD5D1A71682F4520755381EE7505C2FC"
+        "OwnerKey" = "8:_58DD9766CDA34F04A6DAA4C3C3B3C108"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -100,25 +94,37 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2EB0F107C5F5465C829B7626D16C0544"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_58DD9766CDA34F04A6DAA4C3C3B3C108"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_06D0377477BC40BEAE4580C40EF4219D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AD5D1A71682F4520755381EE7505C2FC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_9B3CD01E21BAEA3AAD66526C2D5ED3AA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_7B1F9268DEE5A7B699BA5BD426751257"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_9D6CD0C8420FBAD27A599202FA4F1815"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7A87D727D3AC432090699EA45E17940B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_459E08C50D6148A682B094EB39343F7D"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -193,20 +199,6 @@
     {
         "CustomAction"
         {
-            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_EB9AB0C32AA148EB85931917DEBAC794"
-            {
-            "Name" = "8:Delete Data Action"
-            "Condition" = "8:"
-            "Object" = "8:_459E08C50D6148A682B094EB39343F7D"
-            "FileType" = "3:1"
-            "InstallAction" = "3:4"
-            "Arguments" = "8:"
-            "EntryPoint" = "8:"
-            "Sequence" = "3:1"
-            "Identifier" = "8:_40888C15_1008_49DA_9004_FFD0E3127A93"
-            "InstallerClass" = "11:TRUE"
-            "CustomActionData" = "8:"
-            }
         }
         "DefaultFeature"
         {
@@ -230,6 +222,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_34441E3883E1405E930BAB3AB20600CA"
+            {
+            "SourcePath" = "8:..\\FinanceTracker\\Resources\\Icons\\icon.ico"
+            "TargetName" = "8:icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_7798E339B1A04D44A85B44B3F5C3B3E5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7B1F9268DEE5A7B699BA5BD426751257"
             {
             "AssemblyRegister" = "3:1"
@@ -237,6 +249,11 @@
             "AssemblyAsmDisplayName" = "8:System.IO.Compression.FileSystem, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
                 "ScatterAssemblies"
                 {
+                    "_7B1F9268DEE5A7B699BA5BD426751257"
+                    {
+                    "Name" = "8:System.IO.Compression.FileSystem.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.IO.Compression.FileSystem.dll"
             "TargetName" = "8:"
@@ -256,15 +273,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9D6CD0C8420FBAD27A599202FA4F1815"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9B3CD01E21BAEA3AAD66526C2D5ED3AA"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FinanceTracker, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Encryption, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_9B3CD01E21BAEA3AAD66526C2D5ED3AA"
+                    {
+                    "Name" = "8:Encryption.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
-            "SourcePath" = "8:FinanceTracker.exe"
+            "SourcePath" = "8:Encryption.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_7798E339B1A04D44A85B44B3F5C3B3E5"
@@ -278,7 +300,7 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:TRUE"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -289,6 +311,11 @@
             "AssemblyAsmDisplayName" = "8:System.IO.Compression, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
                 "ScatterAssemblies"
                 {
+                    "_A836593020631EEE05C12E5AF91D9C72"
+                    {
+                    "Name" = "8:System.IO.Compression.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.IO.Compression.dll"
             "TargetName" = "8:"
@@ -308,10 +335,21 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F5D0CD6C5CD3459BB16A4F9AAE7C4637"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AD5D1A71682F4520755381EE7505C2FC"
             {
-            "SourcePath" = "8:..\\FinanceTracker\\Resources\\icon.ico"
-            "TargetName" = "8:icon.ico"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:FileInfo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_AD5D1A71682F4520755381EE7505C2FC"
+                    {
+                    "Name" = "8:FileInfo.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:FileInfo.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_7798E339B1A04D44A85B44B3F5C3B3E5"
             "Condition" = "8:"
@@ -325,7 +363,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -413,7 +451,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Setup Installer for Finanace Tracker"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_F5D0CD6C5CD3459BB16A4F9AAE7C4637"
+        "ARPPRODUCTICON" = "8:_34441E3883E1405E930BAB3AB20600CA"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -516,7 +554,21 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C644D90345E84E07ACB2E3C9AEF37804"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_74E06783E77F4D719B3CE97D0BD8F7C9"
+            {
+            "Name" = "8:Finance Tracker"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_06D0377477BC40BEAE4580C40EF4219D"
+            "Folder" = "8:_DF05ED884CA44FC7AECCBD885A2BB11C"
+            "WorkingFolder" = "8:_7798E339B1A04D44A85B44B3F5C3B3E5"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_AFFEDDECFACE4651A4B131D4AAA4462A"
             {
             "Name" = "8:Data Converter"
             "Arguments" = "8:"
@@ -524,13 +576,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_7A87D727D3AC432090699EA45E17940B"
+            "Target" = "8:_58DD9766CDA34F04A6DAA4C3C3B3C108"
             "Folder" = "8:_DF05ED884CA44FC7AECCBD885A2BB11C"
             "WorkingFolder" = "8:_7798E339B1A04D44A85B44B3F5C3B3E5"
             "Icon" = "8:"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_CC0EA12FE97F4C1C8DD3ED75D77E8217"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DD71CEF3148E45CDA15D2427573B67F0"
             {
             "Name" = "8:Finance Tracker"
             "Arguments" = "8:"
@@ -538,24 +590,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_963565B33AE942CF813294EAFD4F9116"
-            "Folder" = "8:_DF05ED884CA44FC7AECCBD885A2BB11C"
-            "WorkingFolder" = "8:_7798E339B1A04D44A85B44B3F5C3B3E5"
-            "Icon" = "8:_F5D0CD6C5CD3459BB16A4F9AAE7C4637"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_FBBEAD78FB3E462E8FD8E9C72E5995CD"
-            {
-            "Name" = "8:Finance Tracker"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_963565B33AE942CF813294EAFD4F9116"
+            "Target" = "8:_06D0377477BC40BEAE4580C40EF4219D"
             "Folder" = "8:_2E4D87A3044D440DBE9220C5D1A1F8D4"
             "WorkingFolder" = "8:_7798E339B1A04D44A85B44B3F5C3B3E5"
-            "Icon" = "8:_F5D0CD6C5CD3459BB16A4F9AAE7C4637"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
         }
@@ -957,7 +995,35 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_459E08C50D6148A682B094EB39343F7D"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_06D0377477BC40BEAE4580C40EF4219D"
+            {
+            "SourcePath" = "8:..\\FinanceTracker\\obj\\Debug\\FinanceTracker.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_7798E339B1A04D44A85B44B3F5C3B3E5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{42819D39-BEC6-46B2-83DB-A7FC23701BCB}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2EB0F107C5F5465C829B7626D16C0544"
             {
             "SourcePath" = "8:..\\CustomsActions\\obj\\Debug\\CustomsActions.dll"
             "TargetName" = "8:"
@@ -985,7 +1051,7 @@
                 {
                 }
             }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7A87D727D3AC432090699EA45E17940B"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_58DD9766CDA34F04A6DAA4C3C3B3C108"
             {
             "SourcePath" = "8:..\\DataConverter\\obj\\Debug\\DataConverter.exe"
             "TargetName" = "8:"
@@ -1008,34 +1074,6 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{FD05903D-AF00-4D2B-B33C-81EDDB829D58}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_963565B33AE942CF813294EAFD4F9116"
-            {
-            "SourcePath" = "8:..\\FinanceTracker\\obj\\Debug\\FinanceTracker.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_7798E339B1A04D44A85B44B3F5C3B3E5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{42819D39-BEC6-46B2-83DB-A7FC23701BCB}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {
