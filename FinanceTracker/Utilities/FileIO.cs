@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
+using FileInfo;
 using FinanceTracker.DataObjects;
 using FinanceTracker.Resources;
 
@@ -13,15 +14,20 @@ namespace FinanceTracker
 {
     public static class FileIO
     {
-        private static readonly string SavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Finance Tracker");
+        private static bool EncryptionEnabled { get; } = false;
 
+        /// <exception cref="Exception">Couldn't read file properly</exception>
         public static dynamic ReadFile(string name, Type objType)
         {
             dynamic list = null;
             try
             {
-                var exml = File.ReadAllText(Path.Combine(SavePath, name));
-                var xml = Encryption.Decrypt(exml);
+                var xml = File.ReadAllText(Path.Combine(SaveLocation.Path, name));
+
+                if (EncryptionEnabled)
+                {
+                    xml = Encryption.Encryption.Decrypt(xml, Encryption.Encryption.Crypto, Encryption.Encryption.Vector);
+                }
 
                 using (var xreader = XmlReader.Create(new StringReader(xml)))
                 {
@@ -35,26 +41,27 @@ namespace FinanceTracker
             }
             catch (DirectoryNotFoundException)
             {
-                Directory.CreateDirectory(SavePath);
+                Directory.CreateDirectory(SaveLocation.Path);
             }
             catch (XmlException)
             {
                 //Chances are there is a discrepancy between encrypted and non encrypted files
-                File.Copy(Path.Combine(SavePath, name), Path.Combine(SavePath, name + "_backup"), true);
+                File.Copy(Path.Combine(SaveLocation.Path, name), Path.Combine(SaveLocation.Path, name + "_backup"), true);
             }
             catch (FormatException)
             {
                 //Chances are there is a discrepancy between encrypted and non encrypted files
-                File.Copy(Path.Combine(SavePath, name), Path.Combine(SavePath, name + "_backup"), true);
+                File.Copy(Path.Combine(SaveLocation.Path, name), Path.Combine(SaveLocation.Path, name + "_backup"), true);
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error reading file\n" + e.Message, "Error Reading File");
+                throw new Exception($"Error reading file {name}", e);
             }
 
             return list;
         }
 
+        /// <exception cref="Exception">Something went wrong writing to file</exception>
         public static void WriteFile(string name, Type objType, dynamic list)
         {
             try
@@ -64,13 +71,18 @@ namespace FinanceTracker
                     var serializer = new XmlSerializer(objType);
                     serializer.Serialize(writer, list);
                     var xml = writer.ToString();
-                    var exml = Encryption.Encrypt(xml);
-                    File.WriteAllText(Path.Combine(SavePath, name), exml);
+
+                    if (EncryptionEnabled)
+                    {
+                        xml = Encryption.Encryption.Encrypt(xml, Encryption.Encryption.Crypto, Encryption.Encryption.Vector);
+                    }
+
+                    File.WriteAllText(Path.Combine(SaveLocation.Path, name), xml);
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error writing to file\n" + e.Message, "Error Saving File");
+                throw new Exception($"Error writing to file {name}", e);
             }
         }
 
@@ -84,7 +96,7 @@ namespace FinanceTracker
                 {
                     try
                     {
-                        archive.CreateEntryFromFile(Path.Combine(SavePath, name), name);
+                        archive.CreateEntryFromFile(Path.Combine(SaveLocation.Path, name), name);
                     }
                     catch (Exception)
                     {
@@ -112,7 +124,7 @@ namespace FinanceTracker
             {
                 var fName = name;
                 var archiveEntry = archive.Entries.Where(item => String.Equals(item.Name, fName, StringComparison.CurrentCultureIgnoreCase));
-                var fNamePath = Path.Combine(SavePath, fName);
+                var fNamePath = Path.Combine(SaveLocation.Path, fName);
 
                 var zipArchiveEntries = archiveEntry.ToList();
                 if (!zipArchiveEntries.Any()) //will only ever be archives

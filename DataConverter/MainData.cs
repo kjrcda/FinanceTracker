@@ -1,40 +1,24 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Xml;
-using FinanceTracker;
 using System.IO;
-using FinanceTracker.Resources;
+using FileInfo;
 
 namespace DataConverter
 {
     public partial class MainData : Form
     {
         private string _filename = "";
-        private const string FileFilter = "XML File (*." + FileExtensions.Xml + ")|*." + FileExtensions.Xml;
-        private const string AdminFilter = "Finance Tracker File (*." + FileExtensions.Ftf + ")|*." + FileExtensions.Ftf;
+        private static string FileFilter { get; } = $"Finance Tracker File (*.{FileExtension.Ftf})|*.{FileExtension.Ftf}|XML File (*.{FileExtension.Xml})|*.{FileExtension.Xml}";
 
         public MainData()
         {
             InitializeComponent();
-            var message = Encryption.Initialize();
-
-            if (!String.IsNullOrEmpty(message))
-            {
-                MessageBox.Show(message, "Encryption Keys");
-            }
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            var filter = FileFilter;
-            var mEvent = (MouseEventArgs) e;
-
-            if(mEvent.Button == MouseButtons.Right)
-            {
-                filter += "|" + AdminFilter;
-            }
-
-            var diag = new OpenFileDialog { Filter = filter, Title = "Open" };
+            var diag = new OpenFileDialog { Filter = FileFilter, Title = "Open" };
             var result = diag.ShowDialog();
 
             if (result != DialogResult.OK || diag.FileName == "")
@@ -60,8 +44,8 @@ namespace DataConverter
             }
 
             var nameParts = _filename.Split('.');
-            var convertXml = nameParts[1] == FileExtensions.Xml;
-            var convertedFormat = convertXml ? FileExtensions.Ftf : FileExtensions.Xml;
+            var convertXml = nameParts[1] == FileExtension.Xml;
+            var convertedFormat = convertXml ? FileExtension.Ftf : FileExtension.Xml;
             var namePath = nameParts[0] + "." + convertedFormat;
 
             if (File.Exists(namePath))
@@ -101,7 +85,7 @@ namespace DataConverter
         {
             var doc = new XmlDocument();
             doc.Load(_filename);
-            var exml = Encryption.Encrypt(doc.OuterXml);
+            var exml = Encryption.Encryption.Encrypt(doc.OuterXml, Encryption.Encryption.Crypto, Encryption.Encryption.Vector);
             File.WriteAllText(namePath, exml);
         }
 
@@ -109,7 +93,7 @@ namespace DataConverter
         {
             var doc = new XmlDocument();
             var dxml = File.ReadAllText(_filename);
-            dxml = Encryption.Decrypt(dxml);
+            dxml = Encryption.Encryption.Decrypt(dxml, Encryption.Encryption.Crypto, Encryption.Encryption.Vector);
             doc.LoadXml(dxml);
             doc.Save(namePath);
         }

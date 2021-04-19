@@ -79,9 +79,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FinanceTracker\FinanceTracker.csproj">
-      <Project>{42819d39-bec6-46b2-83db-a7fc23701bcb}</Project>
-      <Name>FinanceTracker</Name>
+    <ProjectReference Include="..\Encryption\Encryption.csproj">
+      <Project>{992E1AFA-3DDA-4FD2-8B6C-56D1136D1137}</Project>
+      <Name>Encryption</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileInfo\FileInfo.csproj">
+      <Project>{ED84ECAC-9568-4CDC-BEF5-76534A705023}</Project>
+      <Name>FileInfo</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -21,7 +21,6 @@ namespace FinanceTracker.Forms
         public MainForm()
         {
             InitializeComponent();
-            Encryption.Initialize();
 
             ReadXML();
 
@@ -279,33 +278,69 @@ namespace FinanceTracker.Forms
         {
             foreach (var pair in FileNames.Pairs)
             {
-                if(pair.Key == FileNames.SaveFile.Name)
-                    _listFinances = FileIO.ReadFile(pair.Key, pair.Value) ?? Activator.CreateInstance(pair.Value);
-                else if(pair.Key == FileNames.ProjectionFile.Name)
-                    _projData = FileIO.ReadFile(pair.Key, pair.Value) ?? Activator.CreateInstance(pair.Value);
+                try
+                {
+                    if (pair.Key == FileNames.SaveFile.Name)
+                    {
+                        _listFinances = FileIO.ReadFile(pair.Key, pair.Value) ?? Activator.CreateInstance(pair.Value);
+                    }
+                    else if (pair.Key == FileNames.ProjectionFile.Name)
+                    {
+                        _projData = FileIO.ReadFile(pair.Key, pair.Value) ?? Activator.CreateInstance(pair.Value);
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($"{e.Message}\n\n{e.InnerException?.Message}" , "Error Reading File");
+                }
             }
         }
 
         private void ReadArchives()
         {
-            _archived = FileIO.ReadFile(FileNames.ArchiveFile.Name, FileNames.ArchiveFile.DataType) ??
-                Activator.CreateInstance(FileNames.ArchiveFile.DataType);
+            try
+            {
+                _archived = FileIO.ReadFile(
+                    FileNames.ArchiveFile.Name, FileNames.ArchiveFile.DataType) ?? Activator.CreateInstance(FileNames.ArchiveFile.DataType
+                );
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e.Message}\n\n{e.InnerException?.Message}", "Error Reading File");
+            }
         }
 
         private void WriteXML()
         {
             foreach (var pair in FileNames.Pairs)
             {
-                if(pair.Key == FileNames.SaveFile.Name)
-                    FileIO.WriteFile(pair.Key, pair.Value, _listFinances);
-                else if(pair.Key == FileNames.ProjectionFile.Name)
-                    FileIO.WriteFile(pair.Key, pair.Value, _projData);
+                try
+                {
+                    if (pair.Key == FileNames.SaveFile.Name)
+                    {
+                        FileIO.WriteFile(pair.Key, pair.Value, _listFinances);
+                    }
+                    else if (pair.Key == FileNames.ProjectionFile.Name)
+                    {
+                        FileIO.WriteFile(pair.Key, pair.Value, _projData);
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($"{e.Message}\n\n{e.InnerException?.Message}", "Error Saving File");
+                }
             }
         }
 
         private void WriteArchives()
         {
-            FileIO.WriteFile(FileNames.ArchiveFile.Name, FileNames.ArchiveFile.DataType, _archived);
+            try {
+                FileIO.WriteFile(FileNames.ArchiveFile.Name, FileNames.ArchiveFile.DataType, _archived);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e.Message}\n\n{e.InnerException?.Message}", "Error Saving File");
+            }
         }
 
 #endregion

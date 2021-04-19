@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileInfo;
+using System;
 using System.Collections;
 using System.ComponentModel;
 using System.IO;
@@ -12,7 +13,7 @@ namespace CustomsActions
         {
             base.Uninstall(savedState);
 
-            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Finance Tracker");
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), SaveLocation.FolderName);
             if(Directory.Exists(path))
                 Directory.Delete(path, true);
         }

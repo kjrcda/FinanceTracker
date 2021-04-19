@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileInfo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -9,19 +10,19 @@ namespace FinanceTracker.Resources
     {
         public static readonly FileNameType SaveFile = new FileNameType
         {
-            Name = "file." + FileExtensions.Ftf,
+            Name = "file." + FileExtension.Ftf,
             DataType = typeof(List<DataObjects.FinanceEntry>)
         };
 
         public static readonly FileNameType ProjectionFile = new FileNameType
         {
-            Name = "projFile." + FileExtensions.Ftf,
+            Name = "projFile." + FileExtension.Ftf,
             DataType = typeof(List<double>)
         };
 
         public static readonly FileNameType ArchiveFile = new FileNameType
         {
-            Name = "archFile." + FileExtensions.Ftf,
+            Name = "archFile." + FileExtension.Ftf,
             DataType = typeof(List<DataObjects.ArchiveMonth>)
         };
 

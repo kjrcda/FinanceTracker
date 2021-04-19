@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceTracker", "FinanceTracker\FinanceTracker.csproj", "{42819D39-BEC6-46B2-83DB-A7FC23701BCB}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeleteDataAction", "CustomsActions\DeleteDataAction.csproj", "{F61C7EC9-7341-4E38-8889-CAFCB7ACEDAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryTracker", "InventoryTracker\InventoryTracker.csproj", "{1343808B-8ACA-4209-B286-D47C581CE926}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encryption", "Encryption\Encryption.csproj", "{992E1AFA-3DDA-4FD2-8B6C-56D1136D1137}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileInfo", "FileInfo\FileInfo.csproj", "{ED84ECAC-9568-4CDC-BEF5-76534A705023}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,8 +41,19 @@ Global
 		{1343808B-8ACA-4209-B286-D47C581CE926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1343808B-8ACA-4209-B286-D47C581CE926}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1343808B-8ACA-4209-B286-D47C581CE926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{992E1AFA-3DDA-4FD2-8B6C-56D1136D1137}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{992E1AFA-3DDA-4FD2-8B6C-56D1136D1137}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{992E1AFA-3DDA-4FD2-8B6C-56D1136D1137}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{992E1AFA-3DDA-4FD2-8B6C-56D1136D1137}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED84ECAC-9568-4CDC-BEF5-76534A705023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED84ECAC-9568-4CDC-BEF5-76534A705023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED84ECAC-9568-4CDC-BEF5-76534A705023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED84ECAC-9568-4CDC-BEF5-76534A705023}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D97AFCB-E81C-41B0-A1AB-F22BD8388779}
 	EndGlobalSection
 EndGlobal

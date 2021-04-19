@@ -92,10 +92,8 @@
       <DependentUpon>TotalsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Resources\Categories.cs" />
-    <Compile Include="Resources\FileExtensions.cs" />
     <Compile Include="Resources\FileNames.cs" />
     <Compile Include="Resources\Formats.cs" />
-    <Compile Include="Utilities\Encryption.cs" />
     <Compile Include="Utilities\FileIO.cs" />
     <Compile Include="Utilities\ListSorter.cs" />
     <Compile Include="Program.cs" />
@@ -149,6 +147,16 @@
     <None Include="Resources\Icons\icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Encryption\Encryption.csproj">
+      <Project>{992e1afa-3dda-4fd2-8b6c-56d1136d1137}</Project>
+      <Name>Encryption</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileInfo\FileInfo.csproj">
+      <Project>{ED84ECAC-9568-4CDC-BEF5-76534A705023}</Project>
+      <Name>FileInfo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
