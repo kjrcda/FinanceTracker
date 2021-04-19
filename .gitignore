@@ -1,11 +1,5 @@
-/FinanceTracker/bin
-/FinanceTracker/obj
-/DataConverter/bin
-/DataConverter/obj
-/CustomsActions/bin
-/CustomsActions/obj
-/InventoryTracker/bin
-/InventoryTracker/obj
+/*/bin
+/*/obj
 
 # IDE Settings
 .vs/**
