@@ -32,16 +32,17 @@ namespace FinanceTracker.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnExit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.tabPages = new System.Windows.Forms.TabControl();
             this.tabSpent = new System.Windows.Forms.TabPage();
             this.lstItems = new System.Windows.Forms.ListView();
-            this.hdrID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.hdrCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.hdrAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.hdrPlace = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.hdrDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrID = new System.Windows.Forms.ColumnHeader();
+            this.hdrCategory = new System.Windows.Forms.ColumnHeader();
+            this.hdrAmount = new System.Windows.Forms.ColumnHeader();
+            this.hdrPlace = new System.Windows.Forms.ColumnHeader();
+            this.hdrDescription = new System.Windows.Forms.ColumnHeader();
             this.btnProjection = new System.Windows.Forms.Button();
             this.lblOtherAmt = new System.Windows.Forms.Label();
             this.lblEatOutAmt = new System.Windows.Forms.Label();
@@ -59,22 +60,22 @@ namespace FinanceTracker.Forms
             this.lblRent = new System.Windows.Forms.Label();
             this.tabOwed = new System.Windows.Forms.TabPage();
             this.lstPayments = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.strpMainMenu = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.viewMonthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.archiveMonthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.totalsAcrossMonthsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lstViewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tlspCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPages.SuspendLayout();
@@ -87,9 +88,10 @@ namespace FinanceTracker.Forms
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExit.Location = new System.Drawing.Point(12, 582);
+            this.btnExit.Location = new System.Drawing.Point(14, 672);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(116, 32);
+            this.btnExit.Size = new System.Drawing.Size(135, 37);
             this.btnExit.TabIndex = 20;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -98,9 +100,10 @@ namespace FinanceTracker.Forms
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(556, 582);
+            this.btnNew.Location = new System.Drawing.Point(649, 672);
+            this.btnNew.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(116, 32);
+            this.btnNew.Size = new System.Drawing.Size(135, 37);
             this.btnNew.TabIndex = 5;
             this.btnNew.Text = "New";
             this.btnNew.UseVisualStyleBackColor = true;
@@ -113,11 +116,12 @@ namespace FinanceTracker.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabPages.Controls.Add(this.tabSpent);
             this.tabPages.Controls.Add(this.tabOwed);
-            this.tabPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPages.Location = new System.Drawing.Point(12, 39);
+            this.tabPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tabPages.Location = new System.Drawing.Point(14, 45);
+            this.tabPages.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPages.Name = "tabPages";
             this.tabPages.SelectedIndex = 0;
-            this.tabPages.Size = new System.Drawing.Size(660, 537);
+            this.tabPages.Size = new System.Drawing.Size(770, 620);
             this.tabPages.TabIndex = 3;
             this.tabPages.TabStop = false;
             // 
@@ -140,9 +144,10 @@ namespace FinanceTracker.Forms
             this.tabSpent.Controls.Add(this.lblPhoneBill);
             this.tabSpent.Controls.Add(this.lblRent);
             this.tabSpent.Location = new System.Drawing.Point(4, 25);
+            this.tabSpent.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabSpent.Name = "tabSpent";
-            this.tabSpent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSpent.Size = new System.Drawing.Size(652, 508);
+            this.tabSpent.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabSpent.Size = new System.Drawing.Size(762, 591);
             this.tabSpent.TabIndex = 0;
             this.tabSpent.Text = "Money Spent";
             this.tabSpent.UseVisualStyleBackColor = true;
@@ -160,9 +165,11 @@ namespace FinanceTracker.Forms
             this.hdrDescription});
             this.lstItems.FullRowSelect = true;
             this.lstItems.GridLines = true;
-            this.lstItems.Location = new System.Drawing.Point(6, 115);
+            this.lstItems.HideSelection = false;
+            this.lstItems.Location = new System.Drawing.Point(7, 133);
+            this.lstItems.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lstItems.Name = "lstItems";
-            this.lstItems.Size = new System.Drawing.Size(640, 387);
+            this.lstItems.Size = new System.Drawing.Size(746, 446);
             this.lstItems.TabIndex = 15;
             this.lstItems.TabStop = false;
             this.lstItems.UseCompatibleStateImageBehavior = false;
@@ -198,9 +205,10 @@ namespace FinanceTracker.Forms
             // 
             // btnProjection
             // 
-            this.btnProjection.Location = new System.Drawing.Point(438, 66);
+            this.btnProjection.Location = new System.Drawing.Point(511, 76);
+            this.btnProjection.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnProjection.Name = "btnProjection";
-            this.btnProjection.Size = new System.Drawing.Size(116, 32);
+            this.btnProjection.Size = new System.Drawing.Size(135, 37);
             this.btnProjection.TabIndex = 0;
             this.btnProjection.Text = "Projection";
             this.btnProjection.UseVisualStyleBackColor = true;
@@ -209,8 +217,9 @@ namespace FinanceTracker.Forms
             // lblOtherAmt
             // 
             this.lblOtherAmt.AutoSize = true;
-            this.lblOtherAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOtherAmt.Location = new System.Drawing.Point(490, 26);
+            this.lblOtherAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblOtherAmt.Location = new System.Drawing.Point(572, 30);
+            this.lblOtherAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOtherAmt.Name = "lblOtherAmt";
             this.lblOtherAmt.Size = new System.Drawing.Size(34, 18);
             this.lblOtherAmt.TabIndex = 99;
@@ -219,8 +228,9 @@ namespace FinanceTracker.Forms
             // lblEatOutAmt
             // 
             this.lblEatOutAmt.AutoSize = true;
-            this.lblEatOutAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEatOutAmt.Location = new System.Drawing.Point(332, 80);
+            this.lblEatOutAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEatOutAmt.Location = new System.Drawing.Point(387, 92);
+            this.lblEatOutAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEatOutAmt.Name = "lblEatOutAmt";
             this.lblEatOutAmt.Size = new System.Drawing.Size(34, 18);
             this.lblEatOutAmt.TabIndex = 99;
@@ -229,8 +239,9 @@ namespace FinanceTracker.Forms
             // lblTransportationAmt
             // 
             this.lblTransportationAmt.AutoSize = true;
-            this.lblTransportationAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransportationAmt.Location = new System.Drawing.Point(332, 53);
+            this.lblTransportationAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTransportationAmt.Location = new System.Drawing.Point(387, 61);
+            this.lblTransportationAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTransportationAmt.Name = "lblTransportationAmt";
             this.lblTransportationAmt.Size = new System.Drawing.Size(34, 18);
             this.lblTransportationAmt.TabIndex = 99;
@@ -239,8 +250,9 @@ namespace FinanceTracker.Forms
             // lblGroceryAmt
             // 
             this.lblGroceryAmt.AutoSize = true;
-            this.lblGroceryAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGroceryAmt.Location = new System.Drawing.Point(332, 26);
+            this.lblGroceryAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblGroceryAmt.Location = new System.Drawing.Point(387, 30);
+            this.lblGroceryAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGroceryAmt.Name = "lblGroceryAmt";
             this.lblGroceryAmt.Size = new System.Drawing.Size(34, 18);
             this.lblGroceryAmt.TabIndex = 99;
@@ -249,8 +261,9 @@ namespace FinanceTracker.Forms
             // lblEntertainmentAmt
             // 
             this.lblEntertainmentAmt.AutoSize = true;
-            this.lblEntertainmentAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEntertainmentAmt.Location = new System.Drawing.Point(118, 80);
+            this.lblEntertainmentAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEntertainmentAmt.Location = new System.Drawing.Point(138, 92);
+            this.lblEntertainmentAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEntertainmentAmt.Name = "lblEntertainmentAmt";
             this.lblEntertainmentAmt.Size = new System.Drawing.Size(34, 18);
             this.lblEntertainmentAmt.TabIndex = 99;
@@ -259,8 +272,9 @@ namespace FinanceTracker.Forms
             // lblPhoneBillAmt
             // 
             this.lblPhoneBillAmt.AutoSize = true;
-            this.lblPhoneBillAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhoneBillAmt.Location = new System.Drawing.Point(118, 53);
+            this.lblPhoneBillAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblPhoneBillAmt.Location = new System.Drawing.Point(138, 61);
+            this.lblPhoneBillAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPhoneBillAmt.Name = "lblPhoneBillAmt";
             this.lblPhoneBillAmt.Size = new System.Drawing.Size(34, 18);
             this.lblPhoneBillAmt.TabIndex = 99;
@@ -269,8 +283,9 @@ namespace FinanceTracker.Forms
             // lblRentAmt
             // 
             this.lblRentAmt.AutoSize = true;
-            this.lblRentAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRentAmt.Location = new System.Drawing.Point(118, 26);
+            this.lblRentAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblRentAmt.Location = new System.Drawing.Point(138, 30);
+            this.lblRentAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRentAmt.Name = "lblRentAmt";
             this.lblRentAmt.Size = new System.Drawing.Size(34, 18);
             this.lblRentAmt.TabIndex = 99;
@@ -279,8 +294,9 @@ namespace FinanceTracker.Forms
             // lblOther
             // 
             this.lblOther.AutoSize = true;
-            this.lblOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOther.Location = new System.Drawing.Point(435, 26);
+            this.lblOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblOther.Location = new System.Drawing.Point(507, 30);
+            this.lblOther.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOther.Name = "lblOther";
             this.lblOther.Size = new System.Drawing.Size(49, 18);
             this.lblOther.TabIndex = 99;
@@ -289,8 +305,9 @@ namespace FinanceTracker.Forms
             // lblEatOut
             // 
             this.lblEatOut.AutoSize = true;
-            this.lblEatOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEatOut.Location = new System.Drawing.Point(245, 80);
+            this.lblEatOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEatOut.Location = new System.Drawing.Point(286, 92);
+            this.lblEatOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEatOut.Name = "lblEatOut";
             this.lblEatOut.Size = new System.Drawing.Size(81, 18);
             this.lblEatOut.TabIndex = 99;
@@ -299,8 +316,9 @@ namespace FinanceTracker.Forms
             // lblTransportation
             // 
             this.lblTransportation.AutoSize = true;
-            this.lblTransportation.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTransportation.Location = new System.Drawing.Point(218, 53);
+            this.lblTransportation.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTransportation.Location = new System.Drawing.Point(254, 61);
+            this.lblTransportation.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTransportation.Name = "lblTransportation";
             this.lblTransportation.Size = new System.Drawing.Size(108, 18);
             this.lblTransportation.TabIndex = 99;
@@ -309,8 +327,9 @@ namespace FinanceTracker.Forms
             // lblGrocery
             // 
             this.lblGrocery.AutoSize = true;
-            this.lblGrocery.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGrocery.Location = new System.Drawing.Point(260, 26);
+            this.lblGrocery.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblGrocery.Location = new System.Drawing.Point(303, 30);
+            this.lblGrocery.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGrocery.Name = "lblGrocery";
             this.lblGrocery.Size = new System.Drawing.Size(66, 18);
             this.lblGrocery.TabIndex = 99;
@@ -319,8 +338,9 @@ namespace FinanceTracker.Forms
             // lblEntertainment
             // 
             this.lblEntertainment.AutoSize = true;
-            this.lblEntertainment.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEntertainment.Location = new System.Drawing.Point(9, 80);
+            this.lblEntertainment.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEntertainment.Location = new System.Drawing.Point(10, 92);
+            this.lblEntertainment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEntertainment.Name = "lblEntertainment";
             this.lblEntertainment.Size = new System.Drawing.Size(103, 18);
             this.lblEntertainment.TabIndex = 99;
@@ -329,8 +349,9 @@ namespace FinanceTracker.Forms
             // lblPhoneBill
             // 
             this.lblPhoneBill.AutoSize = true;
-            this.lblPhoneBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPhoneBill.Location = new System.Drawing.Point(34, 53);
+            this.lblPhoneBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblPhoneBill.Location = new System.Drawing.Point(40, 61);
+            this.lblPhoneBill.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPhoneBill.Name = "lblPhoneBill";
             this.lblPhoneBill.Size = new System.Drawing.Size(78, 18);
             this.lblPhoneBill.TabIndex = 99;
@@ -339,8 +360,9 @@ namespace FinanceTracker.Forms
             // lblRent
             // 
             this.lblRent.AutoSize = true;
-            this.lblRent.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRent.Location = new System.Drawing.Point(69, 26);
+            this.lblRent.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblRent.Location = new System.Drawing.Point(80, 30);
+            this.lblRent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRent.Name = "lblRent";
             this.lblRent.Size = new System.Drawing.Size(43, 18);
             this.lblRent.TabIndex = 99;
@@ -350,9 +372,10 @@ namespace FinanceTracker.Forms
             // 
             this.tabOwed.Controls.Add(this.lstPayments);
             this.tabOwed.Location = new System.Drawing.Point(4, 25);
+            this.tabOwed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabOwed.Name = "tabOwed";
-            this.tabOwed.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOwed.Size = new System.Drawing.Size(652, 508);
+            this.tabOwed.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabOwed.Size = new System.Drawing.Size(762, 591);
             this.tabOwed.TabIndex = 1;
             this.tabOwed.Text = "Money Made";
             this.tabOwed.UseVisualStyleBackColor = true;
@@ -370,9 +393,11 @@ namespace FinanceTracker.Forms
             this.columnHeader5});
             this.lstPayments.FullRowSelect = true;
             this.lstPayments.GridLines = true;
-            this.lstPayments.Location = new System.Drawing.Point(6, 115);
+            this.lstPayments.HideSelection = false;
+            this.lstPayments.Location = new System.Drawing.Point(7, 133);
+            this.lstPayments.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lstPayments.Name = "lstPayments";
-            this.lstPayments.Size = new System.Drawing.Size(640, 387);
+            this.lstPayments.Size = new System.Drawing.Size(746, 446);
             this.lstPayments.TabIndex = 16;
             this.lstPayments.TabStop = false;
             this.lstPayments.UseCompatibleStateImageBehavior = false;
@@ -402,9 +427,10 @@ namespace FinanceTracker.Forms
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Location = new System.Drawing.Point(312, 582);
+            this.btnDelete.Location = new System.Drawing.Point(364, 672);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(116, 32);
+            this.btnDelete.Size = new System.Drawing.Size(135, 37);
             this.btnDelete.TabIndex = 15;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -413,9 +439,10 @@ namespace FinanceTracker.Forms
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Location = new System.Drawing.Point(434, 582);
+            this.btnEdit.Location = new System.Drawing.Point(506, 672);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(116, 32);
+            this.btnEdit.Size = new System.Drawing.Size(135, 37);
             this.btnEdit.TabIndex = 10;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -428,7 +455,8 @@ namespace FinanceTracker.Forms
             this.optionsToolStripMenuItem1});
             this.strpMainMenu.Location = new System.Drawing.Point(0, 0);
             this.strpMainMenu.Name = "strpMainMenu";
-            this.strpMainMenu.Size = new System.Drawing.Size(684, 24);
+            this.strpMainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.strpMainMenu.Size = new System.Drawing.Size(798, 24);
             this.strpMainMenu.TabIndex = 6;
             this.strpMainMenu.Text = "menuStrip1";
             // 
@@ -443,7 +471,7 @@ namespace FinanceTracker.Forms
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -460,45 +488,45 @@ namespace FinanceTracker.Forms
             this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem1.Text = "Options";
             // 
-            // importToolStripMenuItem
-            // 
-            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.importToolStripMenuItem.Text = "Restore As...";
-            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
-            // 
-            // exportToolStripMenuItem
-            // 
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.exportToolStripMenuItem.Text = "Backup";
-            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(185, 6);
-            // 
             // viewMonthToolStripMenuItem
             // 
             this.viewMonthToolStripMenuItem.Name = "viewMonthToolStripMenuItem";
-            this.viewMonthToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.viewMonthToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.viewMonthToolStripMenuItem.Text = "View Archive";
             this.viewMonthToolStripMenuItem.Click += new System.EventHandler(this.viewArchiveToolStripMenuItem_Click);
             // 
             // archiveMonthToolStripMenuItem
             // 
             this.archiveMonthToolStripMenuItem.Name = "archiveMonthToolStripMenuItem";
-            this.archiveMonthToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.archiveMonthToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.archiveMonthToolStripMenuItem.Text = "Archive Month";
             this.archiveMonthToolStripMenuItem.Click += new System.EventHandler(this.archiveMonthToolStripMenuItem_Click);
             // 
             // totalsAcrossMonthsToolStripMenuItem
             // 
             this.totalsAcrossMonthsToolStripMenuItem.Name = "totalsAcrossMonthsToolStripMenuItem";
-            this.totalsAcrossMonthsToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.totalsAcrossMonthsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.totalsAcrossMonthsToolStripMenuItem.Text = "Totals Across Months";
             this.totalsAcrossMonthsToolStripMenuItem.Click += new System.EventHandler(this.totalsAcrossMonthsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(183, 6);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.importToolStripMenuItem.Text = "Restore As...";
+            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.exportToolStripMenuItem.Text = "Backup";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // lstViewContextMenu
             // 
@@ -516,18 +544,19 @@ namespace FinanceTracker.Forms
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 626);
+            this.ClientSize = new System.Drawing.Size(798, 722);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.tabPages);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.strpMainMenu);
-            this.Icon = global::FinanceTracker.Properties.Resources.icon;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.strpMainMenu;
-            this.MinimumSize = new System.Drawing.Size(500, 400);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MinimumSize = new System.Drawing.Size(581, 456);
             this.Name = "MainForm";
             this.Text = "Finance Tracker";
             this.tabPages.ResumeLayout(false);
