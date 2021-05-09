@@ -1,15 +1,15 @@
-﻿using System;
+﻿using FileInfo;
+using System;
+using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using System.IO;
-using FileInfo;
 
 namespace DataConverter
 {
     public partial class MainData : Form
     {
         private string _filename = "";
-        private static string FileFilter { get; } = $"Finance Tracker File (*.{FileExtension.Ftf})|*.{FileExtension.Ftf}|XML File (*.{FileExtension.Xml})|*.{FileExtension.Xml}";
+        private static string FileFilter { get; } = $"Encrypted File (*.{FileExtension.Ftf})|*.{FileExtension.Ftf}|Decrypted File (*.{FileExtension.Xml})|*.{FileExtension.Xml}";
 
         public MainData()
         {
