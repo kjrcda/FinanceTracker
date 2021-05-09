@@ -1,5 +1,8 @@
-/*/bin
-/*/obj
+/**/bin
+/**/obj
+*.user
+/**/Debug
+/**/Release
 
 # IDE Settings
 .vs/**
