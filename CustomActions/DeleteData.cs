@@ -4,7 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.IO;
 
-namespace CustomsActions
+namespace CustomActions
 {
     [RunInstaller(true)]
     public partial class DeleteData : System.Configuration.Install.Installer
@@ -14,8 +14,10 @@ namespace CustomsActions
             base.Uninstall(savedState);
 
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), SaveLocation.FolderName);
-            if(Directory.Exists(path))
+            if (Directory.Exists(path))
+            {
                 Directory.Delete(path, true);
+            }
         }
     }
 }

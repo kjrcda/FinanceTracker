@@ -1,4 +1,4 @@
-﻿namespace CustomsActions
+﻿namespace CustomActions
 {
     partial class DeleteData
     {
