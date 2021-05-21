@@ -42,13 +42,14 @@ namespace FinanceTracker.Forms
             // btnFinish
             // 
             this.btnFinish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnFinish.Location = new System.Drawing.Point(145, 470);
-            this.btnFinish.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnFinish.Location = new System.Drawing.Point(124, 407);
             this.btnFinish.Name = "btnFinish";
-            this.btnFinish.Size = new System.Drawing.Size(135, 37);
+            this.btnFinish.Size = new System.Drawing.Size(116, 32);
             this.btnFinish.TabIndex = 1;
             this.btnFinish.Text = "Finish";
             this.btnFinish.UseVisualStyleBackColor = true;
+            this.btnFinish.Click += new System.EventHandler(UIHelper.CloseWindow);
+            this.btnFinish.KeyDown += new System.Windows.Forms.KeyEventHandler(UIHelper.CheckEscape);
             // 
             // chklstItems
             // 
@@ -58,12 +59,12 @@ namespace FinanceTracker.Forms
             this.chklstItems.CheckOnClick = true;
             this.chklstItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.chklstItems.FormattingEnabled = true;
-            this.chklstItems.Location = new System.Drawing.Point(14, 90);
-            this.chklstItems.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.chklstItems.Location = new System.Drawing.Point(12, 78);
             this.chklstItems.Name = "chklstItems";
-            this.chklstItems.Size = new System.Drawing.Size(396, 289);
+            this.chklstItems.Size = new System.Drawing.Size(340, 251);
             this.chklstItems.TabIndex = 99;
             this.chklstItems.TabStop = false;
+            this.chklstItems.KeyDown += new System.Windows.Forms.KeyEventHandler(UIHelper.CheckEscape);
             // 
             // label1
             // 
@@ -71,8 +72,7 @@ namespace FinanceTracker.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(43, 412);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(37, 357);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(203, 20);
             this.label1.TabIndex = 99;
@@ -84,8 +84,7 @@ namespace FinanceTracker.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTotal.Location = new System.Drawing.Point(287, 412);
-            this.lblTotal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotal.Location = new System.Drawing.Point(246, 357);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(40, 20);
             this.lblTotal.TabIndex = 99;
@@ -95,8 +94,7 @@ namespace FinanceTracker.Forms
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(26, 42);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(22, 36);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(312, 18);
             this.label2.TabIndex = 99;
@@ -104,17 +102,16 @@ namespace FinanceTracker.Forms
             // 
             // TotalsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 520);
+            this.ClientSize = new System.Drawing.Size(364, 451);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chklstItems);
             this.Controls.Add(this.btnFinish);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.MinimumSize = new System.Drawing.Size(441, 559);
+            this.MinimumSize = new System.Drawing.Size(380, 490);
             this.Name = "TotalsForm";
             this.Text = "Totals";
             this.ResumeLayout(false);
