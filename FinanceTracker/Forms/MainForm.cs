@@ -12,10 +12,10 @@ namespace FinanceTracker.Forms
         private List<FinanceEntry> _listFinances;
         private List<ArchiveMonth> _archived;
         private List<double> _projData;
-        private List<double> _currData = new List<double>();
+        private List<double> _currData = new();
         private int _currColumn = -1;
 
-        private readonly List<Label> _labels = new List<Label>();
+        private List<Label> _labels { get; } = new();
 
 #region FormFunctions
         public MainForm()
@@ -201,7 +201,7 @@ namespace FinanceTracker.Forms
             var diag = new OpenFileDialog {Filter = "ZIP File (*.zip)|*.zip", Title = "Open"};
             var result = diag.ShowDialog();
 
-            if (result == DialogResult.OK && !String.IsNullOrEmpty(diag.FileName))
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(diag.FileName))
             {
                 FileIO.ImportFiles(diag.FileName, ref _archived);
 
@@ -218,7 +218,7 @@ namespace FinanceTracker.Forms
         private void viewArchiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReadArchives();
-            if(_archived.Count() !=0)
+            if(_archived.Count != 0)
             {
                 using (var form = new ArchiveViewer(_archived))
                 {
@@ -233,7 +233,7 @@ namespace FinanceTracker.Forms
         private void totalsAcrossMonthsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReadArchives();
-            if(_archived.Count() !=0)
+            if(_archived.Count != 0)
             {
                 using(var form = new TotalsForm(_archived))
                 {

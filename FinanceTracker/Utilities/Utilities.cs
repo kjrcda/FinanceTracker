@@ -12,7 +12,7 @@ namespace FinanceTracker
             if (list.Count == 0)
                 _nextID = 1;
             else
-                _nextID = list[list.Count - 1].ID + 1;
+                _nextID = list[^1].ID + 1;
         }
 
         public static int GetNextID()
