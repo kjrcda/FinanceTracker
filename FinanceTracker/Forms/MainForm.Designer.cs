@@ -82,7 +82,7 @@ namespace FinanceTracker.Forms
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExit.Location = new System.Drawing.Point(14, 672);
+            this.btnExit.Location = new System.Drawing.Point(18, 668);
             this.btnExit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(135, 37);
@@ -94,7 +94,7 @@ namespace FinanceTracker.Forms
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(794, 672);
+            this.btnNew.Location = new System.Drawing.Point(790, 668);
             this.btnNew.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(135, 37);
@@ -106,7 +106,7 @@ namespace FinanceTracker.Forms
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Location = new System.Drawing.Point(509, 672);
+            this.btnDelete.Location = new System.Drawing.Point(504, 668);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(135, 37);
@@ -118,7 +118,7 @@ namespace FinanceTracker.Forms
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Location = new System.Drawing.Point(651, 672);
+            this.btnEdit.Location = new System.Drawing.Point(647, 668);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(135, 37);
@@ -446,7 +446,7 @@ namespace FinanceTracker.Forms
             this.lstItems.Location = new System.Drawing.Point(299, 148);
             this.lstItems.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lstItems.Name = "lstItems";
-            this.lstItems.Size = new System.Drawing.Size(630, 501);
+            this.lstItems.Size = new System.Drawing.Size(626, 501);
             this.lstItems.TabIndex = 15;
             this.lstItems.TabStop = false;
             this.lstItems.UseCompatibleStateImageBehavior = false;
