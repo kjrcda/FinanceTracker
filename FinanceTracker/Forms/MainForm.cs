@@ -270,6 +270,31 @@ namespace FinanceTracker.Forms
             }
         }
 
+         private void Recalculate()
+        {
+            var i = 0;
+            foreach (var label in _labels)
+                UIHelper.LabelColor(_projData[i] - _currData[i++], label);
+        }
+
+        private void InitProjectionData()
+        {
+            if (_projData.Count == 0)
+                _projData = Enumerable.Repeat(0.0, Categories.Length).ToList();
+
+            _currData = Enumerable.Repeat(0.0, Categories.Length).ToList();
+        }
+
+        private void PopulateList()
+        {
+            foreach (var item in _listFinances)
+            {
+                _currData[item.Category] += item.Amount;
+                UIHelper.LoadItem(lstItems, item);
+            }
+            Recalculate();
+        }
+
 #endregion
 
 #region FileLoadAndSave
@@ -345,29 +370,5 @@ namespace FinanceTracker.Forms
 
 #endregion
 
-        private void Recalculate()
-        {
-            var i = 0;
-            foreach (var label in _labels)
-                UIHelper.LabelColor(_projData[i] - _currData[i++], label);
-        }
-
-        private void InitProjectionData()
-        {
-            if (_projData.Count == 0)
-                _projData = Enumerable.Repeat(0.0, Categories.Length).ToList();
-
-            _currData = Enumerable.Repeat(0.0, Categories.Length).ToList();
-        }
-
-        private void PopulateList()
-        {
-            foreach (var item in _listFinances)
-            {
-                _currData[item.Category] += item.Amount;
-                UIHelper.LoadItem(lstItems, item);
-            }
-            Recalculate();
-        }
     }
 }
