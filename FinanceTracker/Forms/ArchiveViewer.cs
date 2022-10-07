@@ -10,7 +10,7 @@ namespace FinanceTracker.Forms
     public partial class ArchiveViewer : Form
     {
         private readonly List<ArchiveMonth> _info;
-        private readonly List<List<Label>> _labels = new List<List<Label>>();
+        private readonly List<List<Label>> _labels = new();
         private List<double> _currData; 
         private List<double> _projData;
         private double _projTotal, _currTotal;
@@ -20,7 +20,7 @@ namespace FinanceTracker.Forms
         {
             InitializeComponent();
 
-            var temp = new List<Label>
+            _labels.Add(new List<Label>
             {
                 lblPRentAmt,
                 lblPPhoneAmt,
@@ -29,9 +29,9 @@ namespace FinanceTracker.Forms
                 lblPTransportationAmt,
                 lblPEatingAmt,
                 lblPOtherAmt
-            };
-            _labels.Add(temp);
-            temp = new List<Label>
+            });
+
+            _labels.Add(new List<Label>
             {
                 lblCRentAmt,
                 lblCPhoneAmt,
@@ -40,9 +40,9 @@ namespace FinanceTracker.Forms
                 lblCTransportationAmt,
                 lblCEatingAmt,
                 lblCOtherAmt
-            };
-            _labels.Add(temp);
-            temp = new List<Label>
+            });
+
+            _labels.Add(new List<Label>
             {
                 lblRentAmt,
                 lblPhoneBillAmt,
@@ -51,8 +51,7 @@ namespace FinanceTracker.Forms
                 lblTransportationAmt,
                 lblEatOutAmt,
                 lblOtherAmt
-            };
-            _labels.Add(temp);
+            });
 
             _info = arch;
             foreach(var item in _info)
@@ -66,7 +65,7 @@ namespace FinanceTracker.Forms
 
         private void PopulateList()
         {
-            var month = _info.Find(item => item.MonthName == (String)cboSelector.SelectedItem);
+            var month = _info.Find(item => item.MonthName == (string)cboSelector.SelectedItem);
             _projData = month.MonthProj;
             _projTotal = month.MonthProjTotal;
             _currTotal = month.MonthInfoTotal;
