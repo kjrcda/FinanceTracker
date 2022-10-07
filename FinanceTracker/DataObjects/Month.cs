@@ -5,18 +5,18 @@ namespace FinanceTracker.DataObjects
 {
     public class Month
     {
-        public Guid Identifier = new();
-        public string MonthName = "";
-        public List<double> MonthProj = new();
-        public List<FinanceEntry> MonthInfo = new();
+        public Guid Identifier = Guid.NewGuid();
+        public string Name = "";
+        public List<double> Projections = new();
+        public List<FinanceEntry> FinanceEntries = new();
 
         public Month() { }
 
         public Month(string name, List<double> proj, List<FinanceEntry> list)
         {
-            MonthName = name;
-            MonthProj = proj;
-            MonthInfo = list;
+            Name = name;
+            Projections = proj;
+            FinanceEntries = list;
         }
     }
 }

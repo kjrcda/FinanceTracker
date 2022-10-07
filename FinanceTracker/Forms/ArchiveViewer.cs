@@ -55,7 +55,7 @@ namespace FinanceTracker.Forms
 
             _info = arch;
             foreach(var item in _info)
-                cboSelector.Items.Add(item.MonthName);
+                cboSelector.Items.Add(item.Name);
             cboSelector.SelectedItem = cboSelector.Items[0];
 
             cboSelector_SelectedIndexChanged(null, null);
@@ -65,11 +65,11 @@ namespace FinanceTracker.Forms
 
         private void PopulateList()
         {
-            var month = _info.Find(item => item.MonthName == (string)cboSelector.SelectedItem);
-            _projData = month.MonthProj;
-            _projTotal = month.MonthProjTotal;
-            _currTotal = month.MonthInfoTotal;
-            foreach (var item in month.MonthInfo)
+            var month = _info.Find(item => item.Name == (string)cboSelector.SelectedItem);
+            _projData = month.Projections;
+            _projTotal = month.ProjectionTotal;
+            _currTotal = month.FinanceEntriesTotal;
+            foreach (var item in month.FinanceEntries)
             {
                 _currData[item.Category] += item.Amount;
                 UIHelper.LoadItem(lstItems, item);

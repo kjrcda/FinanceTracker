@@ -8,19 +8,13 @@ namespace FinanceTracker.Resources
 {
     public static class FileNames
     {
-        public static readonly FileNameType SaveFile = new FileNameType
+        public static readonly FileNameType SaveFile = new()
         {
             Name = "file." + FileExtension.Ftf,
-            DataType = typeof(List<DataObjects.FinanceEntry>)
+            DataType = typeof(DataObjects.Month)
         };
 
-        public static readonly FileNameType ProjectionFile = new FileNameType
-        {
-            Name = "projFile." + FileExtension.Ftf,
-            DataType = typeof(List<double>)
-        };
-
-        public static readonly FileNameType ArchiveFile = new FileNameType
+        public static readonly FileNameType ArchiveFile = new()
         {
             Name = "archFile." + FileExtension.Ftf,
             DataType = typeof(List<DataObjects.ArchiveMonth>)

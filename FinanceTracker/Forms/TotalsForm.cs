@@ -16,18 +16,18 @@ namespace FinanceTracker.Forms
 
             _totalsList = list;
             foreach(var month in _totalsList)
-                chklstItems.Items.Add(month.MonthName);
+                chklstItems.Items.Add(month.Name);
             chklstItems.ItemCheck += Calculate_Click;
             CenterToParent();
         }
 
         private void Calculate_Click(object sender, ItemCheckEventArgs e)
         {
-            var entry = _totalsList.Find(item => item.MonthName == chklstItems.Items[e.Index].ToString());
+            var entry = _totalsList.Find(item => item.Name == chklstItems.Items[e.Index].ToString());
             if (e.NewValue == CheckState.Checked)
-                _total += entry.MonthProjTotal-entry.MonthInfoTotal;
+                _total += entry.ProjectionTotal-entry.FinanceEntriesTotal;
             else
-                _total -= entry.MonthProjTotal - entry.MonthInfoTotal;
+                _total -= entry.ProjectionTotal - entry.FinanceEntriesTotal;
             UIHelper.LabelColor(_total, lblTotal);
         }
     }
