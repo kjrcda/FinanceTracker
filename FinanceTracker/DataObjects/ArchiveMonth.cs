@@ -10,11 +10,11 @@ namespace FinanceTracker.DataObjects
 
         public ArchiveMonth() { }
 
-        public ArchiveMonth(string name, List<double> proj, List<FinanceEntry> list)
-            : base(name, proj, list)
+        public ArchiveMonth(Month activeMonth)
+            : base(activeMonth)
         {
-            ProjectionTotal = proj.Sum();
-            FinanceEntriesTotal = list.Sum(item => item.Amount);
+            ProjectionTotal = Projections.Sum();
+            FinanceEntriesTotal = FinanceEntries.Sum(item => item.Amount);
         }
 
         public double GetSpending() => ProjectionTotal - FinanceEntriesTotal;

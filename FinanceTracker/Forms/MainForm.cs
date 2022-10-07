@@ -31,6 +31,7 @@ namespace FinanceTracker.Forms
 
             ReadActiveMonth();
             InitProjectionData();
+            GetMonthName();
             PopulateList();
 
             CenterToScreen();
@@ -160,36 +161,40 @@ namespace FinanceTracker.Forms
 
         private void archiveMonthToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var input = new InputBox("Enter a Month", "Please enter the month you are archiving"))
+            var result = MessageBox.Show($"Are you sure you want to finish and archive {_activeMonth.Name}", "Confirm Archival", MessageBoxButtons.OKCancel);
+
+            if (result != DialogResult.OK)
             {
-                string inputtxt;
-                if (input.ShowDialog() == DialogResult.OK)
-                    inputtxt = input.InputText.ToUpper();
-                else
-                    return;
-
-                ReadArchives();
-                var exists = _archived.Where(item => String.Compare(item.Name.ToUpper(), inputtxt, StringComparison.Ordinal) == 0);
-
-                if (!exists.Any())
-                {
-                    var monthArchive = new ArchiveMonth(input.InputText, _activeMonth.Projections, _activeMonth.FinanceEntries);
-                    _archived.Add(monthArchive);
-                    WriteArchives();
-
-                    UIHelper.ClearList(lstItems);
-                    _activeMonth.FinanceEntries = new List<FinanceEntry>();
-                    _currData = new List<double>();
-                    InitProjectionData();
-                    Utilities.LoadID(_activeMonth.FinanceEntries);
-                    WriteActiveMonth();
-                    Recalculate();
-                    MessageBox.Show("Your total spending for the month left you with: " + (monthArchive.GetSpending()).ToString(Formats.MoneyFormat), "Monthly Total");
-                }
-                else
-                    MessageBox.Show("Error: There is already an entry with the same name","Error");
-                _archived = null;
+                return;
             }
+
+            ReadArchives();
+            var exists = _archived.Where(item => string.Compare(item.Name.ToUpper(), _activeMonth.Name, StringComparison.Ordinal) == 0);
+
+            if (!exists.Any())
+            {
+                var monthArchive = new ArchiveMonth(_activeMonth);
+                _archived.Add(monthArchive);
+                WriteArchives();
+
+                UIHelper.ClearList(lstItems);
+                _activeMonth = new Month();
+                Utilities.LoadID(_activeMonth.FinanceEntries);
+
+                _activeMonth.Projections = monthArchive.Projections;
+                InitProjectionData();
+                Recalculate();
+                GetMonthName();
+                WriteActiveMonth();
+
+                MessageBox.Show($"Your total spending for the { monthArchive.Name } left you with: { monthArchive.GetSpending().ToString(Formats.MoneyFormat) }", "Monthly Total");
+            }
+            else
+            {
+                MessageBox.Show("Error: There is already an entry with the same name", "Error");
+            }
+
+            _archived = null;
         }
 
         private void importToolStripMenuItem_Click(object sender, EventArgs e)
@@ -214,7 +219,7 @@ namespace FinanceTracker.Forms
         private void viewArchiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReadArchives();
-            if(_archived.Count != 0)
+            if (_archived.Count != 0)
             {
                 using (var form = new ArchiveViewer(_archived))
                 {
@@ -222,7 +227,9 @@ namespace FinanceTracker.Forms
                 }
             }
             else
+            {
                 MessageBox.Show("There is no information archived", "No Archive");
+            }
             _archived = null;
         }
 
@@ -291,6 +298,19 @@ namespace FinanceTracker.Forms
             Recalculate();
         }
 
+        private void GetMonthName()
+        {
+            while (string.IsNullOrWhiteSpace(_activeMonth.Name))
+            {
+                using var input = new InputBox("Enter a Name", "Please enter the month you are currently budgeting for");
+                if (input.ShowDialog() == DialogResult.OK)
+                {
+                    _activeMonth.Name = input.InputText;
+                    lblName.Text = _activeMonth.Name;
+                }
+            }
+        }
+
 #endregion
 
 #region FileLoadAndSave
@@ -300,6 +320,7 @@ namespace FinanceTracker.Forms
             try
             {
                 _activeMonth = FileIO.ReadFile(FileNames.SaveFile.Name, FileNames.SaveFile.DataType) ?? Activator.CreateInstance(FileNames.SaveFile.DataType);
+                lblName.Text = _activeMonth.Name;
             }
             catch (Exception e)
             {

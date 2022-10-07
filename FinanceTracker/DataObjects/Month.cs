@@ -12,11 +12,11 @@ namespace FinanceTracker.DataObjects
 
         public Month() { }
 
-        public Month(string name, List<double> proj, List<FinanceEntry> list)
+        public Month(Month month)
         {
-            Name = name;
-            Projections = proj;
-            FinanceEntries = list;
+            Name = month.Name;
+            Projections = month.Projections;
+            FinanceEntries = month.FinanceEntries;
         }
     }
 }
