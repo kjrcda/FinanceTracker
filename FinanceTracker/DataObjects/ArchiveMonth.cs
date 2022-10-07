@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace FinanceTracker.DataObjects
 {
@@ -9,11 +10,13 @@ namespace FinanceTracker.DataObjects
 
         public ArchiveMonth() { }
 
-        public ArchiveMonth(string name, List<double> proj, double projTotal, List<FinanceEntry> list, double listTotal)
+        public ArchiveMonth(string name, List<double> proj, List<FinanceEntry> list)
             : base(name, proj, list)
         {
-            MonthProjTotal = projTotal;
-            MonthInfoTotal = listTotal;
+            MonthProjTotal = proj.Sum();
+            MonthInfoTotal = list.Sum(item => item.Amount);
         }
+
+        public double GetSpending() => MonthProjTotal - MonthInfoTotal;
     }
 }

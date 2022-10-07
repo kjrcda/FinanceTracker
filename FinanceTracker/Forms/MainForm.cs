@@ -176,9 +176,8 @@ namespace FinanceTracker.Forms
 
                 if (!exists.Any())
                 {
-                    double projTotal = _projData.Sum();
-                    double currTotal = _currData.Sum();
-                    _archived.Add(new ArchiveMonth(input.InputText, _projData, projTotal, _listFinances, currTotal));
+                    var monthArchive = new ArchiveMonth(input.InputText, _projData, _listFinances);
+                    _archived.Add(monthArchive);
                     WriteArchives();
 
                     UIHelper.ClearList(lstItems);
@@ -188,7 +187,7 @@ namespace FinanceTracker.Forms
                     Utilities.LoadID(_listFinances);
                     WriteXML();
                     Recalculate();
-                    MessageBox.Show("Your total spending for the month left you with: " + (projTotal - currTotal).ToString(Formats.MoneyFormat), "Monthly Total");
+                    MessageBox.Show("Your total spending for the month left you with: " + (monthArchive.GetSpending()).ToString(Formats.MoneyFormat), "Monthly Total");
                 }
                 else
                     MessageBox.Show("Error: There is already an entry with the same name","Error");
