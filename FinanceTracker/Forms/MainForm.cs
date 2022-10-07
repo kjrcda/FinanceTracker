@@ -9,10 +9,10 @@ namespace FinanceTracker.Forms
 {
     public partial class MainForm : Form
     {
-        private Month _activeMonth;
-        private List<ArchiveMonth> _archived;
-        private List<double> _currData = new();
-        private int _currColumn = -1;
+        private Month _activeMonth { get; set; }
+        private List<double> _currData { get; set; } = new();
+        private int _currColumn { get; set; } = -1;
+        private List<ArchiveMonth> _archived;// { get; set; }
 
         private List<Label> _labels { get; } = new();
 
@@ -20,8 +20,6 @@ namespace FinanceTracker.Forms
         public MainForm()
         {
             InitializeComponent();
-
-            ReadActiveMonth();
 
             _labels.Add(lblRentAmt);
             _labels.Add(lblPhoneBillAmt);
@@ -31,8 +29,8 @@ namespace FinanceTracker.Forms
             _labels.Add(lblEatOutAmt);
             _labels.Add(lblOtherAmt);
 
+            ReadActiveMonth();
             InitProjectionData();
-            Utilities.LoadID(_activeMonth.FinanceEntries);
             PopulateList();
 
             CenterToScreen();
@@ -206,8 +204,8 @@ namespace FinanceTracker.Forms
                 //now need to update the prorgam
                 UIHelper.ClearList(lstItems);
                 _currData = new List<double>();
+
                 ReadActiveMonth();
-                Utilities.LoadID(_activeMonth.FinanceEntries);
                 InitProjectionData();
                 PopulateList();
             }
@@ -307,6 +305,8 @@ namespace FinanceTracker.Forms
             {
                 MessageBox.Show($"{e.Message}\n\n{e.InnerException?.Message}" , "Error Reading File");
             }
+
+            Utilities.LoadID(_activeMonth.FinanceEntries);
         }
 
         private void ReadArchives()
