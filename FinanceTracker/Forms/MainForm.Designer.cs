@@ -75,6 +75,7 @@ namespace FinanceTracker.Forms
             this.hdrAmount = new System.Windows.Forms.ColumnHeader();
             this.hdrPlace = new System.Windows.Forms.ColumnHeader();
             this.hdrDescription = new System.Windows.Forms.ColumnHeader();
+            this.lblName = new System.Windows.Forms.Label();
             this.strpMainMenu.SuspendLayout();
             this.lstViewContextMenu.SuspendLayout();
             this.SuspendLayout();
@@ -82,7 +83,7 @@ namespace FinanceTracker.Forms
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExit.Location = new System.Drawing.Point(18, 668);
+            this.btnExit.Location = new System.Drawing.Point(18, 567);
             this.btnExit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(135, 37);
@@ -94,7 +95,7 @@ namespace FinanceTracker.Forms
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(790, 668);
+            this.btnNew.Location = new System.Drawing.Point(786, 567);
             this.btnNew.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(135, 37);
@@ -106,7 +107,7 @@ namespace FinanceTracker.Forms
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Location = new System.Drawing.Point(504, 668);
+            this.btnDelete.Location = new System.Drawing.Point(500, 567);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(135, 37);
@@ -118,7 +119,7 @@ namespace FinanceTracker.Forms
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Location = new System.Drawing.Point(647, 668);
+            this.btnEdit.Location = new System.Drawing.Point(643, 567);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(135, 37);
@@ -135,7 +136,7 @@ namespace FinanceTracker.Forms
             this.strpMainMenu.Location = new System.Drawing.Point(0, 0);
             this.strpMainMenu.Name = "strpMainMenu";
             this.strpMainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.strpMainMenu.Size = new System.Drawing.Size(943, 24);
+            this.strpMainMenu.Size = new System.Drawing.Size(939, 24);
             this.strpMainMenu.TabIndex = 6;
             this.strpMainMenu.Text = "menuStrip1";
             // 
@@ -268,7 +269,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblRent.AutoSize = true;
             this.lblRent.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblRent.Location = new System.Drawing.Point(80, 30);
+            this.lblRent.Location = new System.Drawing.Point(110, 211);
             this.lblRent.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRent.Name = "lblRent";
             this.lblRent.Size = new System.Drawing.Size(43, 18);
@@ -279,7 +280,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblPhoneBill.AutoSize = true;
             this.lblPhoneBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPhoneBill.Location = new System.Drawing.Point(40, 61);
+            this.lblPhoneBill.Location = new System.Drawing.Point(75, 242);
             this.lblPhoneBill.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPhoneBill.Name = "lblPhoneBill";
             this.lblPhoneBill.Size = new System.Drawing.Size(78, 18);
@@ -290,7 +291,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblEntertainment.AutoSize = true;
             this.lblEntertainment.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblEntertainment.Location = new System.Drawing.Point(10, 92);
+            this.lblEntertainment.Location = new System.Drawing.Point(50, 273);
             this.lblEntertainment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEntertainment.Name = "lblEntertainment";
             this.lblEntertainment.Size = new System.Drawing.Size(103, 18);
@@ -301,7 +302,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblGrocery.AutoSize = true;
             this.lblGrocery.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblGrocery.Location = new System.Drawing.Point(303, 30);
+            this.lblGrocery.Location = new System.Drawing.Point(87, 303);
             this.lblGrocery.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGrocery.Name = "lblGrocery";
             this.lblGrocery.Size = new System.Drawing.Size(66, 18);
@@ -312,7 +313,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblTransportation.AutoSize = true;
             this.lblTransportation.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTransportation.Location = new System.Drawing.Point(254, 61);
+            this.lblTransportation.Location = new System.Drawing.Point(45, 334);
             this.lblTransportation.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTransportation.Name = "lblTransportation";
             this.lblTransportation.Size = new System.Drawing.Size(108, 18);
@@ -323,7 +324,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblEatOut.AutoSize = true;
             this.lblEatOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblEatOut.Location = new System.Drawing.Point(286, 92);
+            this.lblEatOut.Location = new System.Drawing.Point(72, 365);
             this.lblEatOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEatOut.Name = "lblEatOut";
             this.lblEatOut.Size = new System.Drawing.Size(81, 18);
@@ -334,7 +335,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblOther.AutoSize = true;
             this.lblOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblOther.Location = new System.Drawing.Point(507, 30);
+            this.lblOther.Location = new System.Drawing.Point(104, 395);
             this.lblOther.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOther.Name = "lblOther";
             this.lblOther.Size = new System.Drawing.Size(49, 18);
@@ -345,7 +346,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblRentAmt.AutoSize = true;
             this.lblRentAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblRentAmt.Location = new System.Drawing.Point(138, 30);
+            this.lblRentAmt.Location = new System.Drawing.Point(168, 211);
             this.lblRentAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRentAmt.Name = "lblRentAmt";
             this.lblRentAmt.Size = new System.Drawing.Size(34, 18);
@@ -356,7 +357,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblPhoneBillAmt.AutoSize = true;
             this.lblPhoneBillAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblPhoneBillAmt.Location = new System.Drawing.Point(138, 61);
+            this.lblPhoneBillAmt.Location = new System.Drawing.Point(168, 242);
             this.lblPhoneBillAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPhoneBillAmt.Name = "lblPhoneBillAmt";
             this.lblPhoneBillAmt.Size = new System.Drawing.Size(34, 18);
@@ -367,7 +368,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblEntertainmentAmt.AutoSize = true;
             this.lblEntertainmentAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblEntertainmentAmt.Location = new System.Drawing.Point(138, 92);
+            this.lblEntertainmentAmt.Location = new System.Drawing.Point(168, 273);
             this.lblEntertainmentAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEntertainmentAmt.Name = "lblEntertainmentAmt";
             this.lblEntertainmentAmt.Size = new System.Drawing.Size(34, 18);
@@ -378,7 +379,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblGroceryAmt.AutoSize = true;
             this.lblGroceryAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblGroceryAmt.Location = new System.Drawing.Point(387, 30);
+            this.lblGroceryAmt.Location = new System.Drawing.Point(168, 303);
             this.lblGroceryAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGroceryAmt.Name = "lblGroceryAmt";
             this.lblGroceryAmt.Size = new System.Drawing.Size(34, 18);
@@ -389,7 +390,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblTransportationAmt.AutoSize = true;
             this.lblTransportationAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTransportationAmt.Location = new System.Drawing.Point(387, 61);
+            this.lblTransportationAmt.Location = new System.Drawing.Point(168, 334);
             this.lblTransportationAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTransportationAmt.Name = "lblTransportationAmt";
             this.lblTransportationAmt.Size = new System.Drawing.Size(34, 18);
@@ -400,7 +401,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblEatOutAmt.AutoSize = true;
             this.lblEatOutAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblEatOutAmt.Location = new System.Drawing.Point(387, 92);
+            this.lblEatOutAmt.Location = new System.Drawing.Point(168, 365);
             this.lblEatOutAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEatOutAmt.Name = "lblEatOutAmt";
             this.lblEatOutAmt.Size = new System.Drawing.Size(34, 18);
@@ -411,7 +412,7 @@ namespace FinanceTracker.Forms
             // 
             this.lblOtherAmt.AutoSize = true;
             this.lblOtherAmt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblOtherAmt.Location = new System.Drawing.Point(572, 30);
+            this.lblOtherAmt.Location = new System.Drawing.Point(168, 395);
             this.lblOtherAmt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOtherAmt.Name = "lblOtherAmt";
             this.lblOtherAmt.Size = new System.Drawing.Size(34, 18);
@@ -420,7 +421,7 @@ namespace FinanceTracker.Forms
             // 
             // btnProjection
             // 
-            this.btnProjection.Location = new System.Drawing.Point(511, 76);
+            this.btnProjection.Location = new System.Drawing.Point(87, 124);
             this.btnProjection.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnProjection.Name = "btnProjection";
             this.btnProjection.Size = new System.Drawing.Size(135, 37);
@@ -443,10 +444,10 @@ namespace FinanceTracker.Forms
             this.lstItems.FullRowSelect = true;
             this.lstItems.GridLines = true;
             this.lstItems.HideSelection = false;
-            this.lstItems.Location = new System.Drawing.Point(299, 148);
+            this.lstItems.Location = new System.Drawing.Point(299, 40);
             this.lstItems.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lstItems.Name = "lstItems";
-            this.lstItems.Size = new System.Drawing.Size(626, 501);
+            this.lstItems.Size = new System.Drawing.Size(622, 508);
             this.lstItems.TabIndex = 15;
             this.lstItems.TabStop = false;
             this.lstItems.UseCompatibleStateImageBehavior = false;
@@ -480,11 +481,22 @@ namespace FinanceTracker.Forms
             this.hdrDescription.Text = "Description";
             this.hdrDescription.Width = 275;
             // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblName.Location = new System.Drawing.Point(110, 40);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(78, 32);
+            this.lblName.TabIndex = 100;
+            this.lblName.Text = "Name";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(943, 722);
+            this.ClientSize = new System.Drawing.Size(939, 621);
+            this.Controls.Add(this.lblName);
             this.Controls.Add(this.lstItems);
             this.Controls.Add(this.btnProjection);
             this.Controls.Add(this.lblOtherAmt);
@@ -563,6 +575,7 @@ namespace FinanceTracker.Forms
         private Label lblEntertainment;
         private Label lblPhoneBill;
         private Label lblRent;
+        private Label lblName;
     }
 }
 
