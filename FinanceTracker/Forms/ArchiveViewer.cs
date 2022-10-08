@@ -9,11 +9,10 @@ namespace FinanceTracker.Forms
 {
     public partial class ArchiveViewer : Form
     {
-        private readonly List<ArchiveMonth> _info;
+        private readonly List<ArchiveMonth> _archivedMonths;
         private readonly List<List<Label>> _labels = new();
-        private List<double> _currData; 
-        private List<double> _projData;
-        private double _projTotal, _currTotal;
+        private ArchiveMonth _selectedMonth;
+        private List<double> _categorySums;
         private int _currColumn = -1;
 
         public ArchiveViewer(List<ArchiveMonth> arch)
@@ -53,9 +52,9 @@ namespace FinanceTracker.Forms
                 lblOtherAmt
             });
 
-            _info = arch;
-            foreach(var item in _info)
-                cboSelector.Items.Add(item.Name);
+            _archivedMonths = arch;
+            foreach(var month in _archivedMonths)
+                cboSelector.Items.Add(month.Name);
             cboSelector.SelectedItem = cboSelector.Items[0];
 
             cboSelector_SelectedIndexChanged(null, null);
@@ -65,15 +64,15 @@ namespace FinanceTracker.Forms
 
         private void PopulateList()
         {
-            var month = _info.Find(item => item.Name == (string)cboSelector.SelectedItem);
-            _projData = month.Projections;
-            _projTotal = month.ProjectionTotal;
-            _currTotal = month.FinanceEntriesTotal;
-            foreach (var item in month.FinanceEntries)
+            _selectedMonth = _archivedMonths.Find(item => item.Name == (string)cboSelector.SelectedItem);
+            _categorySums = Enumerable.Repeat(0.0, Categories.Length).ToList();
+
+            foreach (var entries in _selectedMonth.FinanceEntries)
             {
-                _currData[item.Category] += item.Amount;
-                UIHelper.LoadItem(lstItems, item);
+                _categorySums[entries.Category] += entries.Amount;
+                UIHelper.LoadItem(lstItems, entries);
             }
+
             Recalculate();
         }
 
@@ -85,23 +84,17 @@ namespace FinanceTracker.Forms
                 var i = 0;
                 foreach (var label in list)
                 {
-                    label.Text = _projData[i++].ToString(Formats.MoneyFormat);
+                    label.Text = _selectedMonth.Projections[i++].ToString(Formats.MoneyFormat);
                     if (j == 1)
-                        label.Text = _currData[i - 1].ToString(Formats.MoneyFormat);
+                        label.Text = _categorySums[i - 1].ToString(Formats.MoneyFormat);
                     else if (j == 2)
-                        UIHelper.LabelColor(_projData[i - 1] - _currData[i - 1], label);
+                        UIHelper.SetColoredText(_selectedMonth.Projections[i - 1] - _categorySums[i - 1], label);
                 }
                 j++;
             }
-            lblPTotalAmt.Text = _projTotal.ToString(Formats.MoneyFormat);
-            lblCTotalAmt.Text = _currTotal.ToString(Formats.MoneyFormat);
-            UIHelper.LabelColor(_projTotal - _currTotal, lblTotalAmt);
-        }
-
-        private void InitProjectionData()
-        {
-            _currData = Enumerable.Repeat(0.0, Categories.Length).ToList();
-            _projData = Enumerable.Repeat(0.0, Categories.Length).ToList();
+            lblPTotalAmt.Text = _selectedMonth.ProjectionTotal.ToString(Formats.MoneyFormat);
+            lblCTotalAmt.Text = _selectedMonth.FinanceEntriesTotal.ToString(Formats.MoneyFormat);
+            UIHelper.SetColoredText(_selectedMonth.GetSpendingTotal(), lblTotalAmt);
         }
 
         private void lstItems_ColumnSort(object sender, ColumnClickEventArgs e)
@@ -112,7 +105,6 @@ namespace FinanceTracker.Forms
         private void cboSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             UIHelper.ClearList(lstItems);
-            InitProjectionData();
             PopulateList();
         }
     }

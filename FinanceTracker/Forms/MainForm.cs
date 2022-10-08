@@ -187,7 +187,7 @@ namespace FinanceTracker.Forms
                 GetMonthName();
                 WriteActiveMonth();
 
-                MessageBox.Show($"Your total spending for the { monthArchive.Name } left you with: { monthArchive.GetSpending().ToString(Formats.MoneyFormat) }", "Monthly Total");
+                MessageBox.Show($"Your total spending for the { monthArchive.Name } left you with: { monthArchive.GetSpendingTotal().ToString(Formats.MoneyFormat) }", "Monthly Total");
             }
             else
             {
