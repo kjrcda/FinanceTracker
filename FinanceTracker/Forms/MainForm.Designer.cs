@@ -41,8 +41,9 @@ namespace FinanceTracker.Forms
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewMonthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeMonthNameToolStripItem = new System.Windows.Forms.ToolStripMenuItem();
             this.archiveMonthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewMonthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.totalsAcrossMonthsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -158,8 +159,9 @@ namespace FinanceTracker.Forms
             // optionsToolStripMenuItem1
             // 
             this.optionsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewMonthToolStripMenuItem,
+            this.changeMonthNameToolStripItem,
             this.archiveMonthToolStripMenuItem,
+            this.viewMonthToolStripMenuItem,
             this.totalsAcrossMonthsToolStripMenuItem,
             this.toolStripSeparator1,
             this.importToolStripMenuItem,
@@ -168,12 +170,12 @@ namespace FinanceTracker.Forms
             this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem1.Text = "Options";
             // 
-            // viewMonthToolStripMenuItem
+            // changeMonthNameToolStripItem
             // 
-            this.viewMonthToolStripMenuItem.Name = "viewMonthToolStripMenuItem";
-            this.viewMonthToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.viewMonthToolStripMenuItem.Text = "View Archive";
-            this.viewMonthToolStripMenuItem.Click += new System.EventHandler(this.viewArchiveToolStripMenuItem_Click);
+            this.changeMonthNameToolStripItem.Name = "changeMonthNameToolStripItem";
+            this.changeMonthNameToolStripItem.Size = new System.Drawing.Size(186, 22);
+            this.changeMonthNameToolStripItem.Text = "Change Name";
+            this.changeMonthNameToolStripItem.Click += new System.EventHandler(this.changeMonthNameToolStripMenuItem_Click);
             // 
             // archiveMonthToolStripMenuItem
             // 
@@ -181,6 +183,13 @@ namespace FinanceTracker.Forms
             this.archiveMonthToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.archiveMonthToolStripMenuItem.Text = "Archive Month";
             this.archiveMonthToolStripMenuItem.Click += new System.EventHandler(this.archiveMonthToolStripMenuItem_Click);
+            // 
+            // viewMonthToolStripMenuItem
+            // 
+            this.viewMonthToolStripMenuItem.Name = "viewMonthToolStripMenuItem";
+            this.viewMonthToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.viewMonthToolStripMenuItem.Text = "View Archive";
+            this.viewMonthToolStripMenuItem.Click += new System.EventHandler(this.viewArchiveToolStripMenuItem_Click);
             // 
             // totalsAcrossMonthsToolStripMenuItem
             // 
@@ -576,6 +585,7 @@ namespace FinanceTracker.Forms
         private Label lblPhoneBill;
         private Label lblRent;
         private Label lblName;
+        private ToolStripMenuItem changeMonthNameToolStripItem;
     }
 }
 

@@ -169,7 +169,7 @@ namespace FinanceTracker.Forms
             }
 
             ReadArchives();
-            var exists = _archived.Where(item => string.Compare(item.Name.ToUpper(), _activeMonth.Name, StringComparison.Ordinal) == 0);
+            var exists = _archived.Where(item => string.Compare(item.Name, _activeMonth.Name, StringComparison.OrdinalIgnoreCase) == 0);
 
             if (!exists.Any())
             {
@@ -231,6 +231,16 @@ namespace FinanceTracker.Forms
                 MessageBox.Show("There is no information archived", "No Archive");
             }
             _archived = null;
+        }
+
+        private void changeMonthNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using var input = new InputBox("Enter a new Name", "Please enter a new name for the current budget");
+            if (input.ShowDialog() == DialogResult.OK)
+            {
+                _activeMonth.Name = input.InputText;
+                lblName.Text = _activeMonth.Name;
+            }
         }
 
         private void totalsAcrossMonthsToolStripMenuItem_Click(object sender, EventArgs e)
