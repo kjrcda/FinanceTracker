@@ -54,10 +54,12 @@ namespace FinanceTracker.Forms
             });
 
             _archivedMonths = arch;
-            foreach(var month in _archivedMonths)
-                cboSelector.Items.Add(month.Name);
-            cboSelector.SelectedItem = cboSelector.Items[0];
 
+            foreach (var month in _archivedMonths)
+            {
+                cboSelector.Items.Add(month.Name);
+            }
+            cboSelector.SelectedItem = cboSelector.Items[0];
             cboSelector_SelectedIndexChanged(null, null);
 
             CenterToParent();

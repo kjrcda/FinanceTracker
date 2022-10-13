@@ -154,9 +154,10 @@ namespace FinanceTracker.Forms
             var diag = new SaveFileDialog {Filter = "ZIP File (*.zip)|*.zip", Title = "Save As", FilterIndex = 1};
             var result = diag.ShowDialog();
 
-            if (result == DialogResult.OK && !String.IsNullOrEmpty(diag.FileName))
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(diag.FileName))
             {
-                FileIO.BackupFiles(diag.FileName);
+                var numFiles = FileIO.BackupFiles(diag.FileName);
+                MessageBox.Show($"{numFiles} files were backed up successfully", "Backup Successful");
             }
         }
 
@@ -205,7 +206,8 @@ namespace FinanceTracker.Forms
 
             if (result == DialogResult.OK && !string.IsNullOrEmpty(diag.FileName))
             {
-                FileIO.ImportFiles(diag.FileName, ref _archived);
+                var numFiles = FileIO.ImportFiles(diag.FileName, ref _archived);
+                MessageBox.Show($"{numFiles} files were imported successfully", "Import Successful");
 
                 //now need to update the prorgam
                 lstItems.ClearList();
@@ -330,7 +332,7 @@ namespace FinanceTracker.Forms
         {
             try
             {
-                _activeMonth = FileIO.ReadFile(FileNames.SaveFile.Name, FileNames.SaveFile.DataType) ?? Activator.CreateInstance(FileNames.SaveFile.DataType);
+                _activeMonth = FileIO.ReadXmlFile<Month>(FileNames.SaveFile);
                 lblName.Text = _activeMonth.Name;
             }
             catch (Exception e)
@@ -345,7 +347,7 @@ namespace FinanceTracker.Forms
         {
             try
             {
-                _archived = FileIO.ReadFile(FileNames.ArchiveFile.Name, FileNames.ArchiveFile.DataType) ?? Activator.CreateInstance(FileNames.ArchiveFile.DataType);
+                _archived = FileIO.ReadXmlFile<List<ArchiveMonth>>(FileNames.ArchiveFile);
             }
             catch (Exception e)
             {
@@ -357,7 +359,7 @@ namespace FinanceTracker.Forms
         {
             try
             {
-                FileIO.WriteFile(FileNames.SaveFile.Name, FileNames.SaveFile.DataType, _activeMonth);
+                FileIO.WriteXmlFile(FileNames.SaveFile, _activeMonth);
             }
             catch (Exception e)
             {
@@ -368,7 +370,7 @@ namespace FinanceTracker.Forms
         private void WriteArchives()
         {
             try {
-                FileIO.WriteFile(FileNames.ArchiveFile.Name, FileNames.ArchiveFile.DataType, _archived);
+                FileIO.WriteXmlFile(FileNames.ArchiveFile, _archived);
             }
             catch (Exception e)
             {

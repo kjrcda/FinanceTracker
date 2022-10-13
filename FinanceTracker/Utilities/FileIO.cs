@@ -16,10 +16,14 @@ namespace FinanceTracker
     {
         private static bool EncryptionEnabled { get; } = false;
 
+        /// <summary>
+        /// Read the file contents dynamically and cast to type T
+        /// </summary>
+        /// <remarks>If nothing to read then return and empty object of type T</remarks>
         /// <exception cref="Exception">Couldn't read file properly</exception>
-        public static dynamic ReadFile(string name, Type objType)
+        public static T ReadXmlFile<T>(string name)
         {
-            dynamic list = null;
+            T list = default;
             try
             {
                 var xml = File.ReadAllText(Path.Combine(SaveLocation.Path, name));
@@ -32,7 +36,7 @@ namespace FinanceTracker
                 using (var xreader = XmlReader.Create(new StringReader(xml)))
                 {
                     xreader.MoveToContent();
-                    list = new XmlSerializer(objType).Deserialize(xreader);
+                    list = (T)new XmlSerializer(typeof(T)).Deserialize(xreader);
                 }
             }
             catch (FileNotFoundException)
@@ -58,17 +62,17 @@ namespace FinanceTracker
                 throw new Exception($"Error reading file {name}", e);
             }
 
-            return list;
+            return list ?? (T)Activator.CreateInstance(typeof(T));
         }
 
         /// <exception cref="Exception">Something went wrong writing to file</exception>
-        public static void WriteFile(string name, Type objType, dynamic list)
+        public static void WriteXmlFile<T>(string name, T list)
         {
             try
             {
                 using (var writer = new StringWriter())
                 {
-                    var serializer = new XmlSerializer(objType);
+                    var serializer = new XmlSerializer(typeof(T));
                     serializer.Serialize(writer, list);
                     var xml = writer.ToString();
 
@@ -86,9 +90,10 @@ namespace FinanceTracker
             }
         }
 
-        public static void BackupFiles(string filename)
+        public static int BackupFiles(string filename)
         {
             var zipFile = new FileStream(filename, FileMode.Create);
+            var numFilesBackedUp = 0;
 
             using (var archive = new ZipArchive(zipFile, ZipArchiveMode.Create))
             {
@@ -97,6 +102,7 @@ namespace FinanceTracker
                     try
                     {
                         archive.CreateEntryFromFile(Path.Combine(SaveLocation.Path, name), name);
+                        numFilesBackedUp++;
                     }
                     catch (Exception)
                     {
@@ -104,26 +110,30 @@ namespace FinanceTracker
                     }
                 }
             }
+
+            return numFilesBackedUp;
         }
 
-        public static void ImportFiles(string filename, ref List<ArchiveMonth> archived)
+        public static int ImportFiles(string filename, ref List<ArchiveMonth> archived)
         {
+            var numFilesImported = 0;
             //check to see if files are in the .zip, skip archFile though its not required
             var archive = ZipFile.OpenRead(filename);
-            var hasAll = FileNames.Names.Where(name => String.Compare(name, FileNames.ArchiveFile.Name, StringComparison.CurrentCultureIgnoreCase) != 0).All(
-                name => archive.Entries.Count(item => String.Equals(item.Name, name, StringComparison.CurrentCultureIgnoreCase)) == 1);
+            var hasAll = FileNames.Names
+                .Where(name => string.Compare(name, FileNames.ArchiveFile, StringComparison.CurrentCultureIgnoreCase) != 0)
+                .All(name => archive.Entries.Count(item => string.Equals(item.Name, name, StringComparison.CurrentCultureIgnoreCase)) == 1);
 
-            if (!hasAll) //if file or projfile missing, cancel
+            if (!hasAll) //if cuurent month file missing, cancel
             {
                 MessageBox.Show("The selected file does not have the required files", "Required Files Missing");
-                return;
+                return 0;
             }
 
             //otherwise import files
             foreach (var name in FileNames.Names)
             {
                 var fName = name;
-                var archiveEntry = archive.Entries.Where(item => String.Equals(item.Name, fName, StringComparison.CurrentCultureIgnoreCase));
+                var archiveEntry = archive.Entries.Where(item => string.Equals(item.Name, fName, StringComparison.CurrentCultureIgnoreCase));
                 var fNamePath = Path.Combine(SaveLocation.Path, fName);
 
                 var zipArchiveEntries = archiveEntry.ToList();
@@ -131,12 +141,19 @@ namespace FinanceTracker
                 {
                     MessageBox.Show("No file " + fName + " to be found. It will not be imported.\nThe current archive file will be deleted.", "File Not Found");
                     if (File.Exists(fNamePath))
+                    {
                         File.Delete(fNamePath);
+                    }
                     archived = new List<ArchiveMonth>();
                 }
                 else
+                {
                     zipArchiveEntries.First().ExtractToFile(fNamePath, true);
+                    numFilesImported++;
+                }
             }
+
+            return numFilesImported;
         }
 
     }
