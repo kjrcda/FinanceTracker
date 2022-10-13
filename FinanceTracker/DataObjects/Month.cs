@@ -5,8 +5,8 @@ namespace FinanceTracker.DataObjects
 {
     public class Month
     {
-        public Guid Identifier = Guid.NewGuid();
-        public string Name = "";
+        public Guid Identifier { get; } = Guid.NewGuid();
+        public string Name { get; set; } = "";
         public List<double> Projections = new();
         public List<FinanceEntry> FinanceEntries = new();
 

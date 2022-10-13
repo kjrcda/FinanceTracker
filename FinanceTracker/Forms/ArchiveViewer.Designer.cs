@@ -167,7 +167,6 @@ namespace FinanceTracker.Forms
             this.cboSelector.Size = new System.Drawing.Size(262, 26);
             this.cboSelector.Sorted = true;
             this.cboSelector.TabIndex = 18;
-            this.cboSelector.SelectedIndexChanged += new System.EventHandler(this.cboSelector_SelectedIndexChanged);
             this.cboSelector.KeyDown += new System.Windows.Forms.KeyEventHandler(UIHelper.CheckEscape);
             // 
             // lblEntry

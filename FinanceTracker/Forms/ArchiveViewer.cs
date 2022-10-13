@@ -55,19 +55,19 @@ namespace FinanceTracker.Forms
 
             _archivedMonths = arch;
 
-            foreach (var month in _archivedMonths)
-            {
-                cboSelector.Items.Add(month.Name);
-            }
+            cboSelector.DisplayMember = nameof(ArchiveMonth.Name);
+            cboSelector.DataSource = _archivedMonths;
+
+            cboSelector.SelectedIndexChanged += cboSelector_SelectedIndexChanged;
             cboSelector.SelectedItem = cboSelector.Items[0];
             cboSelector_SelectedIndexChanged(null, null);
 
             CenterToParent();
         }
 
-        private void PopulateList()
+        private void PopulateList(Guid identifier)
         {
-            _selectedMonth = _archivedMonths.Find(item => item.Name == (string)cboSelector.SelectedItem);
+            _selectedMonth = _archivedMonths.Find(month => month.Identifier == identifier);
             _categorySums = Enumerable.Repeat(0.0, Categories.Length).ToList();
 
             foreach (var entry in _selectedMonth.FinanceEntries)
@@ -107,8 +107,10 @@ namespace FinanceTracker.Forms
 
         private void cboSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var month = (ArchiveMonth)cboSelector.SelectedItem;
+
             lstItems.ClearList();
-            PopulateList();
+            PopulateList(month.Identifier);
         }
     }
 }
