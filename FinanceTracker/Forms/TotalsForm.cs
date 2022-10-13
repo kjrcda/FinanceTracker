@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
+using FinanceTracker.Extensions;
 
 namespace FinanceTracker.Forms
 {
@@ -28,7 +29,7 @@ namespace FinanceTracker.Forms
                 _total += entry.ProjectionTotal-entry.FinanceEntriesTotal;
             else
                 _total -= entry.ProjectionTotal - entry.FinanceEntriesTotal;
-            UIHelper.LabelColor(_total, lblTotal);
+            lblTotal.SetBalance(_total);
         }
     }
 }

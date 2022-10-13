@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
+using FinanceTracker.Extensions;
 using FinanceTracker.Resources;
 
 namespace FinanceTracker.Forms
@@ -67,10 +68,10 @@ namespace FinanceTracker.Forms
             _selectedMonth = _archivedMonths.Find(item => item.Name == (string)cboSelector.SelectedItem);
             _categorySums = Enumerable.Repeat(0.0, Categories.Length).ToList();
 
-            foreach (var entries in _selectedMonth.FinanceEntries)
+            foreach (var entry in _selectedMonth.FinanceEntries)
             {
-                _categorySums[entries.Category] += entries.Amount;
-                UIHelper.LoadItem(lstItems, entries);
+                _categorySums[entry.Category] += entry.Amount;
+                lstItems.LoadItem(entry);
             }
 
             Recalculate();
@@ -88,13 +89,13 @@ namespace FinanceTracker.Forms
                     if (j == 1)
                         label.Text = _categorySums[i - 1].ToString(Formats.MoneyFormat);
                     else if (j == 2)
-                        UIHelper.SetColoredText(_selectedMonth.Projections[i - 1] - _categorySums[i - 1], label);
+                        label.SetBalance(_selectedMonth.Projections[i - 1] - _categorySums[i - 1]);
                 }
                 j++;
             }
             lblPTotalAmt.Text = _selectedMonth.ProjectionTotal.ToString(Formats.MoneyFormat);
             lblCTotalAmt.Text = _selectedMonth.FinanceEntriesTotal.ToString(Formats.MoneyFormat);
-            UIHelper.SetColoredText(_selectedMonth.GetSpendingTotal(), lblTotalAmt);
+            lblTotalAmt.SetBalance(_selectedMonth.GetSpendingTotal());
         }
 
         private void lstItems_ColumnSort(object sender, ColumnClickEventArgs e)
@@ -104,7 +105,7 @@ namespace FinanceTracker.Forms
 
         private void cboSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UIHelper.ClearList(lstItems);
+            lstItems.ClearList();
             PopulateList();
         }
     }

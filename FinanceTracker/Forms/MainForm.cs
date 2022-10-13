@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
+using FinanceTracker.Extensions;
 using FinanceTracker.Resources;
 
 namespace FinanceTracker.Forms
@@ -63,7 +64,7 @@ namespace FinanceTracker.Forms
                 {
                     var entry = form.Entry;
                     _activeMonth.FinanceEntries.Add(entry);
-                    UIHelper.LoadItem(lstItems, entry);
+                    lstItems.LoadItem(entry);
                     _currData[entry.Category] += entry.Amount;
                     Recalculate();
                 }
@@ -177,7 +178,7 @@ namespace FinanceTracker.Forms
                 _archived.Add(monthArchive);
                 WriteArchives();
 
-                UIHelper.ClearList(lstItems);
+                lstItems.ClearList();
                 _activeMonth = new Month();
                 Utilities.LoadID(_activeMonth.FinanceEntries);
 
@@ -207,7 +208,7 @@ namespace FinanceTracker.Forms
                 FileIO.ImportFiles(diag.FileName, ref _archived);
 
                 //now need to update the prorgam
-                UIHelper.ClearList(lstItems);
+                lstItems.ClearList();
                 _currData = new List<double>();
 
                 ReadActiveMonth();
@@ -277,7 +278,7 @@ namespace FinanceTracker.Forms
                 var row = _activeMonth.FinanceEntries.Find(item => item.ID == Convert.ToInt32(lstItems.SelectedItems[0].SubItems[0].Text));
                 var entry = new FinanceEntry(row.Category, row.Amount, row.Place, row.Description);
                 _activeMonth.FinanceEntries.Add(entry);
-                UIHelper.LoadItem(lstItems, entry);
+                lstItems.LoadItem(entry);
                 _currData[entry.Category] += entry.Amount;
                 Recalculate();
             }
@@ -287,7 +288,7 @@ namespace FinanceTracker.Forms
         {
             var i = 0;
             foreach (var label in _labels)
-                UIHelper.LabelColor(_activeMonth.Projections[i] - _currData[i++], label);
+                label.SetBalance(_activeMonth.Projections[i] - _currData[i++]);
         }
 
         private void InitProjectionData()
@@ -303,7 +304,7 @@ namespace FinanceTracker.Forms
             foreach (var item in _activeMonth.FinanceEntries)
             {
                 _currData[item.Category] += item.Amount;
-                UIHelper.LoadItem(lstItems, item);
+                lstItems.LoadItem(item);
             }
             Recalculate();
         }
