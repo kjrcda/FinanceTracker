@@ -13,7 +13,7 @@ namespace FinanceTracker.Forms
         private Month _activeMonth { get; set; }
         private List<double> _currData { get; set; } = new();
         private int _currColumn { get; set; } = -1;
-        private List<ArchiveMonth> _archived;// { get; set; }
+        private List<ArchiveMonth> _archived { get; set; }
 
         private List<Label> _labels { get; } = new();
 
@@ -32,7 +32,10 @@ namespace FinanceTracker.Forms
 
             ReadActiveMonth();
             InitProjectionData();
-            GetMonthName();
+            while (string.IsNullOrWhiteSpace(_activeMonth.Name))
+            {
+                GetMonthName();
+            }
             PopulateList();
 
             CenterToScreen();
@@ -176,6 +179,8 @@ namespace FinanceTracker.Forms
             if (!exists.Any())
             {
                 var monthArchive = new ArchiveMonth(_activeMonth);
+                MessageBox.Show($"Your total spending for the { monthArchive.Name } left you with: { monthArchive.GetSpendingTotal().ToString(Formats.MoneyFormat) }", "Monthly Total");
+
                 _archived.Add(monthArchive);
                 WriteArchives();
 
@@ -185,11 +190,13 @@ namespace FinanceTracker.Forms
 
                 _activeMonth.Projections = monthArchive.Projections;
                 InitProjectionData();
-                Recalculate();
-                GetMonthName();
-                WriteActiveMonth();
 
-                MessageBox.Show($"Your total spending for the { monthArchive.Name } left you with: { monthArchive.GetSpendingTotal().ToString(Formats.MoneyFormat) }", "Monthly Total");
+                Recalculate();
+                while (string.IsNullOrWhiteSpace(_activeMonth.Name))
+                {
+                    GetMonthName();
+                }
+                WriteActiveMonth();
             }
             else
             {
@@ -206,7 +213,7 @@ namespace FinanceTracker.Forms
 
             if (result == DialogResult.OK && !string.IsNullOrEmpty(diag.FileName))
             {
-                var numFiles = FileIO.ImportFiles(diag.FileName, ref _archived);
+                var numFiles = FileIO.ImportFiles(diag.FileName);
                 MessageBox.Show($"{numFiles} files were imported successfully", "Import Successful");
 
                 //now need to update the prorgam
@@ -238,12 +245,7 @@ namespace FinanceTracker.Forms
 
         private void changeMonthNameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using var input = new InputBox("Enter a new Name", "Please enter a new name for the current budget");
-            if (input.ShowDialog() == DialogResult.OK)
-            {
-                _activeMonth.Name = input.InputText;
-                lblName.Text = _activeMonth.Name;
-            }
+            GetMonthName();
         }
 
         private void totalsAcrossMonthsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -313,14 +315,11 @@ namespace FinanceTracker.Forms
 
         private void GetMonthName()
         {
-            while (string.IsNullOrWhiteSpace(_activeMonth.Name))
+            using var input = new InputBox("Enter a Name", "Please enter a new name for the current budget");
+            if (input.ShowDialog() == DialogResult.OK)
             {
-                using var input = new InputBox("Enter a Name", "Please enter the month you are currently budgeting for");
-                if (input.ShowDialog() == DialogResult.OK)
-                {
-                    _activeMonth.Name = input.InputText;
-                    lblName.Text = _activeMonth.Name;
-                }
+                _activeMonth.Name = input.InputText;
+                lblName.Text = _activeMonth.Name;
             }
         }
 

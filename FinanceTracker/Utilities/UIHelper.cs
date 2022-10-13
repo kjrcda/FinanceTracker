@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
-using FinanceTracker.DataObjects;
-using FinanceTracker.Resources;
 
 namespace FinanceTracker
 {
     public static  class UIHelper
     {
-
-#region PublicFunctions
-
         public static void CheckEscape(object sender, KeyEventArgs e)
         {
             var form = ((Control) sender).FindForm();
@@ -40,7 +35,5 @@ namespace FinanceTracker
         {
             ((Button)sender).Parent.Dispose();
         }
-
-#endregion
     }
 }

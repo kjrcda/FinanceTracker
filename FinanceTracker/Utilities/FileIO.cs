@@ -114,7 +114,7 @@ namespace FinanceTracker
             return numFilesBackedUp;
         }
 
-        public static int ImportFiles(string filename, ref List<ArchiveMonth> archived)
+        public static int ImportFiles(string filename)
         {
             var numFilesImported = 0;
             //check to see if files are in the .zip, skip archFile though its not required
@@ -144,7 +144,6 @@ namespace FinanceTracker
                     {
                         File.Delete(fNamePath);
                     }
-                    archived = new List<ArchiveMonth>();
                 }
                 else
                 {
