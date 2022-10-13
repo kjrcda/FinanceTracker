@@ -58,10 +58,6 @@ namespace FinanceTracker.Forms
             cboSelector.DisplayMember = nameof(ArchiveMonth.Name);
             cboSelector.DataSource = _archivedMonths;
 
-            cboSelector.SelectedIndexChanged += cboSelector_SelectedIndexChanged;
-            cboSelector.SelectedItem = cboSelector.Items[0];
-            cboSelector_SelectedIndexChanged(null, null);
-
             CenterToParent();
         }
 
