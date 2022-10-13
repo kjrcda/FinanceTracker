@@ -430,7 +430,7 @@ namespace FinanceTracker.Forms
             // 
             // btnProjection
             // 
-            this.btnProjection.Location = new System.Drawing.Point(87, 124);
+            this.btnProjection.Location = new System.Drawing.Point(161, 567);
             this.btnProjection.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnProjection.Name = "btnProjection";
             this.btnProjection.Size = new System.Drawing.Size(135, 37);
@@ -494,11 +494,14 @@ namespace FinanceTracker.Forms
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblName.Location = new System.Drawing.Point(110, 40);
+            this.lblName.Location = new System.Drawing.Point(18, 40);
+            this.lblName.MaximumSize = new System.Drawing.Size(263, 250);
+            this.lblName.MinimumSize = new System.Drawing.Size(250, 0);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(78, 32);
+            this.lblName.Size = new System.Drawing.Size(250, 32);
             this.lblName.TabIndex = 100;
             this.lblName.Text = "Name";
+            this.lblName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // MainForm
             // 
