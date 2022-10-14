@@ -41,8 +41,9 @@ namespace FinanceTracker.Forms
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeMonthNameToolStripItem = new System.Windows.Forms.ToolStripMenuItem();
             this.archiveMonthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeMonthNameToolStripItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.viewMonthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.totalsAcrossMonthsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -159,8 +160,9 @@ namespace FinanceTracker.Forms
             // optionsToolStripMenuItem1
             // 
             this.optionsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.changeMonthNameToolStripItem,
             this.archiveMonthToolStripMenuItem,
+            this.changeMonthNameToolStripItem,
+            this.toolStripSeparator2,
             this.viewMonthToolStripMenuItem,
             this.totalsAcrossMonthsToolStripMenuItem,
             this.toolStripSeparator1,
@@ -170,13 +172,6 @@ namespace FinanceTracker.Forms
             this.optionsToolStripMenuItem1.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem1.Text = "Options";
             // 
-            // changeMonthNameToolStripItem
-            // 
-            this.changeMonthNameToolStripItem.Name = "changeMonthNameToolStripItem";
-            this.changeMonthNameToolStripItem.Size = new System.Drawing.Size(186, 22);
-            this.changeMonthNameToolStripItem.Text = "Change Name";
-            this.changeMonthNameToolStripItem.Click += new System.EventHandler(this.changeMonthNameToolStripMenuItem_Click);
-            // 
             // archiveMonthToolStripMenuItem
             // 
             this.archiveMonthToolStripMenuItem.Name = "archiveMonthToolStripMenuItem";
@@ -184,11 +179,23 @@ namespace FinanceTracker.Forms
             this.archiveMonthToolStripMenuItem.Text = "Archive Month";
             this.archiveMonthToolStripMenuItem.Click += new System.EventHandler(this.archiveMonthToolStripMenuItem_Click);
             // 
+            // changeMonthNameToolStripItem
+            // 
+            this.changeMonthNameToolStripItem.Name = "changeMonthNameToolStripItem";
+            this.changeMonthNameToolStripItem.Size = new System.Drawing.Size(186, 22);
+            this.changeMonthNameToolStripItem.Text = "Change Name";
+            this.changeMonthNameToolStripItem.Click += new System.EventHandler(this.changeMonthNameToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(183, 6);
+            // 
             // viewMonthToolStripMenuItem
             // 
             this.viewMonthToolStripMenuItem.Name = "viewMonthToolStripMenuItem";
             this.viewMonthToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.viewMonthToolStripMenuItem.Text = "View Archive";
+            this.viewMonthToolStripMenuItem.Text = "View Archives";
             this.viewMonthToolStripMenuItem.Click += new System.EventHandler(this.viewArchiveToolStripMenuItem_Click);
             // 
             // totalsAcrossMonthsToolStripMenuItem
@@ -450,6 +457,7 @@ namespace FinanceTracker.Forms
             this.hdrAmount,
             this.hdrPlace,
             this.hdrDescription});
+            this.lstItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lstItems.FullRowSelect = true;
             this.lstItems.GridLines = true;
             this.lstItems.HideSelection = false;
@@ -589,6 +597,7 @@ namespace FinanceTracker.Forms
         private Label lblRent;
         private Label lblName;
         private ToolStripMenuItem changeMonthNameToolStripItem;
+        private ToolStripSeparator toolStripSeparator2;
     }
 }
 
