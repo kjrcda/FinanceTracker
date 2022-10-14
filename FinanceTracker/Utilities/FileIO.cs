@@ -26,7 +26,7 @@ namespace FinanceTracker
             T list = default;
             try
             {
-                var xml = File.ReadAllText(Path.Combine(SaveLocation.Path, name));
+                var xml = File.ReadAllText(Path.Combine(SaveLocation.DataPath, name));
 
                 if (EncryptionEnabled)
                 {
@@ -45,17 +45,17 @@ namespace FinanceTracker
             }
             catch (DirectoryNotFoundException)
             {
-                Directory.CreateDirectory(SaveLocation.Path);
+                Directory.CreateDirectory(SaveLocation.DataPath);
             }
             catch (XmlException)
             {
                 //Chances are there is a discrepancy between encrypted and non encrypted files
-                File.Copy(Path.Combine(SaveLocation.Path, name), Path.Combine(SaveLocation.Path, name + "_backup"), true);
+                File.Copy(Path.Combine(SaveLocation.DataPath, name), Path.Combine(SaveLocation.DataPath, name + "_backup"), true);
             }
             catch (FormatException)
             {
                 //Chances are there is a discrepancy between encrypted and non encrypted files
-                File.Copy(Path.Combine(SaveLocation.Path, name), Path.Combine(SaveLocation.Path, name + "_backup"), true);
+                File.Copy(Path.Combine(SaveLocation.DataPath, name), Path.Combine(SaveLocation.DataPath, name + "_backup"), true);
             }
             catch (Exception e)
             {
@@ -81,7 +81,7 @@ namespace FinanceTracker
                         xml = Encryption.Encryption.Encrypt(xml, Encryption.Encryption.Crypto, Encryption.Encryption.Vector);
                     }
 
-                    File.WriteAllText(Path.Combine(SaveLocation.Path, name), xml);
+                    File.WriteAllText(Path.Combine(SaveLocation.DataPath, name), xml);
                 }
             }
             catch (Exception e)
@@ -101,7 +101,7 @@ namespace FinanceTracker
                 {
                     try
                     {
-                        archive.CreateEntryFromFile(Path.Combine(SaveLocation.Path, name), name);
+                        archive.CreateEntryFromFile(Path.Combine(SaveLocation.DataPath, name), name);
                         numFilesBackedUp++;
                     }
                     catch (Exception)
@@ -134,7 +134,7 @@ namespace FinanceTracker
             {
                 var fName = name;
                 var archiveEntry = archive.Entries.Where(item => string.Equals(item.Name, fName, StringComparison.CurrentCultureIgnoreCase));
-                var fNamePath = Path.Combine(SaveLocation.Path, fName);
+                var fNamePath = Path.Combine(SaveLocation.DataPath, fName);
 
                 var zipArchiveEntries = archiveEntry.ToList();
                 if (!zipArchiveEntries.Any()) //will only ever be archives
