@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
+using FinanceTracker.Extensions;
 using FinanceTracker.Resources;
 
 namespace FinanceTracker.Forms
 {
     public partial class MainForm : Form
     {
-        private List<FinanceEntry> _listFinances;
-        private List<ArchiveMonth> _archived;
-        private List<double> _projData;
-        private List<double> _currData = new();
-        private int _currColumn = -1;
+        private Month _activeMonth { get; set; }
+        private List<double> _currData { get; set; } = new();
+        private int _currColumn { get; set; } = -1;
+        private List<ArchiveMonth> _archived { get; set; }
 
         private List<Label> _labels { get; } = new();
 
@@ -21,8 +21,6 @@ namespace FinanceTracker.Forms
         public MainForm()
         {
             InitializeComponent();
-
-            ReadXML();
 
             _labels.Add(lblRentAmt);
             _labels.Add(lblPhoneBillAmt);
@@ -32,8 +30,12 @@ namespace FinanceTracker.Forms
             _labels.Add(lblEatOutAmt);
             _labels.Add(lblOtherAmt);
 
+            ReadActiveMonth();
             InitProjectionData();
-            Utilities.LoadID(_listFinances);
+            while (string.IsNullOrWhiteSpace(_activeMonth.Name))
+            {
+                GetMonthName();
+            }
             PopulateList();
 
             CenterToScreen();
@@ -42,7 +44,7 @@ namespace FinanceTracker.Forms
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
-            WriteXML();
+            WriteActiveMonth();
         }
 
         private void TabClicked(object sender, EventArgs e)
@@ -64,8 +66,8 @@ namespace FinanceTracker.Forms
                 if(result == DialogResult.OK)
                 {
                     var entry = form.Entry;
-                    _listFinances.Add(entry);
-                    UIHelper.LoadItem(lstItems, entry);
+                    _activeMonth.FinanceEntries.Add(entry);
+                    lstItems.LoadItem(entry);
                     _currData[entry.Category] += entry.Amount;
                     Recalculate();
                 }
@@ -79,14 +81,14 @@ namespace FinanceTracker.Forms
                 using (var form = new NewForm("Edit"))
                 {
                     var row = lstItems.SelectedItems[0];
-                    var entry = _listFinances.Find(item => item.ID == Convert.ToInt32(row.SubItems[0].Text));
-                    var index = _listFinances.IndexOf(entry);
+                    var entry = _activeMonth.FinanceEntries.Find(item => item.ID == Convert.ToInt32(row.SubItems[0].Text));
+                    var index = _activeMonth.FinanceEntries.IndexOf(entry);
                     _currData[entry.Category] -= entry.Amount;
                     form.Entry = entry;
                     var result = form.ShowDialog();
                     if (result == DialogResult.OK)
                     {
-                        _listFinances[index] = form.Entry;
+                        _activeMonth.FinanceEntries[index] = form.Entry;
                         row.SubItems[1].Text = Categories.Get(form.Entry.Category);
                         row.SubItems[2].Text = form.Entry.Amount.ToString(Formats.MoneyFormat);
                         row.SubItems[3].Text = form.Entry.Place;
@@ -110,7 +112,7 @@ namespace FinanceTracker.Forms
 
         private void btnProjection_Click(object sender, EventArgs e)
         {
-            using (var form = new MonthlyProjection(_projData)) //Saves data (reference passed?)
+            using (var form = new MonthlyProjection(_activeMonth.Projections)) //Saves data (reference passed?)
             {
                 var result = form.ShowDialog();
                 if(result == DialogResult.OK)
@@ -131,8 +133,8 @@ namespace FinanceTracker.Forms
                 {
                     foreach (ListViewItem row in lstItems.SelectedItems)
                     {
-                        var deleteItem = _listFinances.Find(item => item.ID == Convert.ToInt32(row.SubItems[0].Text));
-                        _listFinances.Remove(deleteItem);
+                        var deleteItem = _activeMonth.FinanceEntries.Find(item => item.ID == Convert.ToInt32(row.SubItems[0].Text));
+                        _activeMonth.FinanceEntries.Remove(deleteItem);
                         lstItems.Items.Remove(row);
                         _currData[deleteItem.Category] -= deleteItem.Amount;
                     }
@@ -150,50 +152,58 @@ namespace FinanceTracker.Forms
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WriteXML();
+            WriteActiveMonth();
 
             var diag = new SaveFileDialog {Filter = "ZIP File (*.zip)|*.zip", Title = "Save As", FilterIndex = 1};
             var result = diag.ShowDialog();
 
-            if (result == DialogResult.OK && !String.IsNullOrEmpty(diag.FileName))
+            if (result == DialogResult.OK && !string.IsNullOrEmpty(diag.FileName))
             {
-                FileIO.BackupFiles(diag.FileName);
+                var numFiles = FileIO.BackupFiles(diag.FileName);
+                MessageBox.Show($"{numFiles} files were backed up successfully", "Backup Successful");
             }
         }
 
         private void archiveMonthToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var input = new InputBox("Enter a Month", "Please enter the month you are archiving"))
+            var result = MessageBox.Show($"Are you sure you want to finish and archive {_activeMonth.Name}", "Confirm Archival", MessageBoxButtons.OKCancel);
+
+            if (result != DialogResult.OK)
             {
-                string inputtxt;
-                if (input.ShowDialog() == DialogResult.OK)
-                    inputtxt = input.InputText.ToUpper();
-                else
-                    return;
-
-                ReadArchives();
-                var exists = _archived.Where(item => String.Compare(item.MonthName.ToUpper(), inputtxt, StringComparison.Ordinal) == 0);
-
-                if (!exists.Any())
-                {
-                    double projTotal = _projData.Sum();
-                    double currTotal = _currData.Sum();
-                    _archived.Add(new ArchiveMonth(input.InputText, _projData, projTotal, _listFinances, currTotal));
-                    WriteArchives();
-
-                    UIHelper.ClearList(lstItems);
-                    _listFinances = new List<FinanceEntry>();
-                    _currData = new List<double>();
-                    InitProjectionData();
-                    Utilities.LoadID(_listFinances);
-                    WriteXML();
-                    Recalculate();
-                    MessageBox.Show("Your total spending for the month left you with: " + (projTotal - currTotal).ToString(Formats.MoneyFormat), "Monthly Total");
-                }
-                else
-                    MessageBox.Show("Error: There is already an entry with the same name","Error");
-                _archived = null;
+                return;
             }
+
+            ReadArchives();
+            var exists = _archived.Where(item => string.Compare(item.Name, _activeMonth.Name, StringComparison.OrdinalIgnoreCase) == 0);
+
+            if (!exists.Any())
+            {
+                var monthArchive = new ArchiveMonth(_activeMonth);
+                MessageBox.Show($"Your total spending for the { monthArchive.Name } left you with: { monthArchive.GetSpendingTotal().ToString(Formats.MoneyFormat) }", "Monthly Total");
+
+                _archived.Add(monthArchive);
+                WriteArchives();
+
+                lstItems.ClearList();
+                _activeMonth = new Month();
+                Utilities.LoadID(_activeMonth.FinanceEntries);
+
+                _activeMonth.Projections = monthArchive.Projections;
+                InitProjectionData();
+
+                Recalculate();
+                while (string.IsNullOrWhiteSpace(_activeMonth.Name))
+                {
+                    GetMonthName();
+                }
+                WriteActiveMonth();
+            }
+            else
+            {
+                MessageBox.Show("Error: There is already an entry with the same name", "Error");
+            }
+
+            _archived = null;
         }
 
         private void importToolStripMenuItem_Click(object sender, EventArgs e)
@@ -203,13 +213,14 @@ namespace FinanceTracker.Forms
 
             if (result == DialogResult.OK && !string.IsNullOrEmpty(diag.FileName))
             {
-                FileIO.ImportFiles(diag.FileName, ref _archived);
+                var numFiles = FileIO.ImportFiles(diag.FileName);
+                MessageBox.Show($"{numFiles} files were imported successfully", "Import Successful");
 
                 //now need to update the prorgam
-                UIHelper.ClearList(lstItems);
+                lstItems.ClearList();
                 _currData = new List<double>();
-                ReadXML();
-                Utilities.LoadID(_listFinances);
+
+                ReadActiveMonth();
                 InitProjectionData();
                 PopulateList();
             }
@@ -218,7 +229,7 @@ namespace FinanceTracker.Forms
         private void viewArchiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReadArchives();
-            if(_archived.Count != 0)
+            if (_archived.Count != 0)
             {
                 using (var form = new ArchiveViewer(_archived))
                 {
@@ -226,8 +237,15 @@ namespace FinanceTracker.Forms
                 }
             }
             else
+            {
                 MessageBox.Show("There is no information archived", "No Archive");
+            }
             _archived = null;
+        }
+
+        private void changeMonthNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetMonthName();
         }
 
         private void totalsAcrossMonthsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -261,10 +279,10 @@ namespace FinanceTracker.Forms
                 MessageBox.Show("You must select and item to copy", "Select Item");
             else
             {
-                var row = _listFinances.Find(item => item.ID == Convert.ToInt32(lstItems.SelectedItems[0].SubItems[0].Text));
+                var row = _activeMonth.FinanceEntries.Find(item => item.ID == Convert.ToInt32(lstItems.SelectedItems[0].SubItems[0].Text));
                 var entry = new FinanceEntry(row.Category, row.Amount, row.Place, row.Description);
-                _listFinances.Add(entry);
-                UIHelper.LoadItem(lstItems, entry);
+                _activeMonth.FinanceEntries.Add(entry);
+                lstItems.LoadItem(entry);
                 _currData[entry.Category] += entry.Amount;
                 Recalculate();
             }
@@ -274,60 +292,61 @@ namespace FinanceTracker.Forms
         {
             var i = 0;
             foreach (var label in _labels)
-                UIHelper.LabelColor(_projData[i] - _currData[i++], label);
+                label.SetBalance(_activeMonth.Projections[i] - _currData[i++]);
         }
 
         private void InitProjectionData()
         {
-            if (_projData.Count == 0)
-                _projData = Enumerable.Repeat(0.0, Categories.Length).ToList();
+            if (_activeMonth.Projections.Count == 0)
+                _activeMonth.Projections = Enumerable.Repeat(0.0, Categories.Length).ToList();
 
             _currData = Enumerable.Repeat(0.0, Categories.Length).ToList();
         }
 
         private void PopulateList()
         {
-            foreach (var item in _listFinances)
+            foreach (var item in _activeMonth.FinanceEntries)
             {
                 _currData[item.Category] += item.Amount;
-                UIHelper.LoadItem(lstItems, item);
+                lstItems.LoadItem(item);
             }
             Recalculate();
+        }
+
+        private void GetMonthName()
+        {
+            using var input = new InputBox("Enter a Name", "Please enter a new name for the current budget");
+            if (input.ShowDialog() == DialogResult.OK)
+            {
+                _activeMonth.Name = input.InputText;
+                lblName.Text = _activeMonth.Name;
+            }
         }
 
 #endregion
 
 #region FileLoadAndSave
 
-        private void ReadXML()
+        private void ReadActiveMonth()
         {
-            foreach (var pair in FileNames.Pairs)
+            try
             {
-                try
-                {
-                    if (pair.Key == FileNames.SaveFile.Name)
-                    {
-                        _listFinances = FileIO.ReadFile(pair.Key, pair.Value) ?? Activator.CreateInstance(pair.Value);
-                    }
-                    else if (pair.Key == FileNames.ProjectionFile.Name)
-                    {
-                        _projData = FileIO.ReadFile(pair.Key, pair.Value) ?? Activator.CreateInstance(pair.Value);
-                    }
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show($"{e.Message}\n\n{e.InnerException?.Message}" , "Error Reading File");
-                }
+                _activeMonth = FileIO.ReadXmlFile<Month>(FileNames.SaveFile);
+                lblName.Text = _activeMonth.Name;
             }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e.Message}\n\n{e.InnerException?.Message}" , "Error Reading File");
+            }
+
+            Utilities.LoadID(_activeMonth.FinanceEntries);
         }
 
         private void ReadArchives()
         {
             try
             {
-                _archived = FileIO.ReadFile(
-                    FileNames.ArchiveFile.Name, FileNames.ArchiveFile.DataType) ?? Activator.CreateInstance(FileNames.ArchiveFile.DataType
-                );
+                _archived = FileIO.ReadXmlFile<List<ArchiveMonth>>(FileNames.ArchiveFile);
             }
             catch (Exception e)
             {
@@ -335,32 +354,22 @@ namespace FinanceTracker.Forms
             }
         }
 
-        private void WriteXML()
+        private void WriteActiveMonth()
         {
-            foreach (var pair in FileNames.Pairs)
+            try
             {
-                try
-                {
-                    if (pair.Key == FileNames.SaveFile.Name)
-                    {
-                        FileIO.WriteFile(pair.Key, pair.Value, _listFinances);
-                    }
-                    else if (pair.Key == FileNames.ProjectionFile.Name)
-                    {
-                        FileIO.WriteFile(pair.Key, pair.Value, _projData);
-                    }
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show($"{e.Message}\n\n{e.InnerException?.Message}", "Error Saving File");
-                }
+                FileIO.WriteXmlFile(FileNames.SaveFile, _activeMonth);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e.Message}\n\n{e.InnerException?.Message}", "Error Saving File");
             }
         }
 
         private void WriteArchives()
         {
             try {
-                FileIO.WriteFile(FileNames.ArchiveFile.Name, FileNames.ArchiveFile.DataType, _archived);
+                FileIO.WriteXmlFile(FileNames.ArchiveFile, _archived);
             }
             catch (Exception e)
             {

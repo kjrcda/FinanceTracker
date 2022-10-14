@@ -1,18 +1,24 @@
-﻿namespace FileInfo
+﻿using System;
+using System.IO;
+
+namespace FileInfo
 {
     public static class SaveLocation
     {
-        public static string FolderName { get; } = "FinanceTracker";
+        public static string FolderName => "FinanceTracker";
+        public static string LocalPath => ".";
 
-#if DEBUG
-        public static string Path {
+        public static string ApplicationPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), FolderName);
+
+        public static string DataPath
+        {
             get {
-                var currentLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                return System.IO.Path.Combine(System.IO.Path.GetDirectoryName(currentLocation), FolderName);
+#if DEBUG
+                return LocalPath;
+#else
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), FolderName);
+#endif
             }
         }
-#else
-        public static string Path { get; } = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), FolderName);
-#endif
     }
 }

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
+using FinanceTracker.Extensions;
 using FinanceTracker.Resources;
 
 namespace FinanceTracker.Forms
 {
     public partial class ArchiveViewer : Form
     {
-        private readonly List<ArchiveMonth> _info;
+        private readonly List<ArchiveMonth> _archivedMonths;
         private readonly List<List<Label>> _labels = new();
-        private List<double> _currData; 
-        private List<double> _projData;
-        private double _projTotal, _currTotal;
+        private ArchiveMonth _selectedMonth;
+        private List<double> _categorySums;
         private int _currColumn = -1;
 
         public ArchiveViewer(List<ArchiveMonth> arch)
@@ -53,27 +53,25 @@ namespace FinanceTracker.Forms
                 lblOtherAmt
             });
 
-            _info = arch;
-            foreach(var item in _info)
-                cboSelector.Items.Add(item.MonthName);
-            cboSelector.SelectedItem = cboSelector.Items[0];
+            _archivedMonths = arch;
 
-            cboSelector_SelectedIndexChanged(null, null);
+            cboSelector.DisplayMember = nameof(ArchiveMonth.Name);
+            cboSelector.DataSource = _archivedMonths;
 
             CenterToParent();
         }
 
-        private void PopulateList()
+        private void PopulateList(Guid identifier)
         {
-            var month = _info.Find(item => item.MonthName == (string)cboSelector.SelectedItem);
-            _projData = month.MonthProj;
-            _projTotal = month.MonthProjTotal;
-            _currTotal = month.MonthInfoTotal;
-            foreach (var item in month.MonthInfo)
+            _selectedMonth = _archivedMonths.Find(month => month.Identifier == identifier);
+            _categorySums = Enumerable.Repeat(0.0, Categories.Length).ToList();
+
+            foreach (var entry in _selectedMonth.FinanceEntries)
             {
-                _currData[item.Category] += item.Amount;
-                UIHelper.LoadItem(lstItems, item);
+                _categorySums[entry.Category] += entry.Amount;
+                lstItems.LoadItem(entry);
             }
+
             Recalculate();
         }
 
@@ -85,23 +83,17 @@ namespace FinanceTracker.Forms
                 var i = 0;
                 foreach (var label in list)
                 {
-                    label.Text = _projData[i++].ToString(Formats.MoneyFormat);
+                    label.Text = _selectedMonth.Projections[i++].ToString(Formats.MoneyFormat);
                     if (j == 1)
-                        label.Text = _currData[i - 1].ToString(Formats.MoneyFormat);
+                        label.Text = _categorySums[i - 1].ToString(Formats.MoneyFormat);
                     else if (j == 2)
-                        UIHelper.LabelColor(_projData[i - 1] - _currData[i - 1], label);
+                        label.SetBalance(_selectedMonth.Projections[i - 1] - _categorySums[i - 1]);
                 }
                 j++;
             }
-            lblPTotalAmt.Text = _projTotal.ToString(Formats.MoneyFormat);
-            lblCTotalAmt.Text = _currTotal.ToString(Formats.MoneyFormat);
-            UIHelper.LabelColor(_projTotal - _currTotal, lblTotalAmt);
-        }
-
-        private void InitProjectionData()
-        {
-            _currData = Enumerable.Repeat(0.0, Categories.Length).ToList();
-            _projData = Enumerable.Repeat(0.0, Categories.Length).ToList();
+            lblPTotalAmt.Text = _selectedMonth.ProjectionTotal.ToString(Formats.MoneyFormat);
+            lblCTotalAmt.Text = _selectedMonth.FinanceEntriesTotal.ToString(Formats.MoneyFormat);
+            lblTotalAmt.SetBalance(_selectedMonth.GetSpendingTotal());
         }
 
         private void lstItems_ColumnSort(object sender, ColumnClickEventArgs e)
@@ -111,9 +103,10 @@ namespace FinanceTracker.Forms
 
         private void cboSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UIHelper.ClearList(lstItems);
-            InitProjectionData();
-            PopulateList();
+            var month = (ArchiveMonth)cboSelector.SelectedItem;
+
+            lstItems.ClearList();
+            PopulateList(month.Identifier);
         }
     }
 }

@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace FinanceTracker.DataObjects
 {
-    public class ArchiveMonth
+    public class ArchiveMonth : Month
     {
-        public String MonthName="";
-        public List<double> MonthProj = new List<double>();
-        public List<FinanceEntry> MonthInfo = new List<FinanceEntry>();
-        public double MonthProjTotal;
-        public double MonthInfoTotal;
+        public double ProjectionTotal;
+        public double FinanceEntriesTotal;
 
         public ArchiveMonth() { }
 
-        public ArchiveMonth(String name, List<double> proj, double projTotal, List<FinanceEntry> list, double listTotal)
+        public ArchiveMonth(Month activeMonth) : base(activeMonth)
         {
-            MonthName = name;
-            MonthProj = proj;
-            MonthProjTotal = projTotal;
-            MonthInfo = list;
-            MonthInfoTotal = listTotal;
+            ProjectionTotal = Projections.Sum();
+            FinanceEntriesTotal = FinanceEntries.Sum(e => e.Amount);
         }
+
+        public double GetSpendingTotal() => ProjectionTotal - FinanceEntriesTotal;
     }
 }
