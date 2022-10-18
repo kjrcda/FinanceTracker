@@ -10,13 +10,11 @@ namespace FinanceTracker.Forms
 {
     public partial class ArchiveViewer : Form
     {
-        private readonly List<ArchiveMonth> _archivedMonths;
         private readonly List<List<Label>> _labels = new();
-        private ArchiveMonth _selectedMonth;
         private List<double> _categorySums;
         private int _currColumn = -1;
 
-        public ArchiveViewer(List<ArchiveMonth> arch)
+        public ArchiveViewer(List<ArchiveMonth> archivedMonths)
         {
             InitializeComponent();
 
@@ -53,29 +51,24 @@ namespace FinanceTracker.Forms
                 lblOtherAmt
             });
 
-            _archivedMonths = arch;
-
-            cboSelector.DisplayMember = nameof(ArchiveMonth.Name);
-            cboSelector.DataSource = _archivedMonths;
+            cboSelector.DisplayMember = nameof(ArchiveMonth.Name); // Needs to go before DataSource binding so that the select action executes properly
+            cboSelector.DataSource = archivedMonths;
 
             CenterToParent();
         }
 
-        private void PopulateList(Guid identifier)
+        private void PopulateList(ArchiveMonth month)
         {
-            _selectedMonth = _archivedMonths.Find(month => month.Identifier == identifier);
             _categorySums = Enumerable.Repeat(0.0, Categories.Length).ToList();
 
-            foreach (var entry in _selectedMonth.FinanceEntries)
+            foreach (var entry in month.FinanceEntries)
             {
                 _categorySums[entry.Category] += entry.Amount;
                 lstItems.LoadItem(entry);
             }
-
-            Recalculate();
         }
 
-        private void Recalculate()
+        private void Recalculate(ArchiveMonth month)
         {
             var j = 0;
             foreach (var list in _labels)
@@ -83,17 +76,23 @@ namespace FinanceTracker.Forms
                 var i = 0;
                 foreach (var label in list)
                 {
-                    label.Text = _selectedMonth.Projections[i++].ToString(Formats.MoneyFormat);
+                    label.Text = month.Projections[i++].ToString(Formats.MoneyFormat);
+
                     if (j == 1)
+                    {
                         label.Text = _categorySums[i - 1].ToString(Formats.MoneyFormat);
+                    }
                     else if (j == 2)
-                        label.SetBalance(_selectedMonth.Projections[i - 1] - _categorySums[i - 1]);
+                    {
+                        label.SetBalance(month.Projections[i - 1] - _categorySums[i - 1]);
+                    }
                 }
                 j++;
             }
-            lblPTotalAmt.Text = _selectedMonth.ProjectionTotal.ToString(Formats.MoneyFormat);
-            lblCTotalAmt.Text = _selectedMonth.FinanceEntriesTotal.ToString(Formats.MoneyFormat);
-            lblTotalAmt.SetBalance(_selectedMonth.GetSpendingTotal());
+
+            lblPTotalAmt.Text = month.ProjectionTotal.ToString(Formats.MoneyFormat);
+            lblCTotalAmt.Text = month.FinanceEntriesTotal.ToString(Formats.MoneyFormat);
+            lblTotalAmt.SetBalance(month.GetSpendingTotal());
         }
 
         private void lstItems_ColumnSort(object sender, ColumnClickEventArgs e)
@@ -103,10 +102,11 @@ namespace FinanceTracker.Forms
 
         private void cboSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var month = (ArchiveMonth)cboSelector.SelectedItem;
+            var month = cboSelector.SelectedItem as ArchiveMonth;
 
             lstItems.ClearList();
-            PopulateList(month.Identifier);
+            PopulateList(month);
+            Recalculate(month);
         }
     }
 }
