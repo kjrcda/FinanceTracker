@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace FinanceTracker.DataObjects
 {
     public class ArchiveMonth : Month
     {
-        public double ProjectionTotal;
-        public double FinanceEntriesTotal;
+        public double ProjectionTotal { get; set; }
+        public double FinanceEntriesTotal { get; set; }
 
         public ArchiveMonth() { }
 
