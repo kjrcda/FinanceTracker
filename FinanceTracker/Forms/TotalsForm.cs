@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using FinanceTracker.DataObjects;
 using FinanceTracker.Extensions;
@@ -7,18 +8,20 @@ namespace FinanceTracker.Forms
 {
     public partial class TotalsForm : Form
     {
-        private readonly List<ArchiveMonth> _months;
         private double _total;
 
-        public TotalsForm(List<ArchiveMonth> list)
+        public TotalsForm(List<ArchiveMonth> archivedMonths)
         {
             InitializeComponent();
 
-            _months = list;
-            foreach (var month in _months)
-            {
-                chklstItems.Items.Add(month.Name);
-            }
+            chklstItems.DataSource = archivedMonths.Select(
+                m => new DisplayItem<double>()
+                {
+                    Name = m.Name,
+                    Value = m.GetSpendingTotal()
+                }
+            ).ToList();
+            chklstItems.DisplayMember = nameof(DisplayItem<double>.Name); // Needs to go after DataSource binding... maybe because it's unsupported?
             chklstItems.ItemCheck += Calculate_Click;
 
             CenterToParent();
@@ -26,16 +29,9 @@ namespace FinanceTracker.Forms
 
         private void Calculate_Click(object sender, ItemCheckEventArgs e)
         {
-            var entry = _months.Find(month => month.Name == chklstItems.Items[e.Index].ToString());
+            var monthTotal = (chklstItems.Items[e.Index] as DisplayItem<double>).Value;
 
-            if (e.NewValue == CheckState.Checked)
-            {
-                _total += entry.ProjectionTotal - entry.FinanceEntriesTotal;
-            }
-            else
-            {
-                _total -= entry.ProjectionTotal - entry.FinanceEntriesTotal;
-            }
+            _total += monthTotal * (e.NewValue == CheckState.Checked ? 1 : -1);
 
             lblTotal.SetBalance(_total);
         }
