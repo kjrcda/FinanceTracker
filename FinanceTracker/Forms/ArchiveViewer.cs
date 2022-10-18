@@ -98,7 +98,7 @@ namespace FinanceTracker.Forms
 
         private void lstItems_ColumnSort(object sender, ColumnClickEventArgs e)
         {
-            _currColumn = ListSorter.ColumnSort((ListView)sender, e, _currColumn);
+            _currColumn = (sender as ListView).ColumnSort(_currColumn, e.Column);
         }
 
         private void cboSelector_SelectedIndexChanged(object sender, EventArgs e)
